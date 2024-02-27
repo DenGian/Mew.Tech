@@ -1,0 +1,54 @@
+/* OVERALL */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--bg-color: rgba(190, 228, 235, 1);
+	--bg-color2: rgba(0, 0, 0, 1);
+	--navbar-color: rgba(0, 0, 0, 1);
+	--primary-color: rgba(0, 0, 0, 1);
+}
+html,
+body {
+	background-color: var(--bg-color);
+	font-family: "Pokemon", Helvetica, sans-serif;
+	color: var(--primary-color);
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+body {
+	display: grid;
+	grid-template-areas:
+		"header header header header"
+		"main main main aside"
+		"footer footer footer footer";
+}
+
+/* GENERAL */
+h2 {
+	font-family: "Pokemon", Times, serif;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	color: var(--primary-color);
+	letter-spacing: 0.2rem;
+	padding-bottom: 1.3rem;
+	text-align: center;
+}
+p {
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+	color: var(--primary-color);
+	padding-bottom: 1rem;
+	text-align: justify;
+}
+figcaption {
+	color: var(--primary-color);
+	font-size: 1rem;
+	padding-top: 0.5rem;
+	margin-bottom: 1.3rem;
+	text-align: center;
+	text-transform: capitalize;
+}
