@@ -100,12 +100,27 @@ main {
 	transition: transform 0.3s ease;
 }
 .project img:hover {
-	transform: scale(1.1); /* Scale up by 10% on hover */
+	transform: scale(1.1);
 }
 .project a {
 	text-decoration: none;
 	color: #333;
 	font-weight: bold;
+}
+
+.acces-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.acces-denied {
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* ASIDE */
