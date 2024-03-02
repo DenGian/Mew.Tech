@@ -1,0 +1,6 @@
+@font-face {
+	font-family: "Pokemon";
+	font-style: normal;
+	font-weight: normal;
+	src: local("Pokemon"), url("pokemon_fire_red.ttf") format("truetype");
+}
