@@ -69,6 +69,9 @@ figcaption {
 header {
 	grid-area: header;
 }
+#welcome-text {
+	padding-top: 2rem;
+}
 
 /* MAIN */
 main {
@@ -94,6 +97,10 @@ main {
 	height: auto;
 	margin-right: 20px;
 	border-radius: 8px;
+	transition: transform 0.3s ease;
+}
+.project img:hover {
+	transform: scale(1.1); /* Scale up by 10% on hover */
 }
 .project a {
 	text-decoration: none;
