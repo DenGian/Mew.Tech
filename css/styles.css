@@ -21,6 +21,8 @@ body {
 }
 body {
 	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto 1fr auto;
 	grid-template-areas:
 		"header header header header"
 		"main main main aside"
@@ -28,6 +30,16 @@ body {
 }
 
 /* GENERAL */
+h1 {
+	font-family: "Pokemon", Times, serif;
+	font-size: 1.3rem;
+	text-transform: uppercase;
+	color: var(--primary-color);
+	letter-spacing: 0.2rem;
+	padding-bottom: 1.3rem;
+	text-align: center;
+}
+
 h2 {
 	font-family: "Pokemon", Times, serif;
 	font-size: 1.1rem;
@@ -51,4 +63,74 @@ figcaption {
 	margin-bottom: 1.3rem;
 	text-align: center;
 	text-transform: capitalize;
+}
+
+/* HEADER */
+header {
+	grid-area: header;
+}
+
+/* MAIN */
+main {
+	grid-area: main;
+	padding: 0px, 20px, 20px, 20px;
+}
+
+.all-projects {
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.project {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.project img {
+	width: 100px;
+	height: auto;
+	margin-right: 20px;
+	border-radius: 8px;
+}
+.project a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+}
+
+/* ASIDE */
+aside {
+	grid-area: aside;
+	padding: 20px;
+}
+
+.ad {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+}
+
+.ad img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.ad h3 {
+	font-size: 1.1rem;
+	margin-top: 10px;
+	text-align: center;
+}
+
+/*footer*/
+footer {
+	grid-area: footer;
 }
