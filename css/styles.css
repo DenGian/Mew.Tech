@@ -24,6 +24,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
+    "nav nav nav nav"
     "header header header header"
     "main main main aside"
     "footer footer footer footer";
