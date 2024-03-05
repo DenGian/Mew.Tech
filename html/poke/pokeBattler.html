@@ -7,7 +7,50 @@
     <link rel="stylesheet" href="../../css/styles.css" />
     <title>pokeBattler</title>
   </head>
+
   <body>
+    <header><h1>Poké Battler</h1></header>
+    <main>
+      <section class="all-projects">
+        <h2>Welkom bij de Poké Battler</h2>
+        <p>
+          Hier kan je je eigen Pokémon samenstellen en het opnemen tegen een
+          andere Pokémon. Kies je Pokémon en de aanval die je wilt gebruiken.
+        </p>
+        <form action="">
+          <label for="pokemon1">Kies je Pokémon</label>
+          <select name="pokemon1" id="pokemon1">
+            <option value="pikachu">Pikachu</option>
+            <option value="charizard">Charizard</option>
+            <option value="squirtle">Squirtle</option>
+            <option value="bulbasaur">Bulbasaur</option>
+            <option value="eevee">Eevee</option>
+          </select>
+          <label for="pokemon2">Kies je tegenstander</label>
+          <select name="pokemon2" id="pokemon2">
+            <option value="pikachu">Pikachu</option>
+            <option value="charizard">Charizard</option>
+            <option value="squirtle">Squirtle</option>
+            <option value="bulbasaur">Bulbasaur</option>
+            <option value="eevee">Eevee</option>
+          </select>
+          <label for="attack">Kies je aanval</label>
+          <select name="attack" id="attack">
+            <option value="thunderbolt">Thunderbolt</option>
+            <option value="flamethrower">Flamethrower</option>
+            <option value="watergun">Watergun</option>
+            <option value="vine whip">Vine Whip</option>
+
+            <option value="tackle">Tackle</option>
+          </select>
+          <button type="submit">Vecht!</button>
+        </form>
+      </section>
+      <section>
+        <h2>Resultaat</h2>
+        <p>De winnaar is: <span id="winner">?</span></p>
+      </section>
+    </main>
     <footer>
       <button
         onclick="window.scrollTo(0, 0)"

@@ -9,6 +9,37 @@
   </head>
   <body>
     <!-- eigen pokemon bekijken! -->
+    <header>
+      <h1>Poké Dex</h1>
+    </header>
+    <main>
+      <section class="all-projects">
+        <h2>Welkom bij de Poké Dex</h2>
+        <p>
+          Hier kan je alle Pokémon bekijken. Kies je Pokémon en bekijk de
+          informatie.
+        </p>
+        <form action="">
+          <label for="pokemon">Kies je Pokémon: </label>
+          <select name="pokemon" id="pokemon">
+            <option value="pikachu">Pikachu</option>
+            <option value="charizard">Charizard</option>
+            <option value="squirtle">Squirtle</option>
+            <option value="bulbasaur">Bulbasaur</option>
+            <option value="eevee">Eevee</option>
+          </select>
+          <button type="submit">Bekijk!</button>
+        </form>
+        <section>
+          <h2>Resultaat</h2>
+          <p>Naam: <span id="name">?</span></p>
+          <p>Type: <span id="type">?</span></p>
+          <p>Hoogte: <span id="height">?</span></p>
+          <p>Gewicht: <span id="weight">?</span></p>
+          <p>Ability: <span id="ability">?</span></p>
+          <p>Image: <img id="image" src="" alt="pokemon" /></p>
+        </section>
+      </section>
     <footer>
       <button
         onclick="window.scrollTo(0, 0)"
