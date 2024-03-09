@@ -84,6 +84,18 @@ header {
 	padding-top: 2rem;
 }
 
+/* NAV */
+
+.navbar-nav .nav-link.active {
+	border-bottom: black 1px solid;
+}
+
+.navbar-nav > li:hover {
+	font-weight: bolder;
+	scale: 1.05;
+	transition: all ease-in-out 0.25s;
+}
+
 /* MAIN */
 main {
 	grid-area: main;
