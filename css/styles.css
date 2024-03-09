@@ -11,7 +11,8 @@
 	--primary-color: rgba(0, 0, 0, 1);
 }
 html,
-body {
+body,
+#landing-page {
 	background-color: var(--bg-color);
 	font-family: "Pokemon", Helvetica, sans-serif;
 	color: var(--primary-color);
@@ -26,6 +27,16 @@ body {
 	grid-template-areas:
 		"header header header header"
 		"main main main aside"
+		"footer footer footer footer";
+}
+
+#landing-page {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"header header header header"
+		"main main main main"
 		"footer footer footer footer";
 }
 
@@ -80,34 +91,36 @@ main {
 }
 
 .all-projects {
-	max-width: 800px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+	max-width: 1000px;
 	margin: 20px auto;
 	padding: 20px;
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-.project {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+.card {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	height: 20rem;
 }
-.project img {
-	width: 100px;
-	height: auto;
-	margin-right: 20px;
-	border-radius: 8px;
-	transition: transform 0.3s ease;
+.card-img-top {
+	scale: 0.9;
 }
-.project img:hover {
+.card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+}
+.card-img-top img:hover {
 	transform: scale(1.1);
 }
-.project a {
-	text-decoration: none;
-	color: #333;
-	font-weight: bold;
-}
-
 .acces-page {
 	display: flex;
 	align-items: center;
@@ -123,10 +136,43 @@ main {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.back-arrow {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	cursor: pointer;
+	z-index: 9999;
+	width: 40px;
+	height: 40px;
+	background-color: white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+	transition: width 0.3s ease, height 0.3s ease;
+}
+
+.back-arrow img {
+	width: 25px;
+	height: 25px;
+	transform: rotate(180deg);
+	transition: transform 0.3s ease;
+}
+
+.back-arrow:hover {
+	width: 50px;
+	height: 50px;
+}
+
 /* ASIDE */
 aside {
 	grid-area: aside;
 	padding: 20px;
+}
+
+.hide-aside {
+	display: none;
 }
 
 .ad {
@@ -156,5 +202,3 @@ aside {
 footer {
 	grid-area: footer;
 }
-
-
