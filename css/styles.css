@@ -57,9 +57,7 @@ h2 {
 }
 
 /* HEADER */
-header {
-  grid-area: header;
-}
+
 #welcome-text {
   padding-top: 2rem;
 }
@@ -97,10 +95,8 @@ header {
 /*footer*/
 footer {
   background-color: #f8f9fa; /* Change background color */
-  position: absolute;
-  bottom: 0;
-  left: 0; /* Align to the left edge */
-  right: 0; /* Align to the right edge */
+  position: static;
+  
   width: 100%;
 }
 footer p {
