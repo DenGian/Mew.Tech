@@ -185,3 +185,19 @@ aside {
 footer {
   grid-area: footer;
 }
+
+/* pokemain */
+.card-style {
+  display: block;
+  width: auto;
+  max-height: 150px;
+  margin: 10px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+}
