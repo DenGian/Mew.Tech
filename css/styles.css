@@ -72,7 +72,7 @@ h2 {
 	font-weight: bolder;
 	scale: 1.01;
 	transition: all ease-in-out 0.25s;
-	background-color: pink;
+	background-color: white;
 }
 
 /* MAIN */
@@ -108,14 +108,22 @@ h2 {
 }
 
 /*footer*/
-footer {
-  background-color: #f8f9fa; /* Change background color */
-  position: static;
-  
-  width: 100%;
+
+ul.list-inline {
+	display: flex;
+	justify-content: left;
+	list-style: none;
+	padding: 0;
 }
-footer p {
-	margin-bottom: 0; /* Remove bottom margin for the paragraph */
-	text-align: center; /* Center align the text */
-	color: #333; /* Change text color */
+
+ul.list-inline li {
+	margin-right: 10px;
+}
+
+ul.list-inline li:last-child {
+	margin-right: 0;
+}
+
+ul.list-inline i.bi {
+	font-size: 22px;
 }
