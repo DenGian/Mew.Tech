@@ -65,13 +65,14 @@ h2 {
 /* NAV */
 
 .navbar-nav .nav-link.active {
-	border-bottom: black 1px solid;
+	font-weight: bold;
 }
 
 .navbar-nav > li:hover {
 	font-weight: bolder;
-	scale: 1.05;
+	scale: 1.01;
 	transition: all ease-in-out 0.25s;
+	background-color: pink;
 }
 
 /* MAIN */
