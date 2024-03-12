@@ -26,11 +26,11 @@ body,
   padding: 1rem;
 }
 
-.card {
+.index-card {
   transition: transform 0.3s ease; /* Add transition for smooth effect */
 }
 
-.card:hover {
+.index-card:hover {
   transform: scale(1.05); /* Scale the card on hover */
   background-color: rgba(255, 255, 255, 0.458);
 }
@@ -107,6 +107,11 @@ h2 {
   height: 50px;
 }
 
+.btn-index:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
 /*footer*/
 
 ul.list-inline {
@@ -144,12 +149,14 @@ ul.list-inline i.bi {
 
 /* pokedex */
 
-.pokedex-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.pokedex-card,
+.main-card {
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid #dc3545; /* Pokédex red */
   border-radius: 10px;
 }
-.pokedex-header {
+.pokedex-header,
+.main-card-header {
   background-color: #dc3545; /* Pokédex red */
   color: white;
   padding: 10px 15px;
