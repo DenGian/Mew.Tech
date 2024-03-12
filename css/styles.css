@@ -66,6 +66,8 @@ h2 {
 
 .navbar-nav .nav-link.active {
 	font-weight: bold;
+	background-color: #dc3545;
+	color: white !important;
 }
 
 .navbar-nav > li:hover {
@@ -76,6 +78,10 @@ h2 {
 }
 
 /* MAIN */
+
+main {
+	margin: 30px;
+}
 
 /*arrow access-denied*/
 .back-arrow {
@@ -143,6 +149,10 @@ ul.list-inline i.bi {
 }
 
 /* pokedex */
+
+h5 {
+	background-color: #dc3545;
+}
 
 .pokedex-card {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
