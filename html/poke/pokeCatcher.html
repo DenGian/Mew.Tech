@@ -3,60 +3,139 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/logo-wpl/logo.webp"
+    />
     <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../assets/fonts/style.css" />
     <link rel="stylesheet" href="../../css/styles.css" />
-    <title>pokeCatcher</title>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
   </head>
-  <body>
+  <body class="landing-page">
     <header>
-      <h1>Poké Catcher</h1>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="pokeMain.html">Mew.Tech</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeMain.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeBattler.html">PokeBattler</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >PokeCatch</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeCompare.html">PokeCompare</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeDex.html">PokeDex</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeGuess.html">PokeGuess</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeViewer.html">PokeViewer</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
+
     <main>
-      <section class="all-projects">
-        <h2>Welkom bij de Poké Catcher</h2>
-        <p>
-          Hier kan je je eigen Pokémon vangen. Kies je Pokémon en vang hem!
-        </p>
-        <form action="">
-          <label for="pokemon">Kies je Pokémon: </label>
-          <select name="pokemon" id="pokemon">
-            <option value="pikachu">Pikachu</option>
-            <option value="charizard">Charizard</option>
-            <option value="squirtle">Squirtle</option>
-            <option value="bulbasaur">Bulbasaur</option>
-            <option value="eevee">Eevee</option>
-          </select>
-          <button type="submit">Vang!</button>
-        </form>
-        <section>
-          <h2>Resultaat</h2>
-          <p>Je hebt <span id="name">?</span> gevangen!</p>
-          <p>Type: <span id="type">?</span></p>
-          <p>Hoogte: <span id="height">?</span></p>
-          <p>Gewicht: <span id="weight">?</span></p>
-          <p>Ability: <span id="ability">?</span></p>
-          <p>Image: <img id="image" src="" alt="pokemon" /></p>
-        </section>
+      <section>
+        <h2>PokeCatch</h2>
+        <div class="container text-center mt-3">
+          <p class="lead">
+            Click the button below to try and catch a random Pokémon. Who will
+            you catch?
+          </p>
+        </div>
+        <div class="container img-fluid">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Bulbasaur #001</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                    class="card-img-top"
+                    alt="Bulbasaur"
+                  />
+
+                  <div class="card-body text-center ">
+                    <h5 class="card-title text-center">Bulbasaur Stats</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Type: Grass, Poison</li>
+                      <li class="list-group-item">HP: 45</li>
+                      <li class="list-group-item">Attack: 49</li>
+                      <li class="list-group-item">Defense: 49</li>
+                    
+                    </ul>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="btn btn-pokeball"
+                    style="background-color: transparent; border: none"
+                  >
+                    <img
+                      src="../../assets/images/poke-ball.png"
+                      alt="Pokeball"
+                      style="width: 100px; height: 100px"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-    <footer>
-      <button
-        onclick="window.scrollTo(0, 0)"
-        class="scroll-to-top"
-        title="Terug naar boven"
-      >
-        ↑
-      </button>
-      <a href="../../index.html">Home</a>
-      <a href="../Auth/login.html">login</a>
-      <a href="pokeMain.html">Main</a>
-      <a href="pokeBattler.html">Battler</a>
-      <a href="pokeCatcher.html">Vanger</a>
-      <a href="pokeCompare.html">Vergelijk</a>
-      <a href="pokeDex.html">bekijken</a>
-      <a href="pokeGuess.html">wie is het?</a>
-      <a href="pokeViewer.html">1 bekijken</a>
-      <p>copyright &#169;2024 MewTech. Alle rechten voorbehouden.</p>
-    </footer>
+    <aside></aside>
+    <footer></footer>
   </body>
 </html>

@@ -3,58 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/logo-wpl/logo.webp"
+    />
     <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../assets/fonts/style.css" />
     <link rel="stylesheet" href="../../css/styles.css" />
-    <title>pokeCompare</title>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
   </head>
-  <body>
-    <header><h1>Poké Compare</h1></header>
-    <main>
-      <section class="all-projects">
-        <h2>Welkom bij de Poké Compare</h2>
-        <p>
-          Hier kan je twee Pokémon met elkaar vergelijken. Kies je Pokémon en
-          bekijk de verschillen.
-        </p>
-        <form action="">
-          <label for="pokemon1">Kies je Pokémon: </label>
-          <select name="pokemon1" id="pokemon1">
-            <option value="pikachu">Pikachu</option>
-            <option value="charizard">Charizard</option>
-            <option value="squirtle">Squirtle</option>
-            <option value="bulbasaur">Bulbasaur</option>
-            <option value="eevee">Eevee</option>
-          </select>
-          <label for="pokemon2">Vergelijk met: </label>
-          <select name="pokemon2" id="pokemon2">
-            <option value="pikachu">Pikachu</option>
-            <option value="charizard">Charizard</option>
-            <option value="squirtle">Squirtle</option>
-            <option value="bulbasaur">Bulbasaur</option>
-            <option value="eevee">Eevee</option>
-          </select>
-          <button type="submit">Vergelijk!</button>
-        </form>
-      </section>
+  <body class="landing-page">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="pokeMain.html">Mew.Tech</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeMain.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeBattler.html">PokeBattler</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeCatcher.html">PokeCatch</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >PokeCompare</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeDex.html">PokeDex</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeGuess.html">PokeGuess</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./pokeViewer.html">PokeViewer</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-    <footer>
-      <button
-        onclick="window.scrollTo(0, 0)"
-        class="scroll-to-top"
-        title="Terug naar boven"
-      >
-        ↑
-      </button>
-      <a href="../../index.html">Home</a>
-      <a href="../Auth/login.html">login</a>
-      <a href="pokeMain.html">Main</a>
-      <a href="pokeBattler.html">Battler</a>
-      <a href="pokeCatcher.html">Vanger</a>
-      <a href="pokeCompare.html">Vergelijk</a>
-      <a href="pokeDex.html">bekijken</a>
-      <a href="pokeGuess.html">wie is het?</a>
-      <a href="pokeViewer.html">1 bekijken</a>
-      <p>copyright &#169;2024 MewTech. Alle rechten voorbehouden.</p>
-    </footer>
+    <main>
+      <section>
+        <h2>PokeCompare</h2>
+        <div class="container text-center mt-3">
+          <p class="lead">
+            Vergelijk hier de verschillende Pokémon met elkaar en ontdek welke
+            Pokémon het beste is voor jouw team!
+          </p>
+        </div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Bulbasaur #001</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                    class="card-img-top"
+                    alt="Bulbasaur"
+                  />
+
+                  <div class="card-body text-center">
+                    <h5 class="card-title text-center">Bulbasaur Stats</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Type: Grass, Poison</li>
+                      <li class="list-group-item">HP: 45</li>
+                      <li class="list-group-item">Attack: 49</li>
+                      <li class="list-group-item">Defense: 49</li>
+                      <li class="list-group-item">Special Attack: 65</li>
+                      <li class="list-group-item">Special Defense: 65</li>
+                      <li class="list-group-item">Speed: 45</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Charmander #004</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+                    class="card-img-top"
+                    alt="Charmander"
+                  />
+
+                  <div class="card-body text-center">
+                    <h5 class="card-title text-center">Charmander Stats</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Type: Grass, Poison</li>
+                      <li class="list-group-item">HP: 45</li>
+                      <li class="list-group-item">Attack: 49</li>
+                      <li class="list-group-item">Defense: 49</li>
+                      <li class="list-group-item">Special Attack: 65</li>
+                      <li class="list-group-item">Special Defense: 65</li>
+                      <li class="list-group-item">Speed: 45</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside></aside>
+    <footer></footer>
   </body>
 </html>
