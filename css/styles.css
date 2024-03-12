@@ -159,22 +159,11 @@ ul.list-inline i.bi {
 
 /* pokedex */
 
-<<<<<<< HEAD
 .pokedex-card,
 .main-card {
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid #dc3545; /* Pokédex red */
   border-radius: 10px;
-=======
-h5 {
-	background-color: #dc3545;
-}
-
-.pokedex-card {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border: 1px solid #dc3545; /* Pokédex red */
-	border-radius: 10px;
->>>>>>> ian
 }
 .pokedex-header,
 .main-card-header {
