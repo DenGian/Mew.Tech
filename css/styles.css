@@ -156,13 +156,17 @@ ul.list-inline i.bi {
 /* pokedex */
 
 .pokedex-card,
-.main-card {
+.main-card,
+.extra-info-card,
+.expanded-info-card {
 	box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
 	border: 1px solid #dc3545; /* Pokédex red */
 	border-radius: 10px;
 }
 .pokedex-header,
-.main-card-header {
+.main-card-header,
+info-card-header,
+.expanded-info-card-header {
 	background-color: #dc3545; /* Pokédex red */
 	color: white !important;
 	padding: 10px 15px !important;
@@ -188,7 +192,7 @@ ul.list-inline i.bi {
 .card {
 	margin-right: 15px;
 	margin-bottom: 15px;
-	border: 1px solid black !important;
+	
 }
 
 .card-group .card:nth-child(4n) {
