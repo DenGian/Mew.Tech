@@ -65,13 +65,9 @@ h2 {
 /* NAV */
 
 .navbar-nav .nav-link.active {
-<<<<<<< HEAD
   font-weight: bold;
-=======
-	font-weight: bold;
-	background-color: #dc3545;
-	color: white !important;
->>>>>>> ian
+  background-color: #dc3545;
+  color: white !important;
 }
 
 .navbar-nav > li:hover {
@@ -84,7 +80,7 @@ h2 {
 /* MAIN */
 
 main {
-	margin: 30px;
+  margin: 30px;
 }
 
 /*arrow access-denied*/
@@ -160,7 +156,9 @@ ul.list-inline i.bi {
 /* pokedex */
 
 .pokedex-card,
-.main-card {
+.main-card,
+.extra-info-card,
+.expanded-info-card {
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid #dc3545; /* Pokédex red */
   border-radius: 10px;
