@@ -164,10 +164,17 @@ ul.list-inline i.bi {
 .pokedex-header,
 .main-card-header {
 	background-color: #dc3545; /* Pokédex red */
+<<<<<<< HEAD
 	color: white;
 	padding: 10px 15px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+=======
+	color: white !important;
+	padding: 10px 15px !important;
+	border-top-left-radius: 10px !important;
+	border-top-right-radius: 10px !important;
+>>>>>>> ian
 }
 .pokedex-body {
 	padding: 15px;
@@ -179,4 +186,21 @@ ul.list-inline i.bi {
 /* Map */
 #map {
 	height: 180px;
+<<<<<<< HEAD
+=======
+}
+
+.card-group {
+	margin-bottom: 20px;
+}
+
+.card {
+	margin-right: 15px;
+	margin-bottom: 15px;
+	border: 1px solid black !important;
+}
+
+.card-group .card:nth-child(4n) {
+	margin-right: 0;
+>>>>>>> ian
 }
