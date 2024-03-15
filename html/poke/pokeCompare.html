@@ -69,92 +69,125 @@
 			</nav>
 		</header>
 
-    <main>
-      <section>
-        <h2>PokeCompare</h2>
-        <div class="container text-center mt-3">
-          <p class="lead">
-            Vergelijk hier de verschillende Pokémon met elkaar en ontdek welke
-            Pokémon het beste is voor jouw team!
-          </p>
-        </div>
+		<main>
+			<div class="container">
+				<div class="row">
+					<section class="col-md-9">
+						<!-- Main content takes 9 columns -->
+						<h2>PokeCompare</h2>
+						<div class="container text-center mt-3">
+							<p class="lead">
+								Vergelijk hier de verschillende Pokémon met elkaar en ontdek welke Pokémon het beste is voor
+								jouw team!
+							</p>
+						</div>
 
-        <div class="container mt-5">
-          <div class="row">
-            <!-- Deze rij bevat alle kaarten -->
-            <div class="col-md-6">
-              <!-- Eerste kaart -->
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>Bulbasaur #001</h5>
-                </div>
-                <div class="pokedex-body">
-                  <img
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-                    class="card-img-top"
-                    alt="Bulbasaur"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">Stats</h5>
-                    <div class="row">
-                      <!-- Voeg een rij toe voor de stats -->
-                      <div class="col-6 col-md-4">HP: 45</div>
-                      <div class="col-6 col-md-4">Attack: 49</div>
-                      <div class="col-6 col-md-4">Defense: 49</div>
-                      <div class="col-6 col-md-4">Special Attack: 65</div>
-                      <div class="col-6 col-md-4">Special Defense: 65</div>
-                      <div class="col-6 col-md-4">Speed: 45</div>
-                    </div>
-                    <button
-                      class="btn btn-primary mt-3"
-                      id="play-sound-bulbasaur"
-                    >
-                      Speel Geluid
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+						<div class="container mt-5">
+							<div class="row">
+								<!-- Deze rij bevat alle kaarten -->
+								<div class="col-md-6">
+									<!-- Eerste kaart -->
+									<div class="card pokedex-card">
+										<div class="pokedex-header text-center">
+											<h5>Bulbasaur #001</h5>
+										</div>
+										<div class="pokedex-body">
+											<img
+												src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+												class="card-img-top"
+												alt="Bulbasaur"
+											/>
+											<div class="card-body text-center">
+												<h5 class="card-title">Stats</h5>
+												<div class="row">
+													<!-- Voeg een rij toe voor de stats -->
+													<div class="col-6 col-md-4">HP: 45</div>
+													<div class="col-6 col-md-4">Attack: 49</div>
+													<div class="col-6 col-md-4">Defense: 49</div>
+													<div class="col-6 col-md-4">Special Attack: 65</div>
+													<div class="col-6 col-md-4">Special Defense: 65</div>
+													<div class="col-6 col-md-4">Speed: 45</div>
+												</div>
+												<button class="btn btn-primary mt-3" id="play-sound-bulbasaur">Speel Geluid</button>
+											</div>
+										</div>
+									</div>
+								</div>
 
-            <div class="col-md-6">
-              <!-- Tweede kaart -->
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>Charmander #004</h5>
-                </div>
-                <div class="pokedex-body">
-                  <img
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-                    class="card-img-top"
-                    alt="Charmander"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title text-center">Stats</h5>
-                    <div class="row">
-                      <div class="col-6 col-md-4">HP: 39</div>
-                      <div class="col-6 col-md-4">Attack: 52</div>
-                      <div class="col-6 col-md-4">Defense: 43</div>
-                      <div class="col-6 col-md-4">Special Attack: 60</div>
-                      <div class="col-6 col-md-4">Special Defense: 50</div>
-                      <div class="col-6 col-md-4">Speed: 65</div>
-                    </div>
-                    <button
-                      class="btn btn-primary mt-3"
-                      id="play-sound-charmander"
-                    >
-                     Speel Geluid
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Sluit de rij -->
-        </div>
-      </section>
-    </main>
+								<div class="col-md-6">
+									<!-- Tweede kaart -->
+									<div class="card pokedex-card">
+										<div class="pokedex-header text-center">
+											<h5>Charmander #004</h5>
+										</div>
+										<div class="pokedex-body">
+											<img
+												src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+												class="card-img-top"
+												alt="Charmander"
+											/>
+											<div class="card-body text-center">
+												<h5 class="card-title text-center">Stats</h5>
+												<div class="row">
+													<div class="col-6 col-md-4">HP: 39</div>
+													<div class="col-6 col-md-4">Attack: 52</div>
+													<div class="col-6 col-md-4">Defense: 43</div>
+													<div class="col-6 col-md-4">Special Attack: 60</div>
+													<div class="col-6 col-md-4">Special Defense: 50</div>
+													<div class="col-6 col-md-4">Speed: 65</div>
+												</div>
+												<button class="btn btn-primary mt-3" id="play-sound-charmander">Speel Geluid</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<aside class="col-md-3 order-first order-md-last bg-light">
+						<div class="aside-content">
+							<h3>Jouw Pokémon</h3>
+							<h4>Bulbasaur</h4>
+							<img src="../../assets/images/bulbasaur.png" alt="jouw pokémon" width="100" height="100" />
+							<h3>Stats</h3>
+							<table class="table">
+								<tbody>
+									<tr>
+										<th scope="row">Attack</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Stamina</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Defence</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Hit Points</th>
+										<td>9000</td>
+									</tr>
+								</tbody>
+							</table>
+							<h3>Deel jouw Pokémon!</h3>
+							<ul class="list-inline">
+								<li>
+									<a href="#"><i class="bi bi-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="bi bi-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="bi bi-instagram"></i></a>
+								</li>
+							</ul>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</main>
 
-		<aside></aside>
 		<footer class="footer mt-auto py-3 bg-light">
 			<div class="container">
 				<div class="row">
@@ -207,8 +240,12 @@
 								/>
 							</li>
 							<li>
-								<img src="../../assets/images/creators/creator_jesus.png" alt="Jesus O'Bulan width="110"
-								height="100" />
+								<img
+									src="../../assets/images/creators/creator_jesus.png"
+									alt="Jesus O'Bulan"
+									width="110"
+									height="100"
+								/>
 							</li>
 						</ul>
 					</div>
