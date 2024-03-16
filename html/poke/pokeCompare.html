@@ -99,15 +99,34 @@
 											/>
 											<div class="card-body text-center">
 												<h5 class="card-title">Stats</h5>
-												<div class="row">
-													<!-- Voeg een rij toe voor de stats -->
-													<div class="col-6 col-md-4">HP: 45</div>
-													<div class="col-6 col-md-4">Attack: 49</div>
-													<div class="col-6 col-md-4">Defense: 49</div>
-													<div class="col-6 col-md-4">Special Attack: 65</div>
-													<div class="col-6 col-md-4">Special Defense: 65</div>
-													<div class="col-6 col-md-4">Speed: 45</div>
-												</div>
+												<table class="table table-stats">
+													<tbody>
+														<tr>
+															<th scope="row">HP</th>
+															<td><span class="green-text">+ 45</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Attack</th>
+															<td><span class="red-text">- 49</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Defense</th>
+															<td><span class="green-text">+ 49</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Special Attack</th>
+															<td><span class="green-text">+ 65</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Special Defense</th>
+															<td><span class="green-text">+ 65</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Speed</th>
+															<td><span class="red-text">- 45</span></td>
+														</tr>
+													</tbody>
+												</table>
 												<button class="btn btn-primary mt-3" id="play-sound-bulbasaur">Speel Geluid</button>
 											</div>
 										</div>
@@ -128,14 +147,34 @@
 											/>
 											<div class="card-body text-center">
 												<h5 class="card-title text-center">Stats</h5>
-												<div class="row">
-													<div class="col-6 col-md-4">HP: 39</div>
-													<div class="col-6 col-md-4">Attack: 52</div>
-													<div class="col-6 col-md-4">Defense: 43</div>
-													<div class="col-6 col-md-4">Special Attack: 60</div>
-													<div class="col-6 col-md-4">Special Defense: 50</div>
-													<div class="col-6 col-md-4">Speed: 65</div>
-												</div>
+												<table class="table table-stats">
+													<tbody>
+														<tr>
+															<th scope="row">HP</th>
+															<td><span class="red-text">- 39</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Attack</th>
+															<td><span class="green-text">+ 52</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Defense</th>
+															<td><span class="red-text">- 43</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Special Attack</th>
+															<td><span class="red-text">- 60</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Special Defense</th>
+															<td><span class="red-text">- 50</span></td>
+														</tr>
+														<tr>
+															<th scope="row">Speed</th>
+															<td><span class="green-text">+ 65</span></td>
+														</tr>
+													</tbody>
+												</table>
 												<button class="btn btn-primary mt-3" id="play-sound-charmander">Speel Geluid</button>
 											</div>
 										</div>
@@ -144,6 +183,7 @@
 							</div>
 						</div>
 					</section>
+
 					<aside class="col-md-3 order-first order-md-last bg-light">
 						<div class="aside-content">
 							<h3>Jouw Pokémon</h3>
