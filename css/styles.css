@@ -212,3 +212,23 @@ ul.list-inline i.bi {
 .card-group .card:nth-child(4n) {
 	margin-right: 0;
 }
+
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.table-stats td {
+	text-align: center;
+	width: 50%;
+}
+
+.red-text {
+	color: red;
+}
+
+.green-text {
+	color: green;
+}
