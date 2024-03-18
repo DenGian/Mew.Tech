@@ -1,121 +1,145 @@
 /* OVERALL */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 :root {
-  --bg-color: rgba(190, 228, 235, 1);
-  --bg-color2: rgba(0, 0, 0, 1);
-  --navbar-color: rgba(0, 0, 0, 1);
-  --primary-color: rgba(0, 0, 0, 1);
+	--bg-color: rgba(190, 228, 235, 1);
+	--bg-color2: rgba(0, 0, 0, 1);
+	--navbar-color: rgba(0, 0, 0, 1);
+	--primary-color: rgba(0, 0, 0, 1);
 }
 html,
 body,
 .landing-page {
-  background-color: var(--bg-color);
-  font-family: "Pokemon", Helvetica, sans-serif;
-  color: var(--primary-color);
+	background-color: var(--bg-color);
+	font-family: "Pokemon", Helvetica, sans-serif;
+	color: var(--primary-color);
 }
 
 /*card css */
 .card-img-top {
-  height: 300px; /* Adjust based on your preference */
-  object-fit: contain; /* This will cover the area without stretching the image */
-  width: 100%;
-  padding: 1rem;
+	height: 300px; /* Adjust based on your preference */
+	object-fit: contain; /* This will cover the area without stretching the image */
+	width: 100%;
+	padding: 1rem;
 }
 
 .index-card {
-  transition: transform 0.3s ease; /* Add transition for smooth effect */
+	transition: transform 0.3s ease; /* Add transition for smooth effect */
 }
 
 .index-card:hover {
-  transform: scale(1.05); /* Scale the card on hover */
-  background-color: rgba(255, 255, 255, 0.458);
+	transform: scale(1.05); /* Scale the card on hover */
+	background-color: rgba(255, 255, 255, 0.458);
 }
 
 /* GENERAL */
 h1 {
-  font-family: "Pokemon", Times, serif;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  color: var(--primary-color);
-  letter-spacing: 0.2rem;
-  padding-bottom: 1.3rem;
-  text-align: center;
+	font-family: "Pokemon", Times, serif;
+	font-size: 1.3rem;
+	text-transform: uppercase;
+	color: var(--primary-color);
+	letter-spacing: 0.2rem;
+	padding-bottom: 1.3rem;
+	text-align: center;
 }
 
 h2 {
-  font-family: "Pokemon", Times, serif;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  color: var(--primary-color);
-  letter-spacing: 0.2rem;
-  padding-bottom: 1.3rem;
-  text-align: center;
+	font-family: "Pokemon", Times, serif;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	color: var(--primary-color);
+	letter-spacing: 0.2rem;
+	padding-bottom: 1.3rem;
+	text-align: center;
+}
+h5 {
+	font-size: 1.5rem !important;
+	font-weight: bold !important;
+}
+h6 {
+	font-size: 1.5rem !important;
+}
+
+p {
+	font-size: 1.5rem !important;
+}
+
+td {
+	font-size: 1.3rem;
+}
+tr {
+	font-size: 1.3rem;
+}
+div {
+	font-size: 1.5rem;
 }
 
 /* HEADER */
 
 #welcome-text {
-  padding-top: 2rem;
+	padding-top: 2rem;
 }
 
 /* NAV */
+nav {
+	font-size: 1.4rem;
+}
 
 .navbar-nav .nav-link.active {
-  font-weight: bold;
-  background-color: #dc3545;
-  color: white !important;
+	font-weight: bold;
+	background-color: #dc3545;
+	color: white !important;
 }
 
 .navbar-nav > li:hover {
-  font-weight: bolder;
-  scale: 1.01;
-  transition: all ease-in-out 0.25s;
-  background-color: white;
+	font-weight: bolder;
+	scale: 1.01;
+	transition: all ease-in-out 0.25s;
+	background-color: white;
 }
 
 /* MAIN */
 
 main {
-  margin: 30px;
+	margin: 30px;
 }
 
 /*arrow access-denied*/
 .back-arrow {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 9999;
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: width 0.3s ease, height 0.3s ease;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	cursor: pointer;
+	z-index: 9999;
+	width: 40px;
+	height: 40px;
+	background-color: white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+	transition: width 0.3s ease, height 0.3s ease;
 }
 
 .back-arrow img {
-  width: 25px;
-  height: 25px;
-  transform: rotate(180deg);
-  transition: transform 0.3s ease;
+	width: 25px;
+	height: 25px;
+	transform: rotate(180deg);
+	transition: transform 0.3s ease;
 }
 
 .back-arrow:hover {
-  width: 50px;
-  height: 50px;
+	width: 50px;
+	height: 50px;
 }
 
 .btn-index:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+	background-color: #dc3545;
+	border-color: #dc3545;
 }
 
 /* ASIDE */
@@ -125,51 +149,51 @@ aside {
 }
 
 .aside-content {
-  text-align: center;
-  padding: 1rem;
+	text-align: center;
+	padding: 1rem;
 }
 .aside-content h3 {
-  color: #333;
-  margin: 0.9rem 0rem;
+	color: #333;
+	margin: 0.9rem 0rem;
 }
 .aside-content table {
-  border: 2px dashed black;
+	border: 2px dashed black;
 }
 
 /*footer*/
 
 ul.list-inline {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
 }
 
 ul.list-inline li {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 
 ul.list-inline li:last-child {
-  margin-right: 0;
+	margin-right: 0;
 }
 
 ul.list-inline i.bi {
-  font-size: 31px;
+	font-size: 31px;
 }
 
 /* btn pokeball */
 
 .btn-pokeball {
-  background-color: transparent;
-  border: none;
+	background-color: transparent;
+	border: none;
 
-  outline: none;
-  cursor: pointer;
-  transition: transform 0.2s ease; /* Smooth transition for the transform */
+	outline: none;
+	cursor: pointer;
+	transition: transform 0.2s ease; /* Smooth transition for the transform */
 }
 
 .btn-pokeball:hover {
-  transform: translateY(-5px); /* Moves the button up on hover */
+	transform: translateY(-5px); /* Moves the button up on hover */
 }
 
 /* pokedex */
@@ -178,65 +202,65 @@ ul.list-inline i.bi {
 .main-card,
 .extra-info-card,
 .expanded-info-card {
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
-  border: 1px solid #dc3545; /* Pokédex red */
-  border-radius: 10px;
+	box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+	border: 1px solid #dc3545; /* Pokédex red */
+	border-radius: 10px;
 }
 .pokedex-header,
 .main-card-header,
 .info-card-header,
 .expanded-info-card-header {
-  background-color: #dc3545; /* Pokédex red */
-  color: white !important;
-  padding: 10px 15px !important;
-  border-top-left-radius: 10px !important;
-  border-top-right-radius: 10px !important;
+	background-color: #dc3545; /* Pokédex red */
+	color: white !important;
+	padding: 10px 15px !important;
+	border-top-left-radius: 10px !important;
+	border-top-right-radius: 10px !important;
 }
 .pokedex-body {
-  padding: 15px;
+	padding: 15px;
 }
 .stat-item {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 /* Map */
 #map {
-  height: 180px;
-  width: 50%;
-  margin: 0 auto;
+	height: 180px;
+	width: 50%;
+	margin: 0 auto;
 }
 
 .card-group {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .card {
-  margin-right: 15px;
-  margin-bottom: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
 }
 
 .card-group .card:nth-child(4n) {
-  margin-right: 0;
+	margin-right: 0;
 }
 
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 1rem;
 }
 
 .table-stats td {
-  text-align: center;
-  width: 50%;
+	text-align: center;
+	width: 50%;
 }
 
 .red-text {
-  color: red;
+	color: red;
 }
 
 .green-text {
-  color: green;
+	color: green;
 }
 
 .login-logo {
