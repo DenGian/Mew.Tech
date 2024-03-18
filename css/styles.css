@@ -232,3 +232,11 @@ ul.list-inline i.bi {
 .green-text {
 	color: green;
 }
+
+.login-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 225px;
+	height: 225px;
+}
