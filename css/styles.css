@@ -120,6 +120,10 @@ main {
 
 /* ASIDE */
 
+aside {
+	height: fit-content;
+}
+
 .aside-content {
 	text-align: center;
 	padding: 1rem;
