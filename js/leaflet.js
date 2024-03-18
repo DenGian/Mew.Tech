@@ -8,8 +8,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 let pokeball = L.icon({
   iconUrl: "../../assets/images/poke-ball.png",
-  iconSize: [38, 95],
-  iconAnchor: [22, 94],
+  iconSize: [38, 45],
+  iconAnchor: [22, 20],
   shadowAnchor: [4, 62],
   popupAnchor: [-3, -76],
 });
