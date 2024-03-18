@@ -90,104 +90,109 @@
     <main>
       <div class="container">
         <div class="row">
-      <section class="col-md-9">
-        <h2>Wie is die pokemon?</h2>
-        <div class="container text-center mt-3">
-          <p class="lead">Raad de pokemon!</p>
-        </div>
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h3>Wie is deze Pokémon?</h3>
-                </div>
-                <div class="pokedex-body text-center">
-                  <img
-                    src="../../assets/images/PokemonGuess.webp"
-                    class="card-img-top"
-                    alt="Who's that Pokémon?"
-                  />
-                  <form action="pokeGuess.html" method="post">
-                    <div class="input-group mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Raad de Pokémon"
-                        aria-label="Raad de Pokémon"
-                        aria-describedby="button-addon2"
-                      />
-                      <button
-                        class="btn btn-danger"
-                        type="submit"
-                        id="button-addon2"
-                      >
-                        Raad
-                      </button>
+          <section class="col-md-9">
+            <h2>Wie is die pokemon?</h2>
+            <div class="container text-center mt-3">
+              <p class="lead">Raad de pokemon!</p>
+            </div>
+            <div class="container mt-5">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="card pokedex-card">
+                    <div class="pokedex-header text-center">
+                      <h3>Wie is deze Pokémon?</h3>
                     </div>
-                  </form>
-                  <!-- Statistieken sectie -->
-                  <div class="pokemon-guess-stats">
-                    <h5 class="text-center">Jouw Statistieken</h5>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
-                        Juist geraden: <span id="correctGuesses">0</span>
-                      </li>
-                      <li class="list-group-item">
-                        Fout geraden: <span id="incorrectGuesses">0</span>
-                      </li>
-                    </ul>
+                    <div class="pokedex-body text-center">
+                      <img
+                        src="../../assets/images/PokemonGuess.webp"
+                        class="card-img-top"
+                        alt="Who's that Pokémon?"
+                      />
+                      <form action="pokeGuess.html" method="post">
+                        <div class="input-group mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Raad de Pokémon"
+                            aria-label="Raad de Pokémon"
+                            aria-describedby="button-addon2"
+                          />
+                          <button
+                            class="btn btn-danger"
+                            type="submit"
+                            id="button-addon2"
+                          >
+                            Raad
+                          </button>
+                        </div>
+                      </form>
+                      <!-- Statistieken sectie -->
+                      <div class="pokemon-guess-stats">
+                        <h5 class="text-center">Jouw Statistieken</h5>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">
+                            Juist geraden: <span id="correctGuesses">0</span>
+                          </li>
+                          <li class="list-group-item">
+                            Fout geraden: <span id="incorrectGuesses">0</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+          <aside class="col-md-3 order-first order-md-last bg-light">
+            <div class="aside-content">
+              <h3>Jouw Pokémon</h3>
+              <h4>Bulbasaur</h4>
+              <img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                alt="jouw pokémon"
+                width="100%"
+                height="100%"
+              />
+              <h3>Stats</h3>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Attack</th>
+                    <td>9000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Stamina</th>
+                    <td>9000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Defence</th>
+                    <td>9000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hit Points</th>
+                    <td>9000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3>Deel jouw Pokémon!</h3>
+              <ul class="list-inline">
+                <li>
+                  <a href="#"><i class="bi bi-facebook"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="bi bi-twitter"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="bi bi-instagram"></i></a>
+                </li>
+              </ul>
+            </div>
+          </aside>
         </div>
-      </section>
-      <aside class="col-md-3 order-first order-md-last bg-light">
-        <div class="aside-content">
-          <h3>Jouw Pokémon</h3>
-          <h4>Bulbasaur</h4>
-          <img src="../../assets/images/bulbasaur.png" alt="jouw pokémon" width="100" height="100" />
-          <h3>Stats</h3>
-          <table class="table">
-            <tbody>
-              <tr>
-                <th scope="row">Attack</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Stamina</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Defence</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Hit Points</th>
-                <td>9000</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3>Deel jouw Pokémon!</h3>
-          <ul class="list-inline">
-            <li>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </div>
+      </div>
     </main>
-  
+
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container">
         <div class="row">
