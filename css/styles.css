@@ -148,6 +148,11 @@ aside {
 	height: fit-content;
 }
 
+aside img {
+	width: 70%;
+	height: 70%;
+}
+
 .aside-content {
 	text-align: center;
 	padding: 1rem;
