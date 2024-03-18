@@ -55,6 +55,27 @@ h2 {
 	padding-bottom: 1.3rem;
 	text-align: center;
 }
+h5 {
+	font-size: 1.5rem !important;
+	font-weight: bold !important;
+}
+h6 {
+	font-size: 1.5rem !important;
+}
+
+p {
+	font-size: 1.5rem !important;
+}
+
+td {
+	font-size: 1.3rem;
+}
+tr {
+	font-size: 1.3rem;
+}
+div {
+	font-size: 1.5rem;
+}
 
 /* HEADER */
 
@@ -63,6 +84,9 @@ h2 {
 }
 
 /* NAV */
+nav {
+	font-size: 1.4rem;
+}
 
 .navbar-nav .nav-link.active {
 	font-weight: bold;
