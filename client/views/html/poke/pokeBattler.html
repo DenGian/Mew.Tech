@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+		/>
+		<meta
+			name="keywords"
+			content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+		/>
+		<meta name="author" content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan" />
+		<title>Mew.Tech</title>
+		<link rel="icon" type="image/x-icon" href="../../assets/images/logo-wpl/logo.webp" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../assets/fonts/style.css" />
+		<link rel="stylesheet" href="../../css/styles.css" />
+		<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+			rel="stylesheet"
+		/>
+		<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+	</head>
+	<body class="landing-page">
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container">
+					<a class="navbar-brand" href="pokeMain.html"
+						><img src="../../assets/images/logo-wpl/logo.webp" width="50" height="50"
+					/></a>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarNav"
+						aria-controls="navbarNav"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeMain.html">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">Duel</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeCatcher.html">Catch</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeCompare.html">Vergelijk</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeDex.html">PokeDex</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeGuess.html">Wie is het?</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./pokeViewer.html">Mijn Pokémon</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<div class="container">
+				<div class="row">
+					<section class="col-md-9">
+						<h2 class="text-center mt-4">Duel Arena</h2>
+						<div class="container text-center mt-3">
+							<p class="lead">Test je Pokémon in een gevecht!</p>
+						</div>
+						<div class="container mt-5">
+							<div class="row justify-content-center">
+								<div class="col-md-5">
+									<div class="card mb-5 pokedex-card">
+										<div class="card-header bg-primary text-white">
+											<h5 class="card-title text-center">Je Pokémon: Bulbasaur #001</h5>
+										</div>
+										<img
+											src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+											class="card-img-top"
+											alt="Bulbasaur"
+										/>
+										<div class="card-body">
+											<h6 class="text-center">HP</h6>
+											<div class="progress mb-3">
+												<div
+													class="progress-bar"
+													role="progressbar"
+													style="width: 90%"
+													aria-valuenow="45"
+													aria-valuemin="0"
+													aria-valuemax="100"
+												>
+													45/50
+												</div>
+											</div>
+											<!-- Stats -->
+											<div class="row">
+												<div class="col-6">
+													<h6 class="text-center">Aanval</h6>
+													<p class="text-center">49</p>
+												</div>
+												<div class="col-6">
+													<h6 class="text-center">Verdediging</h6>
+													<p class="text-center">49</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="card mb-5 pokedex-card">
+										<div class="card-header bg-danger text-white">
+											<h5 class="card-title text-center">Tegenstander: Charmander #004</h5>
+										</div>
+										<img
+											src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+											class="card-img-top"
+											alt="Charmander"
+										/>
+										<div class="card-body">
+											<h6 class="text-center">HP</h6>
+											<div class="progress mb-3">
+												<div
+													class="progress-bar bg-danger"
+													role="progressbar"
+													style="width: 80%"
+													aria-valuenow="39"
+													aria-valuemin="0"
+													aria-valuemax="100"
+												>
+													39/50
+												</div>
+											</div>
+											<!-- Stats -->
+											<div class="row">
+												<div class="col-6">
+													<h6 class="text-center">Aanval</h6>
+													<p class="text-center">52</p>
+												</div>
+												<div class="col-6">
+													<h6 class="text-center">Verdediging</h6>
+													<p class="text-center">43</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col text-center">
+								<button type="button" class="btn btn-danger btn-lg">Aanvallen</button>
+							</div>
+						</div>
+					</section>
+					<aside class="col-md-3 order-first order-md-last bg-light">
+						<div class="aside-content">
+							<h3>Jouw Pokémon</h3>
+							<h4>Bulbasaur</h4>
+							<img
+								src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+								alt="jouw pokémon"
+								width="100%"
+								height="100%"
+							/>
+							<h3>Stats</h3>
+							<table class="table">
+								<tbody>
+									<tr>
+										<th scope="row">Attack</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Stamina</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Defence</th>
+										<td>9000</td>
+									</tr>
+									<tr>
+										<th scope="row">Hit Points</th>
+										<td>9000</td>
+									</tr>
+								</tbody>
+							</table>
+							<h3>Deel jouw Pokémon!</h3>
+							<ul class="list-inline">
+								<li>
+									<a href="#"><i class="bi bi-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="bi bi-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="bi bi-instagram"></i></a>
+								</li>
+							</ul>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</main>
+
+		<footer class="footer mt-auto py-3 bg-light">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 text-center">
+						<h3>About Us</h3>
+						<p>
+							Welkom bij Mew.Tech, jouw ultieme Pokémon-ervaring. Ontdek de wereld van Pokémon met onze
+							innovatieve tools!
+						</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h3><a href="contactPage.html" class="text-dark">Contact us</a></h3>
+						<p>
+							Email: <a href="mailto:contact@mew.tech">contact@mew.tech</a><br />Telefoon:
+							<a href="tel:+32000420696">+32 000 42 06 96</a>
+						</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h3>Volg Ons</h3>
+						<p>Blijf verbonden op sociale media:</p>
+						<ul class="list-inline">
+							<li>
+								<a href="#"><i class="bi bi-facebook"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="bi bi-twitter"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="bi bi-instagram"></i></a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 text-center">
+						<h3>Ons Team</h3>
+						<ul class="list-inline">
+							<li>
+								<img
+									src="../../assets/images/creators/creator_cedric.png"
+									alt="Cedric De Maeschalk"
+									width="110"
+									height="100"
+								/>
+							</li>
+							<li>
+								<img
+									src="../../assets/images/creators/creator_ian.png"
+									alt="Ian Mondelaers"
+									width="110"
+									height="100"
+								/>
+							</li>
+							<li>
+								<img
+									src="../../assets/images/creators/creator_jesus.png"
+									alt="Jesus O'Bulan"
+									width="110"
+									height="100"
+								/>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
