@@ -57,22 +57,3 @@ Gebruikers worden uitgedaagd om Pokémon te identificeren aan de hand van zwarte
 Zie de [wireframes](https://whimsical.com/pokemon-TZpSWmvkAL56zmbEbMFZ6E) voor een visuele weergave van de applicatie.
 
 ### Bijdragen
-
-### GIT
-
-#### Eigen Branch
-
-- git add .
-- git commit -m "zinvolle message"
-- git push
-
-#### production
-
-- git switch production
-- git pull
-- git merge <eigen branch>
-- git push
-
-#### Eigen branch
-
-- git switch <eigen branch>
