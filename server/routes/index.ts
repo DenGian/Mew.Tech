@@ -39,15 +39,15 @@ router.get("/viewer", (req, res) => {
 });
 
 router.get("/acces-denied", (req, res) => {
-    res.render("index");
+    res.render("acces-denied");
 });
 
 router.get("/login", (req, res) => {
-    res.render("index");
+    res.render("login");
 });
 
 router.get("/register", (req, res) => {
-    res.render("index");
+    res.render("register");
 });
 
 export default router;
