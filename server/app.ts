@@ -1,8 +1,10 @@
-// app.ts
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import indexRouter from "./routes/index";
+import { handleError } from "./middleware/handleError";
+import { loggingMiddleware } from "./middleware/handleLogging";
+import { pageNotFoundMiddleware } from "./middleware/handlePageNotFound";
 
 dotenv.config();
 
@@ -16,12 +18,13 @@ app.set('views', path.join(__dirname, "..", "client", "views"));
 
 app.set("port", process.env.PORT || 3000);
 
-app.get("", (req, res) => {
-    res.type("text/html");
-    res.render("index");
-});
+app.use(loggingMiddleware);
 
 app.use("/", indexRouter);
+
+app.use(handleError);
+
+app.use(pageNotFoundMiddleware);
 
 app.use((req, res) => {
     res.status(404).send("404, page not found");
