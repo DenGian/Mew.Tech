@@ -26,10 +26,6 @@ app.use(handleError);
 
 app.use(pageNotFoundMiddleware);
 
-app.use((req, res) => {
-  res.status(404).send("404, page not found");
-});
-
 app.listen(app.get("port"), () => {
   console.log("Server started on http://localhost:" + app.get("port"));
 });
