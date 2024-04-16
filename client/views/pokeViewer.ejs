@@ -1,0 +1,238 @@
+<%- include('partials/header') %>
+<main>
+    <div class="container">
+        <div class="row">
+            <section class="col-md-9">
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">Zoek jouw Pokémon</a>
+                        <form class="d-flex" role="search">
+                            <div class="dropdown p-1 mt-1">
+                                <button
+                                    class="btn btn-outline-danger dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Filter
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">gen 1</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 2</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 3</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 4</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 5</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 6</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 7</a></li>
+                                    <li><a class="dropdown-item" href="#">gen 8</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown p-1 mt-1">
+                                <button
+                                    class="btn btn-outline-danger dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Sort
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Van A-Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Van Z-A</a></li>
+                                </ul>
+                            </div>
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button class="btn btn-outline-danger p-1 mt-1" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <div class="card-group py-3">
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Bulbasaur #001</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Ivysaur #002</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Venusaur #003</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Charmander #004</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-group">
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Charmeleon #005</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Charizard #006</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Squirtle #007</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Wartortle #008</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-group">
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">blastoise #009</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Caterpie #010</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Metapod #011</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                    <div class="card card-myPoke">
+                        <h5 class="card-title text-center main-card-header">Butterfree #012</h5>
+                        <img
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <aside class="col-md-3 order-first order-md-last bg-light mb-3">
+                <div class="aside-content">
+                    <h3>Jouw Pokémon</h3>
+                    <h4>Bulbasaur</h4>
+                    <img
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                        alt="jouw pokémon"
+                        width="100%"
+                        height="100%"
+                    />
+                    <h3>Stats</h3>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Attack</th>
+                                <td>9000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stamina</th>
+                                <td>9000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Defence</th>
+                                <td>9000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Hit Points</th>
+                                <td>9000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Deel jouw Pokémon!</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') %>

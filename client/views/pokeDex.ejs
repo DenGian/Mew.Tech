@@ -1,0 +1,267 @@
+<%- include('partials/header') %>
+<main>
+  <div class="container">
+    <div class="row">
+      <section class="col-md-9 mb-3 mb-md-0">
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand">Zoek Pokémon</a>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-danger" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
+        <h1 class="text-center">PokeDex</h1>
+        <div class="container mt-5">
+          <!-- Focused Pokémon (e.g., Venusaur) with more stats -->
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-6">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Venusaur #003</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+                    class="card-img-top"
+                    alt="Venusaur"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Stats</h5>
+                    <div class="row">
+                      <!-- Voeg een rij toe voor de stats -->
+                      <div class="col-6 col-md-4">HP: 45</div>
+                      <div class="col-6 col-md-4">Attack: 49</div>
+                      <div class="col-6 col-md-4">Defense: 49</div>
+                      <div class="col-6 col-md-4">Speed: 45</div>
+                    </div>
+                    <button
+                      class="btn btn-primary mt-3"
+                      id="play-sound-bulbasaur"
+                    >
+                      Speel Geluid
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Evolutionary Chain with minimal stats -->
+          <h2>Evolutionaire Keten</h2>
+          <div class="row justify-content-center">
+            <!-- Bulbasaur Card -->
+            <div class="col-md-4">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Bulbasaur #001</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                    class="card-img-top"
+                    alt="Bulbasaur"
+                  />
+                  <!-- Minimal stats or just a name -->
+                </div>
+              </div>
+            </div>
+            <!-- Ivysaur Card -->
+            <div class="col-md-4">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Ivysaur #002</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+                    class="card-img-top"
+                    alt="Ivysaur"
+                  />
+                  <!-- Minimal stats or just a name -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>Venusaur #002</h5>
+                </div>
+                <div class="pokedex-body">
+                  <img
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
+                    class="card-img-top"
+                    alt="venusaur"
+                  />
+                  <!-- Minimal stats or just a name -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Additional Info Section -->
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <!-- Extra Info Card 1 -->
+            <div class="col-md-4">
+              <div class="card extra-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Pokémon Fun Facts</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Did you know Venusaur's flower is said to take on vivid
+                    colors if it gets plenty of nutrition and sunlight? The
+                    flower's aroma soothes the emotions of people.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extra Info Card 2 -->
+            <div class="col-md-4">
+              <div class="card extra-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Habitat Information</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Venusaur are commonly found in grassy plains and forests
+                    where they can absorb the sun's rays.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extra Info Card 3 -->
+            <div class="col-md-4">
+              <div class="card extra-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Abilities</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Venusaur's ability "Overgrow" powers up Grass-type moves
+                    when the Pokémon's HP is low. It can also have the hidden
+                    ability "Chlorophyll," which boosts its Speed in sunlight.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Expanded Info Section -->
+        <div class="container my-5">
+          <div class="row justify-content-center">
+            <!-- Lore Card -->
+            <div class="col-md-6">
+              <div class="card expanded-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Lore & Background</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Venusaur, the Seed Pokémon, and the final form of Bulbasaur.
+                    The plant blooms when it is absorbing solar energy. It stays
+                    on the move to seek sunlight.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Evolution Methods Card -->
+            <div class="col-md-6">
+              <div class="card expanded-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Evolution Methods</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Bulbasaur evolves into Ivysaur starting at level 16 and then
+                    into Venusaur starting at level 32. In certain games,
+                    Venusaur can further evolve into Mega Venusaur using a
+                    Venusaurite.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center mt-4">
+            <!-- Competitive Battling Tips Card -->
+            <div class="col-md-12">
+              <div class="card expanded-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Competitive Battling Tips</h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Venusaur is a versatile contender in competitive battles,
+                    thanks to its solid dual typing and robust stats. Utilizing
+                    Venusaur's Chlorophyll ability alongside a Sunny Day
+                    teammate can turn it into a formidable sweeper. Its wide
+                    movepool, including Sleep Powder and Sludge Bomb, allows it
+                    to fulfill various roles effectively.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <aside class="col-md-3 order-first order-md-last bg-light mb-3">
+        <div class="aside-content">
+          <h3>Jouw Pokémon</h3>
+          <h4>Bulbasaur</h4>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+            alt="jouw pokémon"
+            width="100%"
+            height="100%"
+          />
+          <h3>Stats</h3>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Attack</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Stamina</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Defence</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Hit Points</th>
+                <td>9000</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Deel jouw Pokémon!</h3>
+          <ul class="list-inline">
+            <li>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+<%- include('partials/footer') %>
