@@ -7,35 +7,35 @@ router.get("/", (req, res) => {
 });
 
 router.get("/contact", (req, res) => {
-    res.render("index");
+    res.render("contactPage");
 });
 
 router.get("/battler", (req, res) => {
-    res.render("index");
+    res.render("pokeBattler");
 });
 
 router.get("/catcher", (req, res) => {
-    res.render("index");
+    res.render("pokeCatcher");
 });
 
 router.get("/compare", (req, res) => {
-    res.render("index");
+    res.render("pokeCompare");
 });
 
 router.get("/pokeDex", (req, res) => {
-    res.render("index");
+    res.render("pokeDex");
 });
 
 router.get("/pokeGuess", (req, res) => {
-    res.render("index");
+    res.render("pokeGuess");
 });
 
 router.get("/main", (req, res) => {
-    res.render("index");
+    res.render("pokeMain");
 });
 
 router.get("/viewer", (req, res) => {
-    res.render("index");
+    res.render("pokeViewer");
 });
 
 router.get("/acces-denied", (req, res) => {
