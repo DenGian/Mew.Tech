@@ -1,16 +1,15 @@
-<%- (include('partials/header')) %>
+<%- include('partials/header') %>
 <main>
   <div class="container">
     <div class="row">
       <section class="col-md-9">
-        <h2>Safari Zone</h2>
+        <h2 class="text-center mt-4">Safari Zone</h2>
         <div class="container text-center mt-3">
-          <p class="lead">
-            Druk op de Pokéball en probeer de Pokémon te vangen!
-          </p>
+          <p class="lead">Vang de Pokemon</p>
         </div>
-        <div class="container img-fluid">
+        <div class="container mt-5">
           <div class="row justify-content-center">
+<<<<<<< HEAD
             <div class="col-md-6">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
@@ -40,13 +39,39 @@
                       />
                     </button>
                   </div>
+=======
+            <% if (randomPokemon) { %>
+            <div class="col-md-5">
+              <div class="card mb-5 pokedex-card">
+                <div class="card-header bg-danger text-white">
+                  <h5 class="card-title text-center">
+                    Pokémon: <%= randomPokemon.name %> #<%= randomPokemon.id %>
+                  </h5>
+>>>>>>> production
                 </div>
+                <img
+                  src="<%= randomPokemon.sprite %>"
+                  class="card-img-top"
+                  alt="<%= randomPokemon.name %>"
+                />
               </div>
             </div>
           </div>
+          <% } %>
+          <!-- Similar setup for opponent Pokémon using `catchPokemon` if available -->
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-danger btn-lg">
+              vang Pokémon
+            </button>
+          </div>
         </div>
       </section>
+<<<<<<< HEAD
       <%- include('partials/aside') %>
+=======
+>>>>>>> production
     </div>
   </div>
 </main>
