@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import { getRandomPokemon, tryToCatchPokemon, catchPokemon } from "../utils/helper-functions";
+import { error } from "console";
 
 const router: Router = express.Router();
 
