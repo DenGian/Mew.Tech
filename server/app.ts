@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
+import { MONGODB_URI } from "./config/env"
 import indexRouter from "./routes/index";
 import { handleError } from "./middleware/handleError";
 import { loggingMiddleware } from "./middleware/handleLogging";
