@@ -276,9 +276,26 @@ ul.list-inline i.bi {
   height: 225px;
 }
 
+<<<<<<< HEAD
 .higher {
   color: green;
 }
 .lower {
   color: red;
+=======
+/* Animations */
+
+.animation {
+  font-size: 10rem;
+}
+
+.animation:hover {
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translate(0, 20px);
+  }
+>>>>>>> cedric
 }
