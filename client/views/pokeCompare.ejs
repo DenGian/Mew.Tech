@@ -38,46 +38,71 @@
               </div>
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
-                  <h5>Bulbasaur #001</h5>
+                  <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="" class="card-img-top" alt="Bulbasaur" />
+                  <img
+                    src="<%= randomPokemon.sprites.front_default %>"
+                    class="card-img-top"
+                    alt="<%= randomPokemon.name %>"
+                  />
                   <div class="card-body text-center">
                     <h5 class="card-title">Stats</h5>
                     <table class="table table-stats">
                       <tbody>
+                        <% const stats1 = randomPokemon.stats.map(stat =>
+                        stat.base_stat); %> <% const stats2 =
+                        randomPokemon2.stats.map(stat => stat.base_stat); %>
                         <tr>
                           <th scope="row">HP</th>
-                          <td><span class="green-text">+ 45</span></td>
+                          <td
+                            class="<%= stats1[0] > stats2[0] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[0] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Attack</th>
-                          <td><span class="red-text">- 49</span></td>
+                          <td
+                            class="<%= stats1[1] > stats2[1] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[1] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Defense</th>
-                          <td><span class="green-text">+ 49</span></td>
+                          <td
+                            class="<%= stats1[2] > stats2[2] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[2] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Special Attack</th>
-                          <td><span class="green-text">+ 65</span></td>
+                          <td
+                            class="<%= stats1[3] > stats2[3] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[3] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Special Defense</th>
-                          <td><span class="green-text">+ 65</span></td>
+                          <td
+                            class="<%= stats1[4] > stats2[4] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[4] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Speed</th>
-                          <td><span class="red-text">- 45</span></td>
+                          <td
+                            class="<%= stats1[5] > stats2[5] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats1[5] %>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
-                    <button
-                      class="btn btn-primary mt-3"
-                      id="play-sound-bulbasaur"
-                    >
-                      Speel Geluid
-                    </button>
                   </div>
                 </div>
               </div>
@@ -106,46 +131,68 @@
               </div>
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
-                  <h5>Charmander #004</h5>
+                  <h5>#<%= randomPokemon2.id %> <%= randomPokemon2.name %></h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="" class="card-img-top" alt="Charmander" />
+                  <img
+                    src="<%= randomPokemon2.sprites.front_default %>"
+                    class="card-img-top"
+                    alt="<%= randomPokemon2.name %>"
+                  />
                   <div class="card-body text-center">
                     <h5 class="card-title text-center">Stats</h5>
                     <table class="table table-stats">
                       <tbody>
                         <tr>
                           <th scope="row">HP</th>
-                          <td><span class="red-text">- 39</span></td>
+                          <td
+                            class="<%= stats2[0] > stats1[0] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[0] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Attack</th>
-                          <td><span class="green-text">+ 52</span></td>
+                          <td
+                            class="<%= stats2[1] > stats1[1] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[1] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Defense</th>
-                          <td><span class="red-text">- 43</span></td>
+                          <td
+                            class="<%= stats2[2] > stats1[2] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[2] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Special Attack</th>
-                          <td><span class="red-text">- 60</span></td>
+                          <td
+                            class="<%= stats2[3] > stats1[3] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[3] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Special Defense</th>
-                          <td><span class="red-text">- 50</span></td>
+                          <td
+                            class="<%= stats2[4] > stats1[4] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[4] %>
+                          </td>
                         </tr>
                         <tr>
                           <th scope="row">Speed</th>
-                          <td><span class="green-text">+ 65</span></td>
+                          <td
+                            class="<%= stats2[5] > stats1[5] ? 'higher' : 'lower' %>"
+                          >
+                            <%= stats2[5] %>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
-                    <button
-                      class="btn btn-primary mt-3"
-                      id="play-sound-charmander"
-                    >
-                      Speel Geluid
-                    </button>
                   </div>
                 </div>
               </div>
@@ -154,7 +201,51 @@
         </div>
       </section>
 
-      <%- include('partials/aside') %>
+      <aside class="col-md-3 order-first order-md-last bg-light">
+        <div class="aside-content">
+          <h3>Jouw Pokémon</h3>
+          <h4>Bulbasaur</h4>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+            alt="jouw pokémon"
+            width="100%"
+            height="100%"
+          />
+          <h3>Stats</h3>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Attack</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Stamina</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Defence</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Hit Points</th>
+                <td>9000</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Deel jouw Pokémon!</h3>
+          <ul class="list-inline">
+            <li>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </div>
 </main>

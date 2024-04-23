@@ -1,43 +1,144 @@
-<%- include('partials/header') %>
+<%- (include('partials/header')) %>
 <main>
   <div class="container">
     <div class="row">
       <section class="col-md-9">
-        <h2 class="text-center mt-4">Safari Zone</h2>
+        <h2>Safari Zone</h2>
         <div class="container text-center mt-3">
-          <p class="lead">Vang de Pokemon</p>
+          <p class="lead">
+            Klik op de Pokéball en probeer jouw eigen Pokémon te vangen! Wie
+            weet welke zeldzame Pokémon je tegenkomt?
+          </p>
         </div>
-        <div class="container mt-5">
+        <div class="container img-fluid">
           <div class="row justify-content-center">
-            <% if (randomPokemon) { %>
-            <div class="col-md-5">
-              <div class="card mb-5 pokedex-card">
-                <div class="card-header bg-danger text-white">
-                  <h5 class="card-title text-center">
-                    Pokémon: <%= randomPokemon.name %> #<%= randomPokemon.id %>
-                  </h5>
+            <div class="col-md-6">
+              <div class="card pokedex-card">
+                <div class="pokedex-header text-center">
+                  <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
                 </div>
-                <img
-                  src="<%= randomPokemon.sprite %>"
-                  class="card-img-top"
-                  alt="<%= randomPokemon.name %>"
-                />
+                <div class="pokedex-body">
+                  <img
+                    src="<%= randomPokemon.sprites.front_default %>"
+                    class="card-img-top"
+                    alt="<%= randomPokemon.name %>"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Stats</h5>
+                    <div class="row">
+                      <!-- Voeg een rij toe voor de stats -->
+                      <div class="col-6 col-md-4">
+                        HP: <%= randomPokemon.stats[0].base_stat %>
+                      </div>
+                      <div class="col-6 col-md-4">
+                        Atk: <%= randomPokemon.stats[1].base_stat %>
+                      </div>
+                      <div class="col-6 col-md-4">
+                        Def: <%= randomPokemon.stats[2].base_stat %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button
+                      id="pokeball-btn"
+                      type="button"
+                      class="btn-pokeball"
+                      style="background-color: transparent; border: none"
+                    >
+                      <img
+                        src="../../assets/images/poke-ball.png"
+                        alt="Pokeball"
+                        style="width: 100px; height: 100px"
+                      />
+                    </button>
+                  </div>
+                  <p id="catch-result"></p>
+                  <p id="attempts-left"></p>
+                </div>
               </div>
             </div>
           </div>
-          <% } %>
-          <!-- Similar setup for opponent Pokémon using `catchPokemon` if available -->
-        </div>
-        <div class="row">
-          <div class="col text-center">
-            <button type="button" class="btn btn-danger btn-lg">
-              vang Pokémon
-            </button>
-          </div>
         </div>
       </section>
-      <%- include('partials/aside') %>
+      <aside class="col-md-3 order-first order-md-last bg-light">
+        <div class="aside-content">
+          <h3>Jouw Pokémon</h3>
+          <h4>Bulbasaur</h4>
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+            alt="jouw pokémon"
+            width="100%"
+            height="100%"
+          />
+          <h3>Stats</h3>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Attack</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Stamina</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Defence</th>
+                <td>9000</td>
+              </tr>
+              <tr>
+                <th scope="row">Hit Points</th>
+                <td>9000</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Deel jouw Pokémon!</h3>
+          <ul class="list-inline">
+            <li>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </div>
 </main>
+
+<script>
+  let attempts = 3;
+
+  document
+    .getElementById("pokeball-btn")
+    .addEventListener("click", function () {
+      if (attempts > 0) {
+        const catchRate = 0.25; // Chance to catch the Pokémon
+        const random = Math.random(); // Generate a random number between 0 and 1
+
+        if (random < catchRate) {
+          document.getElementById("catch-result").textContent =
+            "You caught the Pokémon!";
+          document.getElementById("catch-result").style.color = "green";
+          document.getElementById("pokeball-btn").disabled = true; // Disable the button after catching
+          document.getElementById("attempts-left").textContent =
+            "Attempts left: " + (attempts - 1);
+        } else {
+          attempts--;
+          document.getElementById("catch-result").textContent =
+            "The Pokémon escaped! Try again.";
+          document.getElementById("catch-result").style.color = "red";
+          document.getElementById("attempts-left").textContent =
+            "Attempts left: " + attempts;
+
+          if (attempts === 0) {
+            document.getElementById("pokeball-btn").disabled = true; // Disable the button if no attempts left
+          }
+        }
+      }
+    });
+</script>
 <%- (include('partials/footer')) %>
