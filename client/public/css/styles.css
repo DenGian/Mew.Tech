@@ -276,13 +276,12 @@ ul.list-inline i.bi {
   height: 225px;
 }
 
-<<<<<<< HEAD
 .higher {
   color: green;
 }
 .lower {
   color: red;
-=======
+}
 /* Animations */
 
 .animation {
@@ -297,5 +296,4 @@ ul.list-inline i.bi {
   50% {
     transform: translate(0, 20px);
   }
->>>>>>> cedric
 }
