@@ -6,4 +6,8 @@ router.get("/", (req, res) => {
     res.render("login");
   });
 
+  router.post("/", (req, res) => {
+    res.cookie("username", req.body.username);
+    res.redirect("/register");
+  });
 export default router;
