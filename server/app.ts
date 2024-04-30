@@ -15,6 +15,8 @@ import viewerRouter from "./routes/viewer";
 import { handleError } from "./middleware/handleError";
 import { loggingMiddleware } from "./middleware/handleLogging";
 import { pageNotFoundMiddleware } from "./middleware/handlePageNotFound";
+import cookieParser from "cookie-parser";
+
 
 dotenv.config();
 
@@ -26,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.set("views", path.join(__dirname, "..", "client", "views"));
 
+app.use(cookieParser());
 
 app.set("port", process.env.PORT || 3000);
 
