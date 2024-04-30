@@ -26,10 +26,10 @@
             <div class="col-md-6">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
-                  <h5>Venusaur #003</h5>
+                  <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="" class="card-img-top" alt="Venusaur" />
+                  <img src="<%= randomPokemon.sprites.front_default %>" class="card-img-top" alt="<%= randomPokemon.name %>" />
                   <div class="card-body text-center">
                     <h5 class="card-title">Stats</h5>
                     <div class="row">

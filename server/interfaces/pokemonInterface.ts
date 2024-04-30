@@ -28,6 +28,8 @@ export interface pokemon{
     sprites : Sprites;
 }
 
+
+
 export interface Ability {
     ability:   Species;
     is_hidden: boolean;

@@ -18,8 +18,14 @@ router.get("/contact", (req, res) => {
   res.render("contactPage");
 });
 
-router.get("/battler", (req, res) => {
-  res.render("pokeBattler");
+router.get("/battler", async (req, res) => {
+  try {
+    const pokemonList = await fetchPokemonData();
+    res.render("pokeBattler", { pokemonList });
+  } catch (error) {
+    console.error("Error fetching Pokémon data:", error);
+    res.status(500).send("Failed to load page due to server error.");
+  }
 });
 
 // Route to render the page with a random Pokémon
@@ -54,15 +60,25 @@ router.get("/compare", async (req, res) => {
     const searchPokemon = req.query.searchPokemon;
     const randomPokemon = await displayRandomPokemon();
     const randomPokemon2 = await displayRandomPokemon();
-    res.render("pokeCompare", { randomPokemon, randomPokemon2, searchPokemon});
+    res.render("pokeCompare", { randomPokemon, randomPokemon2, searchPokemon });
   } catch (error) {
     console.error("Error fetching random Pokémon:", error);
     res.status(500).send("Failed to load page due to server error.");
   }
 });
 
-router.get("/pokeDex", (req, res) => {
-  res.render("pokeDex");
+router.get("/pokeDex", async (req, res) => {
+  try {
+    const searchPokemon = req.query.searchPokemon;
+    const randomPokemon = await displayRandomPokemon();
+    res.render("pokeDex", {
+      randomPokemon,
+      searchPokemon,
+    });
+  } catch (error) {
+    console.error("Error fetching random Pokémon:", error);
+    res.status(500).send("Failed to load page due to server error.");
+  }
 });
 
 router.get("/pokeGuess", (req, res) => {
