@@ -1,10 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-<<<<<<< HEAD
-import { MONGODB_URI } from "./config/env";
-=======
->>>>>>> 1881d19 (resolved merge conflicts)
 import indexRouter from "./routes/index";
 import { handleError } from "./middleware/handleError";
 import { loggingMiddleware } from "./middleware/handleLogging";

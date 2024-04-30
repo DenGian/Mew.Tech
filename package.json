@@ -5,11 +5,7 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
-<<<<<<< HEAD
-    "express-session": "^1.18.0"
-=======
     "mongodb": "^6.5.0"
->>>>>>> 1881d19 (resolved merge conflicts)
   },
   "name": "mew.tech",
   "description": "Welkom bij ons Gemeenschappelijk Project! Hieronder vind je alles wat je moet weten over onze Fullstack Pokémon website.",
