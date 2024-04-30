@@ -11,7 +11,7 @@ export const handleError = (
     errorStack: err.stack,
   });
   res.render("error", {
-    message: err.message, // Message from the Error object
+    message: err.message,
     error: {
       status: res.statusCode,
       stack: err.stack,
