@@ -3,7 +3,7 @@ import { fetchPokemonData } from "../utils/helper-functions";
 
 const router: Router = express.Router();
 
-router.get("/battler", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
       const pokemonList = await fetchPokemonData();
       res.render("pokeBattler", { pokemonList });
