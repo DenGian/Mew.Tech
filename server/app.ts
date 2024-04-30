@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import { MONGODB_URI } from "./config/env"
 import indexRouter from "./routes/index";
 import { handleError } from "./middleware/handleError";
 import { loggingMiddleware } from "./middleware/handleLogging";
@@ -17,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.set("views", path.join(__dirname, "..", "client", "views"));
 
+
 app.set("port", process.env.PORT || 3000);
 
 app.use(loggingMiddleware);
@@ -27,6 +27,8 @@ app.use(handleError);
 
 app.use(pageNotFoundMiddleware);
 
-app.listen(app.get("port"), () => {
-  console.log("Server started on http://localhost:" + app.get("port"));
+app.listen(app.get("port"), async () => {
+  console.log(`Server is running on port ${app.get("port")}`);
 });
+
+
