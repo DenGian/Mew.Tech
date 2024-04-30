@@ -3,7 +3,7 @@ import { displayRandomPokemon } from "../utils/helper-functions";
 
 const router: Router = express.Router();
 
-router.get("/compare", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
       const searchPokemon = req.query.searchPokemon;
       const randomPokemon = await displayRandomPokemon();

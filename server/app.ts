@@ -37,7 +37,7 @@ app.use("/battler", battlerRouter);
 app.use("/catcher", catcherRouter);
 app.use("/compare", compareRouter);
 app.use("/contact", contactRouter);
-app.use("/guess", guessRouter);
+app.use("/pokeGuess", guessRouter);
 app.use("/login", loginRouter);
 app.use("/pokeDex", pokeDexRouter);
 app.use("/register", registerRouter);
