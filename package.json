@@ -2,11 +2,12 @@
   "dependencies": {
     "@types/dotenv": "^8.2.0",
     "bootstrap": "^5.3.3",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
-    "mongodb": "^6.5.0",
-    "express-session": "^1.18.0"
+    "express-session": "^1.18.0",
+    "mongodb": "^6.5.0"
   },
   "name": "mew.tech",
   "description": "Welkom bij ons Gemeenschappelijk Project! Hieronder vind je alles wat je moet weten over onze Fullstack Pokémon website.",
@@ -19,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
     "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
