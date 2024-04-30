@@ -27,10 +27,17 @@ app.use(handleError);
 
 app.use(pageNotFoundMiddleware);
 
+<<<<<<< HEAD
 app.listen(app.get("port"), () => {
   console.log(`Server is running on port ${app.get("port")}`);
 });
 function session(arg0: { secret: string; resave: boolean; saveUninitialized: boolean; cookie: { secure: string; }; }): any {
   throw new Error("Function not implemented.");
 }
+=======
+app.listen(app.get("port"), async () => {
+  console.log(`Server is running on port ${app.get("port")}`);
+});
+
+>>>>>>> ian
 
