@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import session from 'express-session';
 import indexRouter from "./routes/index";
 import mainRouter from "./routes/main"
 import accesDeniedRouter from "./routes/accesDenied";
@@ -35,20 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.set("views", path.join(__dirname, "..", "client", "views"));
 
-<<<<<<< HEAD
-// Session middleware configuration
-app.use(session({
-  secret: 'your_secret_key',  // Change 'your_secret_key' to a real secret in production
-  resave: false,
-  saveUninitialized: false,   // Changed to false for better security with uninitialized sessions
-  cookie: {
-    secure: false,  // Set to true if you’re using HTTPS, false if you’re using HTTP
-    maxAge: 1000 * 60 * 60 * 24 // Sets cookie to expire in 24 hours
-  }
-}));
-=======
 app.use(cookieParser());
->>>>>>> ian
 
 app.use(session);
 
@@ -56,12 +42,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(loggingMiddleware);
 
-<<<<<<< HEAD
-// Route that uses session
-=======
 app.use(flashMiddleware);
 
->>>>>>> ian
 app.use("/", indexRouter);
 app.use("/main", mainRouter);
 app.use("/acces-denied", accesDeniedRouter);
