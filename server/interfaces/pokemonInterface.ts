@@ -15,6 +15,7 @@ export interface PokemonSpecies {
 }
 
 export interface PokemonData {
+        _id?: ObjectId;
         id: number;
         name: string;
         sprites: { front_default: string };

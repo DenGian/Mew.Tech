@@ -2,6 +2,7 @@ import { Collection, MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { pokemon } from "../interfaces/pokemonInterface";
+import { PokemonData } from "../interfaces/pokemonInterface";
 import { User } from "../interfaces/userInterface";
 
 dotenv.config();
@@ -9,6 +10,7 @@ dotenv.config();
 const client = new MongoClient(process.env.MONGODB_URI || "mongodb://localhost:27017");
 
 const collectionPokemon: Collection<pokemon> = client.db("wpl").collection<pokemon>("pokemon");
+const collectionPokemonData: Collection<PokemonData> = client.db("wpl").collection<PokemonData>("pokemonData");
 const collectionUsers: Collection<User> = client.db("wpl").collection<User>("users");
 
 const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
@@ -102,6 +104,63 @@ async function loadPokemonsFromApi(collectionPokemon: Collection<pokemon>) {
     }
 }
 
+async function loadPokemonDataFromApi(collectionPokemonData: Collection<PokemonData>) {
+    try {
+        console.log("Loading detailed Pokémon data from API...");
+
+        const batchSize = 100;
+
+        const generationRanges = [
+            { start: 1, end: 151 },
+            { start: 152, end: 251 }
+        ];
+
+        for (const range of generationRanges) {
+            for (let i = range.start; i <= range.end; i += batchSize) {
+                const response = await fetch(`${pokemonApi}?limit=${batchSize}&offset=${i}`);
+                const data = await response.json();
+
+                const pokemonData = await Promise.all(data.results.map(async (pokemonInfo: any) => {
+                    try {
+                        const pokemonResponse = await fetch(pokemonInfo.url);
+                        const pokemonDetails = await pokemonResponse.json();
+
+                        const formattedPokemonData: PokemonData = {
+                            id: pokemonDetails.id,
+                            name: pokemonDetails.name,
+                            sprites: pokemonDetails.sprites,
+                            stats: pokemonDetails.stats,
+                            abilities: pokemonDetails.abilities
+                        };
+
+                        return formattedPokemonData;
+                    } catch (error) {
+                        console.error(`Error processing Pokémon data for ${pokemonInfo.name}: ${error}`);
+                        return null;
+                    }
+                }));
+
+                const filteredPokemonData = pokemonData.filter((pokemon) => pokemon !== null);
+
+                if (filteredPokemonData.length > 0) {
+                    console.log("Inserting Pokémon data into the database...");
+                    try {
+                        await collectionPokemonData.insertMany(filteredPokemonData);
+                        console.log(`${filteredPokemonData.length} Pokémon data inserted into the database.`);
+                    } catch (error) {
+                        console.error("Error inserting Pokémon data into the database:", error);
+                    }
+                } else {
+                    console.log("No Pokémon data to insert.");
+                }
+            }
+        }
+        console.log("Database is up to date, no action needed");
+    } catch (error) {
+        console.error("An error occurred while loading Pokémon data from API: ", error);
+    }
+}
+
 
 async function getAllPokemon(): Promise<pokemon[]> {
     try {
@@ -144,9 +203,10 @@ export async function updateLanguage(pokemonId: string, updatedPokemon: pokemon)
 async function connect() {
     await client.connect();
     await loadPokemonsFromApi(collectionPokemon);
+    await loadPokemonDataFromApi(collectionPokemonData);
     await createInitialUser();
     console.log("Connected to database");
     process.on("SIGINT", exit);
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon };
+export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, loadPokemonDataFromApi, collectionPokemon, collectionPokemonData };
