@@ -1,55 +1,20 @@
 <%- include("partials/landingPageHeader") %>
 <body class="landing-page">
   <main>
-    <section>
-      <h2>Welkom bij onze login page</h2>
-      <div class="d-flex justify-content-center">
-        <img src="./assets/images/logo.webp" class="login-logo" />
+    <% if (message) { %>
+      <p class="<%= message.type %>"><%= message.message %></p>
+    <% } %>
+    <form action="/login" method="post">
+      <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"/>
       </div>
-      <div class="container text-center mt-3">
-        <p class="lead">Hier kan je inloggen op onze website!</p>
-        <p class="lead">veel plezier!</p>
+      <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password"/>
       </div>
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <form method="POST">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  name="username"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-danger">Login</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+      <button type="submit">Login</button>
+  </form>
   </main>
   <footer class="footer mt-auto py-3 bg-light footer-down">
     <div class="container">
