@@ -142,15 +142,11 @@ export async function updateLanguage(pokemonId: string, updatedPokemon: pokemon)
 }
 
 async function connect() {
-    try {
-        await client.connect();
-        await loadPokemonsFromApi(collectionPokemon);
-        await createInitialUser();
-        console.log("Connected to database");
-        process.on("SIGINT", exit);
-    } catch (error) {
-        console.error(error);
-    }
+    await client.connect();
+    await loadPokemonsFromApi(collectionPokemon);
+    await createInitialUser();
+    console.log("Connected to database");
+    process.on("SIGINT", exit);
 }
 
 export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon };
