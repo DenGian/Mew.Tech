@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface pokeDex {
     abilities:                Ability[];
     base_experience:          number;
@@ -6,7 +8,7 @@ export interface pokeDex {
     game_indices:             GameIndex[];
     height:                   number;
     held_items:               HeldItem[];
-    id:                       number;
+    id:                       string;
     is_default:               boolean;
     location_area_encounters: string;
     moves:                    Move[];
@@ -22,7 +24,8 @@ export interface pokeDex {
 }
 
 export interface pokemon{
-    id: number;
+    _id?: ObjectId;
+    id: string;
     name : string;
     url : string;
     sprites : Sprites;
