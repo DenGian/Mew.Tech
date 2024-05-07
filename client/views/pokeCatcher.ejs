@@ -54,51 +54,14 @@
                   </div>
                   <p id="catch-result"></p>
                   <p id="attempts-left"></p>
-                </div>
-                <div class="pokedex-body">
-                  <img
-                    src="<%= randomPokemon.sprites.front_default %>"
-                    class="card-img-top"
-                    alt="<%= randomPokemon.name %>"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">Stats</h5>
-                    <div class="row">
-                      <div class="col-6 col-md-4">
-                        HP: <%= randomPokemon.stats[0].base_stat %>
-                      </div>
-                      <div class="col-6 col-md-4">
-                        Atk: <%= randomPokemon.stats[1].base_stat %>
-                      </div>
-                      <div class="col-6 col-md-4">
-                        Def: <%= randomPokemon.stats[2].base_stat %>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <button
-                      id="pokeball-btn"
-                      type="button"
-                      class="btn-pokeball"
-                      style="background-color: transparent; border: none"
-                    >
-                      <img
-                        src="../../assets/images/poke-ball.png"
-                        alt="Pokeball"
-                        style="width: 100px; height: 100px"
-                      />
-                    </button>
-                    <button
-                      id="reset-btn"
-                      type="button"
-                      class="btn btn-primary"
-                      style="display: none"
-                    >
-                      Start Over
-                    </button>
-                  </div>
-                  <p id="catch-result"></p>
-                  <p id="attempts-left"></p>
+                  <button
+                    id="reset-btn"
+                    type="button"
+                    class="btn btn-primary"
+                    style="display: none"
+                  >
+                    Start Over
+                  </button>
                 </div>
               </div>
             </div>

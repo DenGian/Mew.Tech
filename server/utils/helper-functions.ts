@@ -1,3 +1,4 @@
+import { getAllPokemon } from "../config/database";
 import {
   pokemon,
   PokemonResponse,
@@ -5,6 +6,7 @@ import {
   PokemonSpecies,
 } from "../interfaces/pokemonInterface";
 import axios from "axios";
+
 
 const PokemonData = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -76,39 +78,31 @@ async function getEvolutionChainWithSprites(chain: any) {
 
 async function displayRandomPokemon() {
   try {
-    const randomId = Math.floor(Math.random() * 151) + 1;
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${randomId}`
-    );
-    const data = await response.json(); // Convert the response to JSON
-    return data;
+    const allPokemon = await getAllPokemon(); // Retrieve all Pokémon from the database
+    if (allPokemon.length === 0) {
+      throw new Error("No Pokémon found in the database.");
+    }
+    const randomIndex = Math.floor(Math.random() * allPokemon.length); // Select a random index
+    return allPokemon[randomIndex]; // Return the randomly selected Pokémon
   } catch (error) {
     console.error("Failed to fetch random Pokémon:", error);
     return null;
   }
 }
-
-export async function displayRandomPokemon2() {
-  const randomID = Math.floor(Math.random() * 151) + 1;
-  const data = await fetchPokemonData(randomID as any);
-  if (data === null) {
-    throw new Error("Failed to fetch Pokémon data");
+// Function to catch a Pokémon
+function catchPokemon() {
+  const catchRate = 0.25; // Chance to catch the Pokémon
+  const random = Math.random(); // Generate a random number between 0 and 1
+  if (random < catchRate) {
+    return { message: "You caught the Pokémon!", caught: true };
+  } else {
+    return { message: "The Pokémon escaped!", caught: false };
   }
-  const { pokemonData, evolutionChainData, habitat, flavorTexts } = data;
-  const evolutionChainWithSprites = await getEvolutionChainWithSprites(evolutionChainData.chain);
-  return { pokemonData, evolutionChainWithSprites, habitat, flavorTexts };
-}
-
-function searchPokemon(
-  pokemonName: string,
-  pokemonList: pokemon[]
-): pokemon | null {
-  return pokemonList.find((poke: pokemon) => poke.name === pokemonName) || null;
 }
 
 export {
   fetchPokemonData,
   displayRandomPokemon,
-  searchPokemon,
   getEvolutionChainWithSprites,
+  catchPokemon,
 };
