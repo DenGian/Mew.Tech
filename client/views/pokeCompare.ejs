@@ -16,26 +16,25 @@
           <div class="row">
             <!-- Deze rij bevat alle kaarten -->
             <div class="col-md-6">
-              <div class="row justify-content-center mb-3">
-                <div class="col-8">
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Zoek Pokémon (bv. Bulbasaur)"
-                      aria-label="Zoek Pokémon"
-                      aria-describedby="button-addon1"
-                    />
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      id="button-addon1"
-                    >
-                      Zoeken
-                    </button>
-                  </div>
+              <form class="row justify-content-center mb-3">
+                <div class="col-8 input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="searchPokemon"
+                    placeholder="Zoek Pokémon (bv. Charmander)"
+                    aria-label="Zoek Pokémon"
+                  />
+                  <button
+                    class="btn btn-danger"
+                    type="submit"
+                    formaction="/compare?update=randomPokemon2"
+                    formmethod="get"
+                  >
+                    Zoeken
+                  </button>
                 </div>
-              </div>
+              </form>
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
@@ -109,26 +108,25 @@
             </div>
 
             <div class="col-md-6">
-              <div class="row justify-content-center mb-3">
-                <div class="col-8">
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Zoek Pokémon (bv. Bulbasaur)"
-                      aria-label="Zoek Pokémon"
-                      aria-describedby="button-addon1"
-                    />
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      id="button-addon1"
-                    >
-                      Zoeken
-                    </button>
-                  </div>
+              <form class="row justify-content-center mb-3">
+                <div class="col-8 input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="searchPokemon"
+                    placeholder="Zoek Pokémon (bv. Charmander)"
+                    aria-label="Zoek Pokémon"
+                  />
+                  <button
+                    class="btn btn-danger"
+                    type="submit"
+                    formaction="/compare?update=randomPokemon2"
+                    formmethod="get"
+                  >
+                    Zoeken
+                  </button>
                 </div>
-              </div>
+              </form>
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>#<%= randomPokemon2.id %> <%= randomPokemon2.name %></h5>
@@ -136,7 +134,6 @@
                 <div class="pokedex-body">
                   <img
                     src="<%= randomPokemon2.sprites.front_default %>"
-                    
                     class="card-img-top"
                     alt="<%= randomPokemon2.name %>"
                   />

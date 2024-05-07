@@ -1,4 +1,4 @@
-<%- (include('partials/header')) %>
+<%- include('partials/header') %>
 <main>
   <div class="container">
     <div class="row">
@@ -26,7 +26,6 @@
                   <div class="card-body text-center">
                     <h5 class="card-title">Stats</h5>
                     <div class="row">
-                      <!-- Voeg een rij toe voor de stats -->
                       <div class="col-6 col-md-4">
                         HP: <%= randomPokemon.stats[0].base_stat %>
                       </div>
@@ -51,69 +50,25 @@
                         style="width: 100px; height: 100px"
                       />
                     </button>
+                    <button
+                      id="reset-btn"
+                      type="button"
+                      class="btn btn-primary"
+                      style="display: none"
+                    >
+                      Start Over
+                    </button>
                   </div>
                   <p id="catch-result"></p>
                   <p id="attempts-left"></p>
                 </div>
-<<<<<<< HEAD
-=======
-                <img
-                  src="<%= randomPokemon.sprite %>"
-                  class="animation"
-                  class="card-img-top"
-                  alt="<%= randomPokemon.name %>"
-                />
->>>>>>> cedric
               </div>
             </div>
           </div>
         </div>
       </section>
-      <aside class="col-md-3 order-first order-md-last bg-light">
-        <div class="aside-content">
-          <h3>Jouw Pokémon</h3>
-          <h4>Bulbasaur</h4>
-          <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-            alt="jouw pokémon"
-            width="100%"
-            height="100%"
-          />
-          <h3>Stats</h3>
-          <table class="table">
-            <tbody>
-              <tr>
-                <th scope="row">Attack</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Stamina</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Defence</th>
-                <td>9000</td>
-              </tr>
-              <tr>
-                <th scope="row">Hit Points</th>
-                <td>9000</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3>Deel jouw Pokémon!</h3>
-          <ul class="list-inline">
-            <li>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-            </li>
-          </ul>
-        </div>
-      </aside>
+
+      <%- include('partials/aside') %>
     </div>
   </div>
 </main>
@@ -126,15 +81,14 @@
     .addEventListener("click", function () {
       if (attempts > 0) {
         const catchRate = 0.25; // Chance to catch the Pokémon
-        const random = Math.random(); // Generate a random number between 0 and 1
+        const random = Math.random(); // Generate a random number
 
         if (random < catchRate) {
           document.getElementById("catch-result").textContent =
             "You caught the Pokémon!";
           document.getElementById("catch-result").style.color = "green";
           document.getElementById("pokeball-btn").disabled = true; // Disable the button after catching
-          document.getElementById("attempts-left").textContent =
-            "Attempts left: " + (attempts - 1);
+          document.getElementById("reset-btn").style.display = "block"; // Show the reset button
         } else {
           attempts--;
           document.getElementById("catch-result").textContent =
@@ -145,9 +99,14 @@
 
           if (attempts === 0) {
             document.getElementById("pokeball-btn").disabled = true; // Disable the button if no attempts left
+            document.getElementById("reset-btn").style.display = "block"; // Show the reset button
           }
         }
       }
     });
+
+  document.getElementById("reset-btn").addEventListener("click", function () {
+    location.href = "/catcher"; // Reloads the page or redirects to the initial route to fetch a new Pokémon
+  });
 </script>
-<%- (include('partials/footer')) %>
+<%- include('partials/footer') %>
