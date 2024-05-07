@@ -3,9 +3,27 @@ import dotenv from "dotenv";
 import path from "path";
 import session from 'express-session';
 import indexRouter from "./routes/index";
+import mainRouter from "./routes/main"
+import accesDeniedRouter from "./routes/accesDenied";
+import battlerRouter from "./routes/battler";
+import catcherRouter from "./routes/catcher";
+import compareRouter from "./routes/compare";
+import contactRouter from "./routes/contact";
+import guessRouter from "./routes/guess";
+import loginRouter from "./routes/login";
+import logoutRouter from "./routes/logout"
+import pokeDexRouter from "./routes/pokeDex";
+import registerRouter from "./routes/register";
+import viewerRouter from "./routes/viewer";
 import { handleError } from "./middleware/handleError";
 import { loggingMiddleware } from "./middleware/handleLogging";
 import { pageNotFoundMiddleware } from "./middleware/handlePageNotFound";
+import { secureMiddleware } from "./middleware/handleSecure";
+import { connect } from "./config/database";
+import session from "./middleware/handleSession";
+import cookieParser from "cookie-parser";
+import { flashMiddleware } from "./middleware/handleFlash";
+
 
 dotenv.config();
 
@@ -17,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.set("views", path.join(__dirname, "..", "client", "views"));
 
+<<<<<<< HEAD
 // Session middleware configuration
 app.use(session({
   secret: 'your_secret_key',  // Change 'your_secret_key' to a real secret in production
@@ -27,18 +46,47 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // Sets cookie to expire in 24 hours
   }
 }));
+=======
+app.use(cookieParser());
+>>>>>>> ian
 
-app.set("port", process.env.PORT || 3000);
+app.use(session);
+
+const PORT = process.env.PORT || 3000;
 
 app.use(loggingMiddleware);
 
+<<<<<<< HEAD
 // Route that uses session
+=======
+app.use(flashMiddleware);
+
+>>>>>>> ian
 app.use("/", indexRouter);
+app.use("/main", mainRouter);
+app.use("/acces-denied", accesDeniedRouter);
+app.use("/battler", secureMiddleware, battlerRouter);
+app.use("/catcher", secureMiddleware, catcherRouter);
+app.use("/compare", secureMiddleware, compareRouter);
+app.use("/contact", secureMiddleware, contactRouter);
+app.use("/pokeGuess", secureMiddleware, guessRouter);
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
+app.use("/pokeDex", secureMiddleware, pokeDexRouter);
+app.use("/register", registerRouter);
+app.use("/viewer", secureMiddleware, viewerRouter);
+
 
 app.use(handleError);
 
 app.use(pageNotFoundMiddleware);
 
-app.listen(app.get("port"), async () => {
-  console.log(`Server is running on port ${app.get("port")}`);
+app.listen(PORT, async () => {
+	try {
+		await connect();
+		console.log(`Server is running on port ${PORT}`);
+	} catch (e) {
+		console.error(e);
+		process.exit(1);
+	}
 });

@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+<<<<<<< HEAD
 import {
   fetchPokemonData,
   displayRandomPokemon,
@@ -6,6 +7,8 @@ import {
   getEvolutionChainWithSprites,
 } from "../utils/helper-functions";
 const bodyParser = require("body-parser");
+=======
+>>>>>>> ian
 
 const router: Router = express.Router();
 
@@ -15,6 +18,7 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
+<<<<<<< HEAD
 router.get("/battler", async (req, res) => {
   try {
     const randomPokemon = await displayRandomPokemon();
@@ -230,4 +234,6 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
+=======
+>>>>>>> ian
 export default router;

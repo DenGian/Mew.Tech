@@ -1,8 +1,42 @@
+<<<<<<< HEAD
 export interface pokemon{
         id: number;
         name : string;
         url : string;
         sprites : Sprites;
+=======
+import { ObjectId } from "mongodb";
+
+export interface pokeDex {
+    abilities:                Ability[];
+    base_experience:          number;
+    cries:                    Cries;
+    forms:                    Species[];
+    game_indices:             GameIndex[];
+    height:                   number;
+    held_items:               HeldItem[];
+    id:                       string;
+    is_default:               boolean;
+    location_area_encounters: string;
+    moves:                    Move[];
+    name:                     string;
+    order:                    number;
+    past_abilities:           any[];
+    past_types:               any[];
+    species:                  Species;
+    sprites:                  Sprites;
+    stats:                    Stat[];
+    types:                    Type[];
+    weight:                   number;
+}
+
+export interface pokemon{
+    _id?: ObjectId;
+    id: string;
+    name : string;
+    url : string;
+    sprites : Sprites;
+>>>>>>> ian
 }
 
 export interface PokemonSpecies {
