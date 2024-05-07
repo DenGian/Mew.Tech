@@ -5,7 +5,7 @@ const router: Router = express.Router();
 
 router.get("/", async (req, res) => {
     try {
-      const pokemonList = await fetchPokemonData();
+      const pokemonList = await fetchPokemonData(2);
       res.render("pokeBattler", { pokemonList });
     } catch (error) {
       console.error("Error fetching Pokémon data:", error);
