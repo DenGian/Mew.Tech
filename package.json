@@ -5,7 +5,8 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
-    "express-session": "^1.18.0"
+    "express-session": "^1.18.0",
+    "nes.css": "^2.3.0"
   },
   "name": "mew.tech",
   "description": "Welkom bij ons Gemeenschappelijk Project! Hieronder vind je alles wat je moet weten over onze Fullstack Pokémon website.",

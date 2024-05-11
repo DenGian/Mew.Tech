@@ -3,149 +3,28 @@
   <div class="container">
     <div class="row">
       <section class="col-md-9">
-        <h2>Welkom</h2>
-
-        <div class="container img-fluid">
-          <div class="row">
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h5 class="main-card-header text-center py-2 fs-3">
-                  PokeDuel Arena
-                </h5>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokeBattler-IMG.webp"
-                  class="card-img-top"
-                  alt="poke battler"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    kies je Pokémon en daag tegenstanders uit in gevechten.<br />
-                  </p>
-                  <a
-                    href="/battler"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h5 class="main-card-header text-center py-2 fs-3">
-                  Pokémon Safari Zone
-                </h5>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokeCatcher-IMG.webp"
-                  class="card-img-top"
-                  alt="poke catcher"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    Zet je schrap voor avontuur en vang je favoriete Pokémon.<br />
-                  </p>
-                  <a
-                    href="/catcher"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h5 class="main-card-header text-center py-2 fs-3">
-                  PokéAnalyse
-                </h5>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokeCompare-IMG.webp"
-                  class="card-img-top"
-                  alt="poke compare"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    Vergelijk je Pokémon met anderen.<br />
-                    Ontdek wie de sterkste!
-                  </p>
-                  <a
-                    href="/compare"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row py-3">
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h5 class="main-card-header text-center py-2 fs-3">Pokedéx</h5>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokedex-IMG.webp"
-                  class="card-img-top"
-                  alt="pokedex"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    Ontdek en leer alles over Pokémon.<br />
-                    Jouw gids voor Pokémon-details!
-                  </p>
-                  <a
-                    href="/pokeDex"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h3 class="main-card-header text-center py-2 fs-3">
-                  Wie is Die Pokémon?
-                </h3>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokeGuess-IMG.webp"
-                  class="card-img-top"
-                  alt="poke guess"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    Test je Pokémon-kennis.<br />Kun jij ze allemaal raden op
-                    basis van silhouetten en hints?
-                  </p>
-                  <a
-                    href="/pokeGuess"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 py-1">
-              <div class="card h-100 main-card">
-                <h5 class="main-card-header text-center py-2 fs-3">
-                  Mijn Pokémon
-                </h5>
-                <img
-                  src="../../assets/images/template-pokeLandingPage/pokeViewer-IMG.webp"
-                  class="card-img-top"
-                  alt="poke viewer"
-                />
-                <div class="card-body text-center fs-5">
-                  <p>
-                    Bekijk en beheer je Pokémon.<br />
-                    Ontdek hun krachten en maak je klaar voor het volgende
-                    gevecht
-                  </p>
-                  <a
-                    href="/viewer"
-                    class="btn btn-danger rounded-pill border-1 border-dark text-uppercase fs-3"
-                    >start</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="nes-container with-title is-centered">
+          <h2 class="title">Welkom</h2>
+          <ul class="framed buttons">
+            <li>
+              <button><a href="/battler">PokéDuel Arena</a></button>
+            </li>
+            <li>
+              <button><a href="/catcher">Pokémon Safari Zone</a></button>
+            </li>
+            <li>
+              <button><a href="/compare">PokéAnalyse</a></button>
+            </li>
+            <li>
+              <button><a href="/pokedex">Pokédex</a></button>
+            </li>
+            <li>
+              <button><a href="/pokeGuess">Wie is Die Pokémon?</a></button>
+            </li>
+            <li>
+              <button><a href="/viewer">Mijn Pokémon</a></button>
+            </li>
+          </ul>
         </div>
       </section>
       <%- include('partials/aside') %>

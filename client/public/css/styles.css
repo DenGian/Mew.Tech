@@ -1,4 +1,5 @@
 /* OVERALL */
+
 * {
   margin: 0;
   padding: 0;
@@ -79,33 +80,29 @@ div {
 
 /* HEADER */
 
-#welcome-text {
-  padding-top: 2rem;
-}
-
 /* NAV */
 nav {
   font-size: 1.4rem;
+  text-align: center;
 }
 
-.navbar-nav .nav-link.active {
-  font-weight: bold;
-  background-color: #dc3545;
-  color: white !important;
+nav a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-.navbar-nav > li:hover {
+nav a:hover {
+  color: #dc3545;
   font-weight: bolder;
   scale: 1.01;
   transition: all ease-in-out 0.25s;
-  background-color: white;
 }
 
 /* MAIN */
-
-main {
-  margin: 30px;
-}
 
 /*arrow access-denied*/
 .back-arrow {
@@ -145,28 +142,25 @@ main {
 /* ASIDE */
 
 aside {
-  height: fit-content;
-}
-
-aside img {
-  width: 70%;
-  height: 70%;
-}
-
-.aside-content {
-  text-align: center;
-  padding: 1rem;
-}
-.aside-content h3 {
-  color: #333;
-  margin: 0.9rem 0rem;
-}
-.aside-content table {
-  border: 2px dashed black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 /*footer*/
 
+.footer .inlist-inline li {
+  position: relative;
+  top: -50;
+}
+
+.footer {
+  padding-bottom: 50px;
+  overflow: visible;
+}
 ul.list-inline {
   display: flex;
   justify-content: center;
@@ -185,7 +179,6 @@ ul.list-inline li:last-child {
 ul.list-inline i.bi {
   font-size: 31px;
 }
-
 /* btn pokeball */
 
 .btn-pokeball {
@@ -296,4 +289,16 @@ ul.list-inline i.bi {
   50% {
     transform: translate(0, 20px);
   }
+}
+
+.catchIMG {
+  background-image: url("../assets/images/grassland.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.battleIMG {
+  background-image: url("../assets/images/battleplace.png");
+  background-size: cover;
+  background-position: center;
 }

@@ -1,17 +1,13 @@
 <%- include('partials/header') %>
 <main>
-  <div class="container">
-    <div class="row">
-      <section class="col-md-9">
-        <h2 class="text-center mt-4">Duel Arena</h2>
-        <div class="container text-center mt-3">
-          <p class="lead">Test je Pokémon in een gevecht!</p>
-        </div>
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <div class="col-md-5">
-              <div class="card mb-5 pokedex-card">
-                <div class="card-header bg-primary text-white">
+  <div class="battleIMG">
+    <div class="container">
+      <div class="row">
+        <section class="col-md-9">
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <div class="col-md-5">
+                <div class="card-header text-white">
                   <h5 class="card-title text-center">
                     Je Pokémon: Bulbasaur #001
                   </h5>
@@ -24,17 +20,16 @@
                 />
                 <div class="card-body">
                   <h6 class="text-center">HP</h6>
-                  <div class="progress mb-3">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 90%"
-                      aria-valuenow="45"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
+                  <div class="progress-bar-container">
+                    <label for="progressBarR"></label>
+                    <progress
+                      id="progressBarR"
+                      class=".p1 - .p100"
+                      value="20"
+                      max="100"
                     >
-                      45/50
-                    </div>
+                      20%
+                    </progress>
                   </div>
                   <!-- Stats -->
                   <div class="row">
@@ -49,10 +44,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-5">
-              <div class="card mb-5 pokedex-card">
-                <div class="card-header bg-danger text-white">
+              <div class="col-md-5">
+                <div class="card-header text-white">
                   <h5 class="card-title text-center">
                     Tegenstander: Charmander #004
                   </h5>
@@ -65,18 +58,18 @@
                 />
                 <div class="card-body">
                   <h6 class="text-center">HP</h6>
-                  <div class="progress mb-3">
-                    <div
-                      class="progress-bar bg-danger"
-                      role="progressbar"
-                      style="width: 80%"
-                      aria-valuenow="39"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
+                  <div class="progress-bar-container">
+                    <label for="progressBarR"></label>
+                    <progress
+                      id="progressBarR"
+                      class=".p1 - .p100"
+                      value="60"
+                      max="100"
                     >
-                      39/50
-                    </div>
+                      60%
+                    </progress>
                   </div>
+
                   <!-- Stats -->
                   <div class="row">
                     <div class="col-6">
@@ -92,16 +85,16 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col text-center">
-            <button type="button" class="btn btn-danger btn-lg">
-              Aanvallen
-            </button>
+          <div class="row">
+            <div class="col text-center">
+              <button type="button" class="btn btn-danger btn-lg">
+                Aanvallen
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
-      <%- include('partials/aside') %>
+        </section>
+        <%- include('partials/aside') %>
+      </div>
     </div>
   </div>
 </main>
