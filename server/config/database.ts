@@ -162,9 +162,9 @@ async function loadPokemonDataFromApi(collectionPokemonData: Collection<PokemonD
 }
 
 
-async function getAllPokemon(): Promise<pokemon[]> {
+async function getAllPokemon(): Promise<PokemonData[]> {
     try {
-        const data = await collectionPokemon.find({}).toArray();
+        const data = await collectionPokemonData.find({}).toArray();
         return data;
     } catch (error) {
         throw new Error(`An error occurred while fetching data: ${error}`);

@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export interface pokemon{
+    evolutionChain(evolutionChain: any): unknown;
     _id?: ObjectId;
     id: string;
     name : string;
