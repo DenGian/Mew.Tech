@@ -1,5 +1,23 @@
 import { ObjectId } from "mongodb";
 
+<<<<<<< HEAD
+=======
+export interface pokemon{
+    evolutionChain(evolutionChain: any): unknown;
+    _id?: ObjectId;
+    id: string;
+    name : string;
+    url : string;
+    sprites : Sprites;
+}
+
+export interface PokemonSpecies {
+        habitat: { name: string };
+        flavor_text_entries: { flavor_text: string; language: { name: string } }[];
+        evolution_chain: { url: string };
+}
+
+>>>>>>> 5da78bb (stash)
 export interface PokemonData {
         _id?: ObjectId;
         id: string;

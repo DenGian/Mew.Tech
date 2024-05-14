@@ -13,4 +13,7 @@ const router: Router = express.Router();
 //     }
 //   });
 
+router.get("/", async (req, res) => {
+  });
+
 export default router;
