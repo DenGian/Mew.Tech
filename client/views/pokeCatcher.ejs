@@ -27,6 +27,8 @@
                     <h5 class="card-title">Stats</h5>
                     <div class="row">
                       <!-- Voeg een rij toe voor de stats -->
+                      <% if (randomPokemon && randomPokemon.stats &&
+                      randomPokemon.stats.length > 0) { %>
                       <div class="col-6 col-md-4">
                         Levens Punten <%= randomPokemon.stats[0].base_stat %>
                       </div>
@@ -34,8 +36,12 @@
                         Aanval <%= randomPokemon.stats[1].base_stat %>
                       </div>
                       <div class="col-6 col-md-4">
-                        Def: <%= randomPokemon.stats[2].base_stat %>
+                        Verdediging <%= randomPokemon.stats[2].base_stat %>
+                      <% } else { %>
+                      <div class="col-12">
+                        No stats available for this Pokémon.
                       </div>
+                      <% } %>
                     </div>
                   </div>
                   <div class="d-flex justify-content-center">
