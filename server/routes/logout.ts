@@ -2,7 +2,7 @@ import express, { Router } from "express";
 
 const router: Router = express.Router();
 
-router.get("/", async(req, res) => {
+router.post("/", async(req, res) => {
     req.session.destroy(() => {
         res.redirect("/login");
     });
