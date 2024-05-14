@@ -82,7 +82,7 @@ div {
 
 /* NAV */
 nav {
-  font-size: 1.4rem;
+  font-size: 0.8rem;
   text-align: center;
 }
 
@@ -152,15 +152,6 @@ aside {
 
 /*footer*/
 
-.footer .inlist-inline li {
-  position: relative;
-  top: -50;
-}
-
-.footer {
-  padding-bottom: 50px;
-  overflow: visible;
-}
 ul.list-inline {
   display: flex;
   justify-content: center;
@@ -177,7 +168,22 @@ ul.list-inline li:last-child {
 }
 
 ul.list-inline i.bi {
-  font-size: 31px;
+  font-size: 24px;
+}
+
+.footer {
+  background: linear-gradient(to bottom, rgba(190, 228, 235, 1) 65%, white 35%);
+  padding: 10px 0;
+  overflow: visible;
+}
+
+.footer img {
+  width: 80px;
+  height: 80px;
+}
+
+footer h3 {
+  font-size: 16px;
 }
 /* btn pokeball */
 
