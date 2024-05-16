@@ -1,11 +1,14 @@
 <%- include('partials/header') %>
 <main class="catchIMG">
+
+  <h1 class="text-center">PokeDex - Who's That Pokémon?</h1>
+
   <div class="container">
     <div class="row">
       <section class="col-md-9">
-        <h2>Wie is die pokemon?</h2>
+        <h2>Wie is die Pokémon?</h2>
         <div class="container text-center mt-3">
-          <p class="lead">Raad de pokemon!</p>
+          <p class="lead">Raad de Pokémon!</p>
         </div>
         <div class="container mt-5">
           <div class="row justify-content-center">
@@ -15,15 +18,34 @@
                   <h3>Wie is deze Pokémon?</h3>
                 </div>
                 <div class="pokedex-body text-center">
-                  <img src="" class="card-img-top" alt="Who's that Pokémon?" />
-                  <form action="pokeGuess.html" method="post">
+                  <% if (pokemonData && pokemonData.sprites && pokemonData.sprites.front_default) { %>
+                    <img
+                      src="<%= pokemonData.sprites.front_default %>"
+                      alt="Who's that Pokémon?"
+                      class="card-img-top"
+                    />
+                  <% } else { %>
+                    <p>Geen afbeelding beschikbaar.</p>
+                  <% } %>
+
+                  <form action="/pokeGuess" method="post">
+                    <% if (pokemonData && pokemonData.id) { %>
+                      <input
+                        type="hidden"
+                        name="pokemonID"
+                        value="<%= pokemonData.id %>"
+                      />
+                    <% } %>
+
                     <div class="input-group mb-3">
                       <input
                         type="text"
                         class="form-control"
+                        name="guess"
                         placeholder="Raad de Pokémon"
                         aria-label="Raad de Pokémon"
                         aria-describedby="button-addon2"
+                        required
                       />
                       <button
                         class="btn btn-danger"
@@ -34,15 +56,24 @@
                       </button>
                     </div>
                   </form>
-                  <!-- Statistieken sectie -->
+
+                  <% if (feedback) { %>
+                    <div class="feedback text-center">
+                      <h5><%= feedback %></h5>
+                    </div>
+                  <% } %>
+
+                  <!-- Stats Section -->
                   <div class="pokemon-guess-stats">
                     <h5 class="text-center">Jouw Statistieken</h5>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">
-                        Juist geraden: <span id="correctGuesses">0</span>
+                        Juist geraden:
+                        <span id="correctGuesses"><%= correctGuesses %></span>
                       </li>
                       <li class="list-group-item">
-                        Fout geraden: <span id="incorrectGuesses">0</span>
+                        Fout geraden:
+                        <span id="incorrectGuesses"><%= incorrectGuesses %></span>
                       </li>
                     </ul>
                   </div>

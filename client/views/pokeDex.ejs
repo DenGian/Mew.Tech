@@ -18,42 +18,69 @@
         </div>
 
         <div class="container mt-5">
-          <!-- Focused Pokémon (e.g., Venusaur) with more stats -->
+          <!-- Display the focused Pokémon with its stats -->
           <div class="row justify-content-center mb-5">
             <div class="col-md-6">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
-                  <h5>Venusaur #003</h5>
+                  <h5>
+                    #<%= pokemonData.id %> <%=
+                    pokemonData.name.charAt(0).toUpperCase() +
+                    pokemonData.name.slice(1) %>
+                  </h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="" class="animation" class="card-img-top" alt="" />
+                  <img
+                    src="<%= pokemonData.sprites.front_default %>"
+                    alt="<%= pokemonData.name %>"
+                    class="animation card-img-top"
+                  />
                   <div class="card-body text-center">
-                    <h5 class="card-title">Stats</h5>
-                    <div class="row">
-                      <!-- Voeg een rij toe voor de stats -->
-                      <div class="col-6 col-md-4">HP: 45</div>
-                      <div class="col-6 col-md-4">Atk: 49</div>
-                      <div class="col-6 col-md-4">Def: 49</div>
-                    </div>
-                    <button
-                      class="btn btn-primary mt-3"
-                      id="play-sound-bulbasaur"
-                    >
-                      Speel Geluid
-                    </button>
+                    <h5>Stats</h5>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <th>HP</th>
+                          <td><%= pokemonData.stats[0].base_stat %></td>
+                        </tr>
+                        <tr>
+                          <th>Attack</th>
+                          <td><%= pokemonData.stats[1].base_stat %></td>
+                        </tr>
+                        <tr>
+                          <th>Defense</th>
+                          <td><%= pokemonData.stats[2].base_stat %></td>
+                        </tr>
+                        <tr>
+                          <th>Special Attack</th>
+                          <td><%= pokemonData.stats[3].base_stat %></td>
+                        </tr>
+                        <tr>
+                          <th>Special Defense</th>
+                          <td><%= pokemonData.stats[4].base_stat %></td>
+                        </tr>
+                        <tr>
+                          <th>Speed</th>
+                          <td><%= pokemonData.stats[5].base_stat %></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Evolutionary Chain with minimal stats -->
-          <h2>Evolutionaire Keten</h2>
+
+          <h2>Evolutionary Chain</h2>
           <div class="row justify-content-center">
-            <!-- Bulbasaur Card -->
+            <% evolutionChainWithSprites.forEach(chainEntry => { %>
             <div class="col-md-4">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
-                  <h5>Bulbasaur #001</h5>
+                  <h5>
+                    <%= chainEntry.name.charAt(0).toUpperCase() +
+                    chainEntry.name.slice(1) %> #<%= chainEntry.id %>
+                  </h5>
                 </div>
                 <div class="pokedex-body">
                   <img src="" class="animation" class="card-img-top" alt="" />
@@ -79,8 +106,46 @@
                   <h5>Venusaur #002</h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="" class="animation" class="card-img-top" alt="" />
-                  <!-- Minimal stats or just a name -->
+                  <img src="<%= chainEntry.sprite %>" class="animation" class="card-img-top" alt="<%= chainEntry.name %>" />
+                  <!-- <img
+                    src=""
+                    alt=""
+                  /> -->
+                  
+                </div>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+        <!-- Additional Info Section -->
+        <div class="container mt-5">
+          <!-- Additional Information Sections -->
+          <div class="row justify-content-center">
+          
+            
+            <!-- Habitat Information -->
+            <div class="col-md-4">
+              <div class="card extra-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Habitat</h5>
+                </div>
+                <div class="card-body">
+                  <p><%= habitat %></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Abilities -->
+            <div class="col-md-4">
+              <div class="card extra-info-card">
+                <div class="pokedex-header text-center">
+                  <h5>Abilities</h5>
+                </div>
+                <div class="card-body">
+                  <% pokemonData.abilities.forEach(ability => { %>
+                  <p><%= ability.ability.name %></p>
+                  <% }); %>
                 </div>
               </div>
             </div>
