@@ -10,11 +10,8 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-<<<<<<< HEAD
-    "nes.css": "^2.3.0"
-=======
+    "nes.css": "^2.3.0",
     "mongodb": "^6.5.0"
->>>>>>> production
   },
   "name": "mew.tech",
   "description": "Welkom bij ons Gemeenschappelijk Project! Hieronder vind je alles wat je moet weten over onze Fullstack Pokémon website.",
