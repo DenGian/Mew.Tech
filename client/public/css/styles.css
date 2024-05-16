@@ -308,3 +308,16 @@ footer h3 {
   background-size: cover;
   background-position: center;
 }
+
+@media (min-width: 992px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+@media (min-width: 991px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
