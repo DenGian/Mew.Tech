@@ -1,14 +1,12 @@
 import { ObjectId } from "mongodb";
 
-<<<<<<< HEAD
-=======
-export interface pokemon{
-    evolutionChain(evolutionChain: any): unknown;
-    _id?: ObjectId;
-    id: string;
-    name : string;
-    url : string;
-    sprites : Sprites;
+export interface pokemon {
+        evolutionChain(evolutionChain: any): unknown;
+        _id?: ObjectId;
+        id: string;
+        name: string;
+        url: string;
+        sprites: Sprites;
 }
 
 export interface PokemonSpecies {
@@ -17,7 +15,6 @@ export interface PokemonSpecies {
         evolution_chain: { url: string };
 }
 
->>>>>>> 5da78bb (stash)
 export interface PokemonData {
         _id?: ObjectId;
         id: string;
@@ -26,8 +23,8 @@ export interface PokemonData {
         sprites: { front_default: string };
         stats: { name: string; base_stat: number }[];
         abilities: { ability: { name: string } }[];
-    }
-    
+}
+
 
 export interface PokemonResponse {
         name: any;
@@ -39,15 +36,15 @@ export interface PokemonResponse {
 
 
 export interface Sprites {
-        back_default:       string;
-        back_female:        null;
-        back_shiny:         string;
-        back_shiny_female:  null;
-        front_default:      string;
-        front_female:       null;
-        front_shiny:        string;
+        back_default: string;
+        back_female: null;
+        back_shiny: string;
+        back_shiny_female: null;
+        front_default: string;
+        front_female: null;
+        front_shiny: string;
         front_shiny_female: null;
 }
-    
+
 
 
