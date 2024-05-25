@@ -95,7 +95,8 @@ async function registerUser(email: string, password: string, username: string): 
             email,
             password: hashedPassword,
             username,
-            role: "USER"
+            role: "USER",
+            caughtPokemon: []
         });
         console.log("User registered successfully.");
     } catch (error) {
