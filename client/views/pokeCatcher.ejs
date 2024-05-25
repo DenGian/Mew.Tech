@@ -2,69 +2,70 @@
 <main class="catchIMG">
   <div class="container">
     <div class="row">
-      <section class="col-md-9">
+      <section class="col-md-12">
         <h2>Safari Zone</h2>
         <div class="container img-fluid">
           <div class="row justify-content-center">
             <div class="col-md-6">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
-                </div>
-                <div class="pokedex-body">
-                  <img
-                    src="<%= randomPokemon.sprites.front_default %>"
-                    class="card-img-top"
-                    alt="<%= randomPokemon.name %>"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">Stats</h5>
-                    <div class="row">
-                      <!-- Voeg een rij toe voor de stats -->
-                      <% if (randomPokemon && randomPokemon.stats &&
-                      randomPokemon.stats.length > 0) { %>
-                      <div class="col-6 col-md-4">
-                        Levens Punten <%= randomPokemon.stats[0].base_stat %>
-                      </div>
-                      <div class="col-6 col-md-4">
-                        Aanval <%= randomPokemon.stats[1].base_stat %>
-                      </div>
-                      <div class="col-6 col-md-4">
-                        Verdediging <%= randomPokemon.stats[2].base_stat %> <% }
-                        else { %>
-                        <div class="col-12">
-                          No stats available for this Pokémon.
-                        </div>
-                        <% } %>
-                      </div>
-                    </div>
-                  </div>
+              <div class="text-center">
+                <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
+              </div>
+              <div class="pokedex-body">
+                <img
+                  src="<%= randomPokemon.sprites.front_default %>"
+                  class="card-img-top"
+                  alt="<%= randomPokemon.name %>"
+                />
+              </div>
+              <h5 class="card-title">Stats</h5>
+              <div class="row">
+                <!-- Voeg een rij toe voor de stats -->
+                <% if (randomPokemon && randomPokemon.stats &&
+                randomPokemon.stats.length > 0) { %>
+                <div class="col-md-4">
                   <div class="d-flex justify-content-center">
-                    <button
-                      id="pokeball-btn"
-                      type="button"
-                      class="btn-pokeball"
-                      style="background-color: transparent; border: none"
-                    >
-                      <img
-                        src="../../assets/images/poke-ball.png"
-                        alt="Pokeball"
-                        style="width: 100px; height: 100px"
-                      />
-                    </button>
+                    HP <%= randomPokemon.stats[0].base_stat %>
                   </div>
-                  <p id="catch-result"></p>
-                  <p id="attempts-left"></p>
-                  <button
-                    id="reset-btn"
-                    type="button"
-                    class="btn btn-primary"
-                    style="display: none"
-                  >
-                    Opnieuw proberen
-                  </button>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex justify-content-center">
+                    ATK <%= randomPokemon.stats[1].base_stat %>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex justify-content-center">
+                    DEF <%= randomPokemon.stats[2].base_stat %> <% } else { %>
+                  </div>
+                  <div class="col-12">
+                    Geen Statistieken te vinden voor deze pokemon.
+                  </div>
+                  <% } %>
                 </div>
               </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  id="pokeball-btn"
+                  type="button"
+                  class="btn-pokeball"
+                  style="background-color: transparent; border: none"
+                >
+                  <img
+                    src="../../assets/images/poke-ball.png"
+                    alt="Pokeball"
+                    style="width: 80px; height: 80px"
+                  />
+                </button>
+              </div>
+              <p id="catch-result"></p>
+              <p id="attempts-left"></p>
+              <button
+                id="reset-btn"
+                type="button"
+                class="btn btn-primary"
+                style="display: none"
+              >
+                Opnieuw proberen
+              </button>
             </div>
           </div>
         </div>
@@ -80,12 +81,12 @@
     .getElementById("pokeball-btn")
     .addEventListener("click", function () {
       if (attempts > 0) {
-        const catchRate = 0.10; // Chance to catch the Pokémon
+        const catchRate = 0.1; // Chance to catch the Pokémon
         const random = Math.random(); // Generate a random number
 
         if (random < catchRate) {
           document.getElementById("catch-result").textContent =
-            "You caught the Pokémon!";
+            "Pokémon gevangen!";
           document.getElementById("catch-result").style.color = "green";
           document.getElementById("pokeball-btn").disabled = true; // Disable the button after catching
           document.getElementById("reset-btn").style.display = "block"; // Show the reset button
@@ -93,11 +94,11 @@
           attempts--;
           if (attempts > 0) {
             document.getElementById("catch-result").textContent =
-              "Didn't catch the Pokémon, try again.";
+              "Pokémon niet gevangen, probeer opnieuw.";
             document.getElementById("catch-result").style.color = "red";
           } else {
             document.getElementById("catch-result").textContent =
-              "The Pokémon has escaped!";
+              "Pokémon is ontsnapt!";
             document.getElementById("catch-result").style.color = "red";
             document.getElementById("pokeball-btn").disabled = true; // Disable the button if no attempts left
             document.getElementById("reset-btn").style.display = "block"; // Show the reset button

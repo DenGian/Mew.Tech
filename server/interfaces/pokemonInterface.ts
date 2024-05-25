@@ -1,23 +1,5 @@
 import { ObjectId } from "mongodb";
 
-<<<<<<< HEAD
-export interface pokemon {
-        evolutionChain(evolutionChain: any): unknown;
-        _id?: ObjectId;
-        id: string;
-        name: string;
-        url: string;
-        sprites: Sprites;
-}
-
-export interface PokemonSpecies {
-        habitat: { name: string };
-        flavor_text_entries: { flavor_text: string; language: { name: string } }[];
-        evolution_chain: { url: string };
-}
-
-=======
->>>>>>> production
 export interface PokemonData {
         _id?: ObjectId;
         id: string;
@@ -26,21 +8,7 @@ export interface PokemonData {
         sprites: { front_default: string };
         stats: { name: string; base_stat: number }[];
         abilities: { ability: { name: string } }[];
-<<<<<<< HEAD
-}
-
-
-export interface PokemonResponse {
-        name: any;
-        pokemonData: PokemonData;
-        evolutionChainData: any;
-        habitat: string;
-        flavorTexts: string[];
-}
-
-=======
     }
->>>>>>> production
 
 export interface Sprites {
         back_default: string;

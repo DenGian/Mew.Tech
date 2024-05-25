@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 :root {
-  --bg-color: rgba(190, 228, 235, 1);
+  --bg-color: rgba(248, 246, 240);
   --bg-color2: rgba(0, 0, 0, 1);
   --navbar-color: rgba(0, 0, 0, 1);
   --primary-color: rgba(0, 0, 0, 1);
@@ -20,6 +20,9 @@ body,
 }
 
 /*card css */
+.card {
+  margin-top: 20px;
+}
 .card-img-top {
   height: 300px; /* Adjust based on your preference */
   object-fit: contain; /* This will cover the area without stretching the image */
@@ -172,7 +175,7 @@ ul.list-inline i.bi {
 }
 
 .footer {
-  background: linear-gradient(to bottom, rgba(190, 228, 235, 1) 65%, white 35%);
+  background: linear-gradient(to bottom, rgba(248, 246, 240) 65%, white 35%);
   padding: 10px 0;
   overflow: visible;
 }
@@ -225,6 +228,18 @@ footer h3 {
 }
 .stat-item {
   margin-bottom: 10px;
+}
+
+/* catcher */
+.card {
+  max-width: 300px;
+  margin: auto;
+  border: none;
+}
+
+#catch-result {
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 /* Map */
@@ -283,25 +298,27 @@ footer h3 {
 }
 /* Animations */
 
-  .animation {
-    font-size: 10rem;
-  }
+.animation {
+  font-size: 10rem;
+}
 
-  .animation:hover {
-    animation: float 2s ease-in-out infinite;
-  }
+.animation:hover {
+  animation: float 2s ease-in-out infinite;
+}
 
-  @keyframes float {
-    50% {
-      transform: translate(0, 20px);
-    }
+@keyframes float {
+  50% {
+    transform: translate(0, 20px);
   }
-
+}
 
 .catchIMG {
   background-image: url("../assets/images/grassland.webp");
   background-size: cover;
   background-position: center;
+  min-height: 90vh;
+  width: 100%;
+  position: relative;
 }
 
 .battleIMG {

@@ -1,11 +1,9 @@
 <%- include('partials/header') %>
 <main class="catchIMG">
-
   <h1 class="text-center">PokeDex - Who's That Pokémon?</h1>
-
   <div class="container">
     <div class="row">
-      <section class="col-md-9">
+      <section class="col-md-12">
         <h2>Wie is die Pokémon?</h2>
         <div class="container text-center mt-3">
           <p class="lead">Raad de Pokémon!</p>
@@ -18,23 +16,24 @@
                   <h3>Wie is deze Pokémon?</h3>
                 </div>
                 <div class="pokedex-body text-center">
-                  <% if (pokemonData && pokemonData.sprites && pokemonData.sprites.front_default) { %>
-                    <img
-                      src="<%= pokemonData.sprites.front_default %>"
-                      alt="Who's that Pokémon?"
-                      class="card-img-top"
-                    />
+                  <% if (pokemonData && pokemonData.sprites &&
+                  pokemonData.sprites.front_default) { %>
+                  <img
+                    src="<%= pokemonData.sprites.front_default %>"
+                    alt="Who's that Pokémon?"
+                    class="card-img-top"
+                  />
                   <% } else { %>
-                    <p>Geen afbeelding beschikbaar.</p>
+                  <p>Geen afbeelding beschikbaar.</p>
                   <% } %>
 
                   <form action="/pokeGuess" method="post">
                     <% if (pokemonData && pokemonData.id) { %>
-                      <input
-                        type="hidden"
-                        name="pokemonID"
-                        value="<%= pokemonData.id %>"
-                      />
+                    <input
+                      type="hidden"
+                      name="pokemonID"
+                      value="<%= pokemonData.id %>"
+                    />
                     <% } %>
 
                     <div class="input-group mb-3">
@@ -58,9 +57,9 @@
                   </form>
 
                   <% if (feedback) { %>
-                    <div class="feedback text-center">
-                      <h5><%= feedback %></h5>
-                    </div>
+                  <div class="feedback text-center">
+                    <h5><%= feedback %></h5>
+                  </div>
                   <% } %>
 
                   <!-- Stats Section -->
@@ -73,7 +72,9 @@
                       </li>
                       <li class="list-group-item">
                         Fout geraden:
-                        <span id="incorrectGuesses"><%= incorrectGuesses %></span>
+                        <span id="incorrectGuesses"
+                          ><%= incorrectGuesses %></span
+                        >
                       </li>
                     </ul>
                   </div>
