@@ -1,4 +1,9 @@
 <%- include('partials/header') %>
+<style>
+  .pokemon-silhouette img.silhouette {
+    filter: brightness(0) invert(1);
+  }
+</style>
 <h1 class="text-center">PokeDex - Who's That Pokémon?</h1>
 <main>
   <div class="container">
@@ -20,40 +25,42 @@
                     <img
                       src="<%= pokemonData.sprites.front_default %>"
                       alt="Who's that Pokémon?"
-                      class="card-img-top"
+                      class="card-img-top silhouette"
                     />
                   <% } else { %>
                     <p>Geen afbeelding beschikbaar.</p>
                   <% } %>
 
-                  <form action="/pokeGuess" method="post">
-                    <% if (pokemonData && pokemonData.id) { %>
-                      <input
-                        type="hidden"
-                        name="pokemonID"
-                        value="<%= pokemonData.id %>"
-                      />
-                    <% } %>
+                  <% if (!feedback || feedback.includes('Incorrect')) { %>
+                    <form action="/pokeGuess" method="post">
+                      <% if (pokemonData && pokemonData.id) { %>
+                        <input
+                          type="hidden"
+                          name="pokemonID"
+                          value="<%= pokemonData.id %>"
+                        />
+                      <% } %>
 
-                    <div class="input-group mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="guess"
-                        placeholder="Raad de Pokémon"
-                        aria-label="Raad de Pokémon"
-                        aria-describedby="button-addon2"
-                        required
-                      />
-                      <button
-                        class="btn btn-danger"
-                        type="submit"
-                        id="button-addon2"
-                      >
-                        Raad
-                      </button>
-                    </div>
-                  </form>
+                      <div class="input-group mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="guess"
+                          placeholder="Raad de Pokémon"
+                          aria-label="Raad de Pokémon"
+                          aria-describedby="button-addon2"
+                          required
+                        />
+                        <button
+                          class="btn btn-danger"
+                          type="submit"
+                          id="button-addon2"
+                        >
+                          Raad
+                        </button>
+                      </div>
+                    </form>
+                  <% } %>
 
                   <% if (feedback) { %>
                     <div class="feedback text-center">
@@ -61,8 +68,14 @@
                     </div>
                   <% } %>
 
+                  <form action="/pokeGuess/next" method="post">
+                    <button class="btn btn-primary mt-3" type="submit">
+                      Volgende Pokémon
+                    </button>
+                  </form>
+
                   <!-- Stats Section -->
-                  <div class="pokemon-guess-stats">
+                  <div class="pokemon-guess-stats mt-4">
                     <h5 class="text-center">Jouw Statistieken</h5>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">
