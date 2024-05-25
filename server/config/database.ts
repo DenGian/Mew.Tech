@@ -14,8 +14,6 @@ const client = new MongoClient(MONGODB_URI);
 const collectionPokemon: Collection<PokemonData> = client.db("wpl").collection<PokemonData>("pokemon");
 const collectionUsers: Collection<User> = client.db("wpl").collection<User>("users");
 
-const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
-
 async function exit() {
     try {
         await client.close();
@@ -105,37 +103,68 @@ async function registerUser(email: string, password: string, username: string): 
 }
 
 ///////////////////////////////
-
-async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
+async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
+    const speciesResponse = await axios.get(speciesUrl);
+    const speciesData = speciesResponse.data;
+    const evolutionChainUrl = speciesData.evolution_chain.url;
+  
+    const evolutionResponse = await axios.get(evolutionChainUrl);
+    const evolutionData = evolutionResponse.data;
+  
+    const chain: any = evolutionData.chain;
+    const evolutionIds: string[] = [];
+  
+    const traverseChain = (chainLink: any) => {
+      const id = chainLink.species.url.split('/').slice(-2, -1)[0];
+      evolutionIds.push(id);
+      if (chainLink.evolves_to.length > 0) {
+        chainLink.evolves_to.forEach((evolution: any) => traverseChain(evolution));
+      }
+    };
+  
+    traverseChain(chain);
+    return evolutionIds;
+  }
+  
+  async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
     const MAX_POKEMON_ID = 251;
-
+  
     try {
-        const count = await collectionPokemon.countDocuments();
-        if (count > 0) {
-            console.log('Pokémon data already exists in the database. Skipping fetch operation.');
-            return;
+      const count = await collectionPokemon.countDocuments();
+      if (count > 0) {
+        console.log('Pokémon data already exists in the database. Skipping fetch operation.');
+        return;
+      }
+  
+      for (let i = 1; i <= MAX_POKEMON_ID; i++) {
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
+        const pokemon = response.data;
+  
+        const speciesUrl = pokemon.species ? pokemon.species.url : null;
+        let evolutionChain: string[] = [];
+  
+        if (speciesUrl) {
+          evolutionChain = await fetchEvolutionChain(speciesUrl);
         }
-        for (let i = 1; i <= MAX_POKEMON_ID; i++) {
-            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
-            const pokemon = response.data;
-
-            const pokemonData: PokemonData = {
-                id: pokemon.id.toString(),
-                name: pokemon.name,
-                sprites: { front_default: pokemon.sprites.front_default },
-                stats: pokemon.stats.map((stat: any) => ({ name: stat.stat.name, base_stat: stat.base_stat })),
-                abilities: pokemon.abilities.map((ability: any) => ({ ability: { name: ability.ability.name } })),
-                url: pokemon.species ? pokemon.species.url : null,
-            };
-            
-            await collectionPokemon.insertOne(pokemonData);
-            console.log(`Inserted ${pokemonData.name} into MongoDB`);
-        }
-        console.log('All Pokémon data inserted successfully');
+  
+        const pokemonData: PokemonData = {
+          id: pokemon.id.toString(),
+          name: pokemon.name,
+          sprites: { front_default: pokemon.sprites.front_default },
+          stats: pokemon.stats.map((stat: any) => ({ name: stat.stat.name, base_stat: stat.base_stat })),
+          abilities: pokemon.abilities.map((ability: any) => ({ ability: { name: ability.ability.name } })),
+          url: speciesUrl,
+          evolution_chain: evolutionChain
+        };
+  
+        await collectionPokemon.insertOne(pokemonData);
+        console.log(`Inserted ${pokemonData.name} into MongoDB`);
+      }
+      console.log('All Pokémon data inserted successfully');
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
     }
-}
+  }
 
 async function getAllPokemon(): Promise<PokemonData[]> {
     try {

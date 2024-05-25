@@ -1,4 +1,5 @@
-import { getAllPokemon, getPokemonById } from "../config/database";
+import { collectionPokemon, getAllPokemon } from "../config/database";
+import { PokemonData } from "../interfaces/pokemonInterface";
 
 // Function to display a random Pokémon
 
@@ -26,4 +27,33 @@ function catchPokemon() {
   }
 }
 
-export { displayRandomPokemon, catchPokemon };
+// Function to get the evolution chain of a Pokémon
+async function getEvolutionChain(pokemonId: string): Promise<{ name: string, id: string, sprite: string }[]> {
+  try {
+    const pokemon = await collectionPokemon.findOne({ id: pokemonId });
+    if (!pokemon || !pokemon.evolution_chain) return [];
+
+    const evolutionChain: { name: string, id: string, sprite: string }[] = [];
+    for (const evoId of pokemon.evolution_chain) {
+      const evoPokemon = await collectionPokemon.findOne({ id: evoId });
+      if (evoPokemon) {
+        evolutionChain.push({
+          name: evoPokemon.name,
+          id: evoPokemon.id,
+          sprite: evoPokemon.sprites.front_default
+        });
+      }
+    }
+
+    return evolutionChain;
+  } catch (error) {
+    console.error('Error fetching evolution chain:', error);
+    return [];
+  }
+}
+
+
+
+
+
+export { displayRandomPokemon, catchPokemon, getEvolutionChain};

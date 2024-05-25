@@ -20,6 +20,13 @@ declare module 'express-session' {
     }
 }
 
+declare module 'express-session' {
+    interface SessionData {
+      correctGuesses: number;
+      incorrectGuesses: number;
+    }
+  }
+
 export default session({
     secret: process.env.SESSION_SECRET ?? "my-super-secret-secret",
     store: mongoStore,
