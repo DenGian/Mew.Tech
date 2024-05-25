@@ -3,30 +3,34 @@
   <div class="container">
     <div class="row">
       <section class="col-md-9 mb-3 mb-md-0">
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand">Zoek Pokémon</a>
+            <form class="d-flex" role="search" action="/search" method="GET">
+              <input
+                class="form-control me-2"
+                type="search"
+                name="searchPokemon"
+                placeholder="Search"
+                aria-label="Search"
+                value="<%= searchPokemon %>"
+              />
+              <button class="btn btn-outline-danger" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
         <h1 class="text-center">PokeDex</h1>
-        <div class="container-fluid">
-          <a>Zoek Pokémon</a>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-danger" type="submit">Search</button>
-          </form>
-        </div>
-
         <div class="container mt-5">
           <!-- Display the focused Pokémon with its stats -->
+          <% if (pokemonData) { %>
           <div class="row justify-content-center mb-5">
             <div class="col-md-6">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>
-                    #<%= pokemonData.id %> <%=
-                    pokemonData.name.charAt(0).toUpperCase() +
-                    pokemonData.name.slice(1) %>
+                    #<%= pokemonData.id %> <%= pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1) %>
                   </h5>
                 </div>
                 <div class="pokedex-body">
@@ -39,30 +43,12 @@
                     <h5>Stats</h5>
                     <table class="table">
                       <tbody>
+                        <% pokemonData.stats.forEach(stat => { %>
                         <tr>
-                          <th>HP</th>
-                          <td><%= pokemonData.stats[0].base_stat %></td>
+                          <th><%= stat.name %></th>
+                          <td><%= stat.base_stat %></td>
                         </tr>
-                        <tr>
-                          <th>Attack</th>
-                          <td><%= pokemonData.stats[1].base_stat %></td>
-                        </tr>
-                        <tr>
-                          <th>Defense</th>
-                          <td><%= pokemonData.stats[2].base_stat %></td>
-                        </tr>
-                        <tr>
-                          <th>Special Attack</th>
-                          <td><%= pokemonData.stats[3].base_stat %></td>
-                        </tr>
-                        <tr>
-                          <th>Special Defense</th>
-                          <td><%= pokemonData.stats[4].base_stat %></td>
-                        </tr>
-                        <tr>
-                          <th>Speed</th>
-                          <td><%= pokemonData.stats[5].base_stat %></td>
-                        </tr>
+                        <% }); %>
                       </tbody>
                     </table>
                   </div>
@@ -70,16 +56,19 @@
               </div>
             </div>
           </div>
+          <% } else { %>
+          <p>No Pokémon data available.</p>
+          <% } %>
 
           <h2>Evolutionary Chain</h2>
+          <% if (evolutionChainWithSprites && evolutionChainWithSprites.length > 0) { %>
           <div class="row justify-content-center">
             <% evolutionChainWithSprites.forEach(chainEntry => { %>
             <div class="col-md-4">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>
-                    <%= chainEntry.name.charAt(0).toUpperCase() +
-                    chainEntry.name.slice(1) %> #<%= chainEntry.id %>
+                    #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
                   </h5>
                 </div>
                 <div class="pokedex-body">
@@ -112,46 +101,22 @@
                     alt=""
                   /> -->
                   
+                  <img
+                    src="<%= chainEntry.sprite %>"
+                    alt="<%= chainEntry.name %> image"
+                  />
                 </div>
               </div>
             </div>
             <% }); %>
           </div>
+          <% } else { %>
+          <p>No evolution data available.</p>
+          <% } %>
         </div>
         <!-- Additional Info Section -->
-        <div class="container mt-5">
-          <!-- Additional Information Sections -->
-          <div class="row justify-content-center">
-          
-            
-            <!-- Habitat Information -->
-            <div class="col-md-4">
-              <div class="card extra-info-card">
-                <div class="pokedex-header text-center">
-                  <h5>Habitat</h5>
-                </div>
-                <div class="card-body">
-                  <p><%= habitat %></p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Abilities -->
-            <div class="col-md-4">
-              <div class="card extra-info-card">
-                <div class="pokedex-header text-center">
-                  <h5>Abilities</h5>
-                </div>
-                <div class="card-body">
-                  <% pokemonData.abilities.forEach(ability => { %>
-                  <p><%= ability.ability.name %></p>
-                  <% }); %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     </div>
   </div>
 </main>
+<%- include('partials/footer') %>
