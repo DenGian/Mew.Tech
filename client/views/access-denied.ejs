@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.flowbite.com/flowbite/flowbite.min.js"></script>
+    <title>Toegang Geweigerd</title>
+    <style>
+      /* Adding pixel art effect by enlarging pixels */
+      .pixelated {
+        image-rendering: pixelated; /* For most non-IE browsers */
+        image-rendering: -moz-crisp-edges; /* For Firefox */
+        image-rendering: crisp-edges; /* For Chrome */
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-[Press_Start_2P] flex flex-col h-screen justify-between"
+  >
+    <header class="p-4 bg-gray-800 bg-opacity-70">
+      <a href="javascript:history.go(-1)" class="text-white flex items-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/748/748091.png"
+          alt="Back arrow"
+          class="h-8 mr-2"
+        />
+        Terug
+      </a>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center">
+      <section>
+        <img
+          src="../../assets/images/acces/acces.denied.webp"
+          width="40%"
+          alt="Access denied image"
+          class="mx-auto d-block mt-5 img img-fluid border border-red-500 border-3 rounded pixelated"
+        />
+      </section>
+      <div class="mt-5 text-center">
+        <p class="text-2xl text-yellow-300">Toegang Geweigerd!</p>
+        <p class="text-lg text-white mt-2">
+          Je hebt geen toegang tot deze pagina.
+        </p>
+      </div>
+    </main>
+
+    <footer class="p-4 bg-gray-800 bg-opacity-70 text-center">
+      <p class="text-sm text-white">Mew.Tech &copy; 2024</p>
+    </footer>
+  </body>
+</html>

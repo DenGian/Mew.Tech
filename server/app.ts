@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import indexRouter from "./routes/index";
 import mainRouter from "./routes/main"
-import accesDeniedRouter from "./routes/accesDenied";
+import accessDeniedRouter from "./routes/accessDenied";
 import battlerRouter from "./routes/battler";
 import catcherRouter from "./routes/catcher";
 import compareRouter from "./routes/compare";
@@ -46,7 +46,7 @@ app.use(flashMiddleware);
 
 app.use("/", indexRouter);
 app.use("/main", mainRouter);
-app.use("/acces-denied", accesDeniedRouter);
+app.use("/access-denied", accessDeniedRouter);
 app.use("/battler", secureMiddleware, battlerRouter);
 app.use("/catcher", secureMiddleware, catcherRouter);
 app.use("/compare", secureMiddleware, compareRouter);
