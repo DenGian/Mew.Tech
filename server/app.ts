@@ -10,7 +10,7 @@ import compareRouter from "./routes/compare";
 import contactRouter from "./routes/contact";
 import guessRouter from "./routes/guess";
 import loginRouter from "./routes/login";
-import logoutRouter from "./routes/logout"
+import logoutRouter from "./routes/logout";
 import pokeDexRouter from "./routes/pokeDex";
 import registerRouter from "./routes/register";
 import viewerRouter from "./routes/viewer";

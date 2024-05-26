@@ -93,7 +93,8 @@ async function registerUser(email: string, password: string, username: string): 
             email,
             password: hashedPassword,
             username,
-            role: "USER"
+            role: "USER",
+            caughtPokemon: []
         });
         console.log("User registered successfully.");
     } catch (error) {
@@ -166,12 +167,13 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
     }
   }
 
-async function getAllPokemon(): Promise<PokemonData[]> {
+async function getAllPokemon(skip: number = 0, limit: number = Infinity): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
     try {
-        const data = await collectionPokemon.find({}).toArray();
-        return data;
+        const pokemonData = await collectionPokemon.find({}).skip(skip).limit(limit).toArray();
+        const totalPokemonCount = await collectionPokemon.countDocuments();
+        return { pokemonData, totalPokemonCount };
     } catch (error) {
-        throw new Error(`An error occurred while fetching data: ${error}`);
+        throw new Error(`An error occurred while fetching Pokémon data: ${error}`);
     }
 }
 

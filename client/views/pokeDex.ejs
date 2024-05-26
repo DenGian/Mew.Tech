@@ -2,120 +2,49 @@
 <main class="catchIMG">
   <div class="container">
     <div class="row">
-      <section class="col-md-9 mb-3 mb-md-0">
-        <nav class="navbar bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand">Zoek Pokémon</a>
-            <form class="d-flex" role="search" action="/search" method="GET">
-              <input
-                class="form-control me-2"
-                type="search"
-                name="searchPokemon"
-                placeholder="Search"
-                aria-label="Search"
-                value="<%= searchPokemon %>"
-              />
-              <button class="btn btn-outline-danger" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-        </nav>
-        <h1 class="text-center">PokeDex</h1>
-        <div class="container mt-5">
-          <!-- Display the focused Pokémon with its stats -->
-          <% if (pokemonData) { %>
-          <div class="row justify-content-center mb-5">
-            <div class="col-md-6">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>
-                    #<%= pokemonData.id %> <%= pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1) %>
-                  </h5>
-                </div>
-                <div class="pokedex-body">
-                  <img
-                    src="<%= pokemonData.sprites.front_default %>"
-                    alt="<%= pokemonData.name %>"
-                    class="animation card-img-top"
-                  />
-                  <div class="card-body text-center">
-                    <h5>Stats</h5>
-                    <table class="table">
-                      <tbody>
-                        <% pokemonData.stats.forEach(stat => { %>
-                        <tr>
-                          <th><%= stat.name %></th>
-                          <td><%= stat.base_stat %></td>
-                        </tr>
-                        <% }); %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+      <section class="col-md-9">
+        <div class="card-group py-3">
+          <% pokemonData.forEach(pokemon => { %>
+            <div class="card card-myPoke">
+              <h5 class="card-title text-center main-card-header">
+                <%= pokemon.name %> #<%= pokemon.id %>
+              </h5>
+              <img src="<%= pokemon.sprites.front_default %>" class="card-img-top" alt="...">
+              <div class="card-body text-center">
+                <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex/<%= pokemon.id %>">Check Stats!</a>
+                <!-- Add checkbox for caught Pokémon filter -->
+                <label for="caughtPokemon_<%= pokemon.id %>">Caught</label>
+                <input type="checkbox" id="caughtPokemon_<%= pokemon.id %>" name="caughtPokemon_<%= pokemon.id %>" value="<%= pokemon.id %>" <% if (user.caughtPokemon.includes(pokemon.id)) { %> checked <% } %> >
               </div>
             </div>
-          </div>
-          <% } else { %>
-          <p>No Pokémon data available.</p>
-          <% } %>
-
-          <h2>Evolutionary Chain</h2>
-          <% if (evolutionChainWithSprites && evolutionChainWithSprites.length > 0) { %>
-          <div class="row justify-content-center">
-            <% evolutionChainWithSprites.forEach(chainEntry => { %>
-            <div class="col-md-4">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>
-                    #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
-                  </h5>
-                </div>
-                <div class="pokedex-body">
-                  <img src="" class="animation" class="card-img-top" alt="" />
-                  <!-- Minimal stats or just a name -->
-                </div>
-              </div>
-            </div>
-            <!-- Ivysaur Card -->
-            <div class="col-md-4">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>Ivysaur #002</h5>
-                </div>
-                <div class="pokedex-body">
-                  <img src="" class="animation" class="card-img-top" alt="" />
-                  <!-- Minimal stats or just a name -->
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h5>Venusaur #002</h5>
-                </div>
-                <div class="pokedex-body">
-                  <img src="<%= chainEntry.sprite %>" class="animation" class="card-img-top" alt="<%= chainEntry.name %>" />
-                  <!-- <img
-                    src=""
-                    alt=""
-                  /> -->
-                  
-                  <img
-                    src="<%= chainEntry.sprite %>"
-                    alt="<%= chainEntry.name %> image"
-                  />
-                </div>
-              </div>
-            </div>
-            <% }); %>
-          </div>
-          <% } else { %>
-          <p>No evolution data available.</p>
-          <% } %>
+          <% }); %>
         </div>
-        <!-- Additional Info Section -->
+        <!-- Pagination Links -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <% if (page > 1) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page - 1 %>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            <% } %>
+            <% for (let i = startPage; i <= endPage; i++) { %>
+              <li class="page-item <%= i === page ? 'active' : '' %>">
+                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+            <% if (page < totalPages) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page + 1 %>" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
       </section>
+      <% include('partials/aside') %>
     </div>
   </div>
 </main>

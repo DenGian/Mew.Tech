@@ -2,176 +2,46 @@
 <main>
   <div class="container">
     <div class="row">
-      <section class="col-md-12">
-        <nav class="navbar bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand">Zoek jouw Pokémon</a>
-          </div>
-        </nav>
+      <section class="col-md-9">
         <div class="card-group py-3">
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Bulbasaur #001
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
+          <% pokemonData.forEach(pokemon => { %>
+            <div class="card card-myPoke">
+              <h5 class="card-title text-center main-card-header">
+                <%= pokemon.name %> #<%= pokemon.id %>
+              </h5>
+              <img src="<%= pokemon.sprites.front_default %>" class="card-img-top" alt="...">
+              <div class="card-body text-center">
+                <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
+              </div>
             </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Ivysaur #002
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Venusaur #003
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Charmander #004
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
+          <% }); %>
         </div>
-        <div class="card-group">
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Charmeleon #005
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Charizard #006
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Squirtle #007
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Wartortle #008
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="card-group">
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              blastoise #009
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Caterpie #010
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Metapod #011
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-          <div class="card card-myPoke">
-            <h5 class="card-title text-center main-card-header">
-              Butterfree #012
-            </h5>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body text-center">
-              <a
-                class="btn btn-lg btn-danger rounded-pill"
-                href="./pokeDex.html"
-                >Check Stats!</a
-              >
-            </div>
-          </div>
-        </div>
+        <!-- Pagination Links -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <% if (page > 1) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page - 1 %>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            <% } %>
+            <% for (let i = 1; i <= totalPages; i++) { %>
+              <li class="page-item <%= i === page ? 'active' : '' %>">
+                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+            <% if (page < totalPages) { %>
+              <li class="page-item">
+                <a class="page-link" href="?page=<%= page + 1 %>" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
       </section>
-      <%- include('partials/aside') %>
+      <% include('partials/aside') %>
     </div>
   </div>
 </main>

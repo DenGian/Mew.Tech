@@ -6,4 +6,5 @@ export interface User {
     password?: string;
     username?: string;
     role: "ADMIN" | "USER";
+    caughtPokemon?: string[];
 }
