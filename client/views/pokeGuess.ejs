@@ -1,102 +1,319 @@
-<%- include('partials/header') %>
-<style>
-  .pokemon-silhouette img.silhouette {
-    filter: brightness(0) invert(1);
-  }
-</style>
-<h1 class="text-center">PokeDex - Who's That Pokémon?</h1>
-<main>
-  <div class="container">
-    <div class="row">
-      <section class="col-md-12">
-        <h2>Wie is die Pokémon?</h2>
-        <div class="container text-center mt-3">
-          <p class="lead">Raad de Pokémon!</p>
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech - Wie is het?</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        background-image: url("../assets/images/grassland.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Press Start 2P", cursive;
+        padding: 1rem;
+        min-height: 100vh;
+      }
+      .pixel-border {
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+      }
+      .pixel-button {
+        background-color: #ffcc00; /* Pokémon yellow */
+        color: #fff;
+        border: 2px solid #cc0000; /* Pokémon red */
+        text-shadow: 1px 1px 0px #000;
+        font-size: 12px;
+        transition: transform 0.2s;
+      }
+      .pixel-button:hover {
+        background-color: #fefe02;
+        
+      }
+      .pokemon-silhouette {
+        filter: brightness(0) invert(0);
+        transition: filter 0.3s;
+      }
+      .pokemon-box {
+        background-color: rgba(255, 255, 255, 0.206);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 10px;
+        text-align: center;
+        margin: 20px;
+        animation: bounceIn 1s;
+        position: relative;
+      }
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        70% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .pokemon-img-container {
+        position: relative;
+        display: inline-block;
+      }
+      .pokemon-img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      header {
+        background: linear-gradient(to right, #ff0000, #ffcc00);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+      .feedback {
+        font-size: 1.25rem;
+        color: #ff0000;
+        animation: flash 0.5s alternate infinite;
+      }
+      @keyframes flash {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0.5;
+        }
+      }
+      .title {
+        font-size: 2.5rem;
+        text-shadow: 2px 2px #000;
+      }
+      .tutorial-box {
+        background-color: rgba(255, 255, 255, 0.203);
+        border: 2px solid #444;
+        box-shadow: 2px 2px 0px #aaa;
+        padding: 15px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="pixel-border p-4 mb-4">
+      <nav
+        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
+      >
+        <div class="flex justify-between items-center w-full sm:w-auto">
+          <a class="text-2xl font-bold flex items-center" href="/main">
+            <img
+              src="./assets/images/logo.webp"
+              alt="logo"
+              class="h-10 w-10 mr-2"
+            />
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </div>
-        <div class="container mt-5">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="card pokedex-card">
-                <div class="pokedex-header text-center">
-                  <h3>Wie is deze Pokémon?</h3>
+        <div
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 ml-auto"
+          id="navbar-default"
+        >
+          <ul class="flex flex-col lg:flex-row sm:space-x-4 text-white">
+            <li><a class="hover:text-blue-500" href="/main">Home</a></li>
+            <li><a class="hover:text-blue-500" href="/battler">Duel</a></li>
+            <li><a class="hover:text-blue-500" href="/catcher">Catch</a></li>
+            <li>
+              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+            </li>
+            <li><a class="hover:text-blue-500" href="/pokeDex">PokéDex</a></li>
+            <li>
+              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li>
+              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-4">
+      <h2 class="text-center title mb-4">Wie is het?</h2>
+      <div class="flex justify-center">
+        <div class="w-full lg:w-1/3">
+          <div class="pokemon-box">
+            <div class="pokedex-header text-center">
+              <h3>Wie is deze Pokémon?</h3>
+            </div>
+            <div class="pokedex-body text-center relative">
+              <div class="pokemon-img-container">
+                <% if (pokemonData && pokemonData.sprites &&
+                pokemonData.sprites.front_default) { %>
+                <img
+                  src="<%= pokemonData.sprites.front_default %>"
+                  alt="Who's that Pokémon?"
+                  class="pokemon-img mx-auto pokemon-silhouette"
+                  id="pokemonImage"
+                />
+                <% } else { %>
+                <p>Geen afbeelding beschikbaar.</p>
+                <% } %>
+              </div>
+
+              <% if (!feedback || feedback.includes('Incorrect')) { %>
+              <form action="/pokeGuess" method="post">
+                <% if (pokemonData && pokemonData.id) { %>
+                <input
+                  type="hidden"
+                  name="pokemonID"
+                  value="<%= pokemonData.id %>"
+                />
+                <% } %>
+
+                <div class="search-bar flex w-full mt-4">
+                  <input
+                    type="text"
+                    class="pixel-border flex-grow p-2"
+                    name="guess"
+                    placeholder="Raad de Pokémon"
+                    aria-label="Raad de Pokémon"
+                    required
+                  />
+                  <button
+                    class="pixel-button py-2 px-4 rounded"
+                    type="submit"
+                    id="button-addon2"
+                  >
+                    Raad
+                  </button>
                 </div>
-                <div class="pokedex-body text-center">
-                  <% if (pokemonData && pokemonData.sprites && pokemonData.sprites.front_default) { %>
-                    <img
-                      src="<%= pokemonData.sprites.front_default %>"
-                      alt="Who's that Pokémon?"
-                      class="card-img-top silhouette"
-                    />
-                  <% } else { %>
-                  <p>Geen afbeelding beschikbaar.</p>
-                  <% } %>
+              </form>
+              <% } %> <% if (feedback) { %>
+              <div class="feedback text-center mt-4">
+                <h5><%= feedback %></h5>
+              </div>
+              <% } %>
 
-                  <% if (!feedback || feedback.includes('Incorrect')) { %>
-                    <form action="/pokeGuess" method="post">
-                      <% if (pokemonData && pokemonData.id) { %>
-                        <input
-                          type="hidden"
-                          name="pokemonID"
-                          value="<%= pokemonData.id %>"
-                        />
-                      <% } %>
+              <form action="/pokeGuess/next" method="post">
+                <button
+                  class="pixel-button py-2 px-4 rounded mt-3"
+                  type="submit"
+                >
+                  Volgende Pokémon
+                </button>
+              </form>
 
-                      <div class="input-group mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="guess"
-                          placeholder="Raad de Pokémon"
-                          aria-label="Raad de Pokémon"
-                          aria-describedby="button-addon2"
-                          required
-                        />
-                        <button
-                          class="btn btn-danger"
-                          type="submit"
-                          id="button-addon2"
-                        >
-                          Raad
-                        </button>
-                      </div>
-                    </form>
-                  <% } %>
-
-                  <% if (feedback) { %>
-                  <div class="feedback text-center">
-                    <h5><%= feedback %></h5>
-                  </div>
-                  <% } %>
-
-                  <form action="/pokeGuess/next" method="post">
-                    <button class="btn btn-primary mt-3" type="submit">
-                      Volgende Pokémon
-                    </button>
-                  </form>
-
-                  <!-- Stats Section -->
-                  <div class="pokemon-guess-stats mt-4">
-                    <h5 class="text-center">Jouw Statistieken</h5>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
-                        Juist geraden:
-                        <span id="correctGuesses"><%= correctGuesses %></span>
-                      </li>
-                      <li class="list-group-item">
-                        Fout geraden:
-                        <span id="incorrectGuesses"
-                          ><%= incorrectGuesses %></span
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+              <!-- Stats Section -->
+              <div class="pokemon-guess-stats mt-4">
+                <h5 class="text-center">Jouw Statistieken</h5>
+                <ul class="list-disc list-inside">
+                  <li>
+                    Juist geraden:
+                    <span id="correctGuesses"><%= correctGuesses %></span>
+                  </li>
+                  <li>
+                    Fout geraden:
+                    <span id="incorrectGuesses"><%= incorrectGuesses %></span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  </div>
-</main>
-<%- include('partials/footer') %>
+      </div>
+
+      <!-- Tutorial Section -->
+      <div class="container mx-auto py-8">
+        <div class="tutorial-box">
+          <p class="mb-2">
+            Welkom bij de Pokémon Raadspel! Volg deze stappen om te beginnen:
+          </p>
+          <ol class="list-decimal list-inside mb-4">
+            <li>Voer de naam van een Pokémon in het zoekveld in.</li>
+            <li>Klik op de "Raad" knop om je antwoord in te dienen.</li>
+            <li>
+              Als je het goed hebt, zal de Pokémon afbeelding zichtbaar worden.
+            </li>
+            <li>
+              Klik op de "Volgende Pokémon" knop om naar de volgende Pokémon te
+              gaan.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const button = document.querySelector(
+        '[data-collapse-toggle="navbar-default"]'
+      );
+      const navbarDefault = document.getElementById("navbar-default");
+
+      button.addEventListener("click", function () {
+        navbarDefault.classList.toggle("hidden");
+      });
+
+      // Show the full image if the feedback indicates the guess was correct
+      const feedback = "<%= feedback %>";
+      if (feedback && feedback.includes("Correct")) {
+        document
+          .getElementById("pokemonImage")
+          .classList.remove("pokemon-silhouette");
+      }
+    </script>
+  </body>
+</html>

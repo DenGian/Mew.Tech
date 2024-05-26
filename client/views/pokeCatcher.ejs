@@ -1,115 +1,300 @@
-<%- (include('partials/header')) %>
-<main class="catchIMG">
-  <div class="container">
-    <div class="row">
-      <section class="col-md-12">
-        <h2>Safari Zone</h2>
-        <div class="container img-fluid">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="text-center">
-                <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
-              </div>
-              <div class="pokedex-body">
-                <img
-                  src="<%= randomPokemon.sprites.front_default %>"
-                  class="card-img-top"
-                  alt="<%= randomPokemon.name %>"
-                />
-              </div>
-              <h5 class="card-title">Stats</h5>
-              <div class="row">
-                <!-- Voeg een rij toe voor de stats -->
-                <% if (randomPokemon && randomPokemon.stats &&
-                randomPokemon.stats.length > 0) { %>
-                <div class="col-md-4">
-                  <div class="d-flex justify-content-center">
-                    HP <%= randomPokemon.stats[0].base_stat %>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="d-flex justify-content-center">
-                    ATK <%= randomPokemon.stats[1].base_stat %>
-                  </div>
-                </div>
-                <div class="col-6 col-md-4">
-                  <div class="d-flex justify-content-center">
-                    DEF <%= randomPokemon.stats[2].base_stat %> <% } else { %>
-                  </div>
-                  <div class="col-12">
-                    Geen Statistieken te vinden voor deze pokemon.
-                  </div>
-                  <% } %>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <button
-                  id="pokeball-btn"
-                  type="button"
-                  class="btn-pokeball"
-                  style="background-color: transparent; border: none"
-                >
-                  <img
-                    src="../../assets/images/poke-ball.png"
-                    alt="Pokeball"
-                    style="width: 80px; height: 80px"
-                  />
-                </button>
-              </div>
-              <p id="catch-result"></p>
-              <p id="attempts-left"></p>
-              <button
-                id="reset-btn"
-                type="button"
-                class="btn btn-primary"
-                style="display: none"
-              >
-                Opnieuw proberen
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-</main>
-
-<script>
-  let attempts = 3;
-
-  document
-    .getElementById("pokeball-btn")
-    .addEventListener("click", function () {
-      if (attempts > 0) {
-        const catchRate = 0.1; // Chance to catch the Pokémon
-        const random = Math.random(); // Generate a random number
-
-        if (random < catchRate) {
-          document.getElementById("catch-result").textContent =
-            "Pokémon gevangen!";
-          document.getElementById("catch-result").style.color = "green";
-          document.getElementById("pokeball-btn").disabled = true; // Disable the button after catching
-          document.getElementById("reset-btn").style.display = "block"; // Show the reset button
-        } else {
-          attempts--;
-          if (attempts > 0) {
-            document.getElementById("catch-result").textContent =
-              "Pokémon niet gevangen, probeer opnieuw.";
-            document.getElementById("catch-result").style.color = "red";
-          } else {
-            document.getElementById("catch-result").textContent =
-              "Pokémon is ontsnapt!";
-            document.getElementById("catch-result").style.color = "red";
-            document.getElementById("pokeball-btn").disabled = true; // Disable the button if no attempts left
-            document.getElementById("reset-btn").style.display = "block"; // Show the reset button
-          }
-          document.getElementById("attempts-left").textContent =
-            "Attempts left: " + attempts;
-        }
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        background-image: url("../assets/images/grassland.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Press Start 2P", cursive;
+        padding: 1rem;
+        min-height: 100vh;
       }
-    });
+      .pixel-border {
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+      }
+      .pixel-button {
+        background-color: #444;
+        color: #fff;
+        border: 2px solid #222;
+        text-shadow: 1px 1px 0px #000;
+      }
+      .pixel-button:hover {
+        background-color: #555;
+      }
+      .pixel-button-pokemon {
+        background-color: #ffcc00; /* Pokémon yellow */
+        color: #fff;
+        border: 2px solid #cc0000; /* Pokémon red */
+        text-shadow: 1px 1px 0px #000;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .pixel-button-pokemon:hover {
+        background-color: #ffdd00;
+      }
+      .pokemon-img {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        animation: appear 1s forwards;
+      }
+      .pokemon-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 10px;
+        text-align: center;
+      }
+      .tutorial-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 2px solid #444;
+        box-shadow: 2px 2px 0px #aaa;
+        padding: 15px;
+        margin-top: 20px;
+        
+      }
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-10px); }
+        40%, 80% { transform: translateX(10px); }
+      }
+      @keyframes appear {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes capture {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(0); opacity: 0; }
+      }
+      .shake {
+        animation: shake 0.5s;
+      }
+      .capture {
+        animation: capture 0.5s forwards;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="pixel-border p-4 mb-4">
+      <nav
+        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
+      >
+        <div class="flex justify-between items-center w-full sm:w-auto">
+          <a class="text-2xl font-bold flex items-center" href="/main">
+            <img
+              src="./assets/images/logo.webp"
+              alt="logo"
+              class="h-10 w-10 mr-2"
+            />
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 ml-auto"
+          id="navbar-default"
+        >
+          <ul class="flex flex-col lg:flex-row sm:space-x-4 text-white">
+            <li><a class="hover:text-yellow-500" href="/main">Home</a></li>
+            <li><a class="hover:text-yellow-500" href="/battler">Duel</a></li>
+            <li><a class="hover:text-yellow-500" href="/catcher">Catch</a></li>
+            <li>
+              <a class="hover:text-yellow-500" href="/compare">Vergelijk</a>
+            </li>
+            <li>
+              <a class="hover:text-yellow-500" href="/pokeDex">PokéDex</a>
+            </li>
+            <li>
+              <a class="hover:text-yellow-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li>
+              <a class="hover:text-yellow-500" href="/viewer">Mijn Pokémon</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-  document.getElementById("reset-btn").addEventListener("click", function () {
-    location.href = "/catcher"; // Reloads the page or redirects to the initial route to fetch a new Pokémon
-  });
-</script>
+    <main class="container mx-auto p-4">
+      <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
+      <div id="initial-message" class="text-center text-xl mb-4">
+        A wild <%= randomPokemon.name %> has appeared!
+      </div>
+      <div
+        id="pokemon-container"
+        class="flex justify-center items-center"
+        style="display: none"
+      >
+        <div class="pokemon-box">
+          <h5 class="text-xl mb-2">
+            #<%= randomPokemon.id %> <%= randomPokemon.name %>
+          </h5>
+          <img
+            id="pokemon-img"
+            src="<%= randomPokemon.sprites.front_default %>"
+            class="pokemon-img mx-auto mb-4"
+            alt="<%= randomPokemon.name %>"
+          />
+          <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
+            <img
+              src="../../assets/images/poke-ball.png"
+              alt="Pokeball"
+              class="w-8 h-8 inline"
+            />
+          </button>
+          <p id="catch-result" class="mt-4"></p>
+          <p id="attempts-left" class="mt-2"></p>
+          <button
+            id="reset-btn"
+            class="pixel-button-pokemon py-2 px-4 rounded mt-4"
+            style="display: none"
+          >
+            Opnieuw proberen
+          </button>
+        </div>
+      </div>
+      <div class="tutorial-box">
+        <h3 class="text-2xl mb-2">Hoe te spelen:</h3>
+        <p class="mb-2">
+          1. Klik op de Pokébal om te proberen de Pokémon te vangen.
+        </p>
+        <p class="mb-2">2. Je hebt drie pogingen om de Pokémon te vangen.</p>
+        <p class="mb-2">
+          3. Als de Pokémon ontsnapt na drie pogingen, kun je op "Opnieuw
+          proberen" klikken om het opnieuw te proberen.
+        </p>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          document.getElementById("initial-message").style.display = "none";
+          document.getElementById("pokemon-container").style.display = "flex";
+        }, 2000); // Show Pokémon after 2 seconds
+      });
+
+      let attempts = 3;
+
+      document
+        .getElementById("pokeball-btn")
+        .addEventListener("click", function () {
+          const pokeball = document.getElementById("pokeball-btn");
+          const pokemonImg = document.getElementById("pokemon-img");
+          pokeball.classList.add("shake");
+
+          setTimeout(function () {
+            pokeball.classList.remove("shake");
+
+            if (attempts > 0) {
+              pokemonImg.classList.add("capture");
+
+              setTimeout(function () {
+                const catchRate = 0.1;
+                const random = Math.random();
+
+                if (random < catchRate) {
+                  document.getElementById("catch-result").textContent =
+                    "Pokémon gevangen!";
+                  document.getElementById("catch-result").style.color = "green";
+                  pokeball.disabled = true;
+                  document.getElementById("reset-btn").style.display = "block";
+                } else {
+                  attempts--;
+                  if (attempts > 0) {
+                    document.getElementById("catch-result").textContent =
+                      "Pokémon niet gevangen, probeer opnieuw.";
+                    document.getElementById("catch-result").style.color = "red";
+                  } else {
+                    document.getElementById("catch-result").textContent =
+                      "Pokémon is ontsnapt!";
+                    document.getElementById("catch-result").style.color = "red";
+                    pokeball.disabled = true;
+                    document.getElementById("reset-btn").style.display = "block";
+                  }
+                  document.getElementById("attempts-left").textContent =
+                    "Pogingen: " + attempts;
+
+                  pokemonImg.classList.remove("capture");
+                  pokemonImg.style.animation = "none";
+                  setTimeout(function () {
+                    pokemonImg.style.animation = "";
+                  }, 100); // Re-enable animation
+                }
+              }, 1000); // Capture animation duration
+            }
+          }, 1000); // Shake animation duration
+        });
+
+      const button = document.querySelector(
+        '[data-collapse-toggle="navbar-default"]'
+      );
+      const navbarDefault = document.getElementById("navbar-default");
+
+      button.addEventListener("click", function () {
+        navbarDefault.classList.toggle("hidden");
+      });
+
+      document
+        .getElementById("reset-btn")
+        .addEventListener("click", function () {
+          location.href = "/catcher";
+        });
+    </script>
+  </body>
+</html>

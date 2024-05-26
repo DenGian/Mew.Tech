@@ -10,8 +10,9 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "nes.css": "^2.3.0",
-    "mongodb": "^6.5.0"
+    "flowbite": "^2.3.0",
+    "mongodb": "^6.5.0",
+    "nes.css": "^2.3.0"
   },
   "name": "mew.tech",
   "description": "Welkom bij ons Gemeenschappelijk Project! Hieronder vind je alles wat je moet weten over onze Fullstack Pokémon website.",
@@ -31,6 +32,9 @@
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
     "@types/node": "^20.12.4",
-    "nodemon": "^3.1.0"
+    "autoprefixer": "^10.4.19",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }
