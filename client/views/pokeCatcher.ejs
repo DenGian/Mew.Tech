@@ -256,79 +256,83 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-          document.getElementById("initial-message").style.display = "none";
-          document.getElementById("pokemon-container").style.display = "flex";
-        }, 2000); // Show Pokémon after 2 seconds
-      });
+    // Hide initial message after 2 seconds and show the Pokémon container
+    setTimeout(function () {
+        document.getElementById("initial-message").style.display = "none";
+        document.getElementById("pokemon-container").style.display = "flex";
+    }, 2000);
 
-      let attempts = 3;
+    let attempts = 3; // Maximum number of attempts to catch a Pokémon
+    const pokeballBtn = document.getElementById("pokeball-btn");
+    const pokemonImg = document.getElementById("pokemon-img");
+    const attemptsLeft = document.getElementById("attempts-left");
+    const catchResult = document.getElementById("catch-result");
+    const resetBtn = document.getElementById("reset-btn");
 
-      document
-        .getElementById("pokeball-btn")
-        .addEventListener("click", function () {
-          const pokeball = document.getElementById("pokeball-btn");
-          const pokemonImg = document.getElementById("pokemon-img");
-          pokeball.classList.add("shake");
+    pokeballBtn.addEventListener("click", async function () {
+        if (attempts > 0) {
+            pokeballBtn.disabled = true;
+            pokemonImg.classList.add("shake");
 
-          setTimeout(function () {
-            pokeball.classList.remove("shake");
+            setTimeout(async function () {
+                pokemonImg.classList.remove("shake");
 
-            if (attempts > 0) {
-              pokemonImg.classList.add("capture");
-
-              setTimeout(function () {
                 const catchRate = 0.1;
                 const random = Math.random();
 
                 if (random < catchRate) {
-                  document.getElementById("catch-result").textContent =
-                    "Pokémon gevangen!";
-                  document.getElementById("catch-result").style.color = "green";
-                  pokeball.disabled = true;
-                  document.getElementById("reset-btn").style.display = "block";
+                    // Post to server to catch the Pokémon
+                    const response = await fetch("/catcher/catch-pokemon", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ pokemonId: "<%= randomPokemon.id %>" })
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        catchResult.textContent = "Pokémon gevangen!";
+                        catchResult.style.color = "green";
+                    } else {
+                        catchResult.textContent = result.message;
+                        catchResult.style.color = "red";
+                    }
+                    pokeballBtn.disabled = true;
+                    resetBtn.style.display = "block";
                 } else {
-                  attempts--;
-                  if (attempts > 0) {
-                    document.getElementById("catch-result").textContent =
-                      "Pokémon niet gevangen, probeer opnieuw.";
-                    document.getElementById("catch-result").style.color = "red";
-                  } else {
-                    document.getElementById("catch-result").textContent =
-                      "Pokémon is ontsnapt!";
-                    document.getElementById("catch-result").style.color = "red";
-                    pokeball.disabled = true;
-                    document.getElementById("reset-btn").style.display =
-                      "block";
-                  }
-                  document.getElementById("attempts-left").textContent =
-                    "Pogingen: " + attempts;
-
-                  pokemonImg.classList.remove("capture");
-                  pokemonImg.style.animation = "none";
-                  setTimeout(function () {
-                    pokemonImg.style.animation = "";
-                  }, 100); // Re-enable animation
+                    attempts--;
+                    if (attempts > 0) {
+                        catchResult.textContent = "Pokémon niet gevangen, probeer opnieuw.";
+                        catchResult.style.color = "red";
+                    } else {
+                        catchResult.textContent = "Pokémon is ontsnapt!";
+                        catchResult.style.color = "red";
+                        pokeballBtn.disabled = true;
+                        resetBtn.style.display = "block";
+                    }
+                    attemptsLeft.textContent = "Pogingen: " + attempts;
+                    pokeballBtn.disabled = false;
                 }
-              }, 1000); // Capture animation duration
-            }
-          }, 1000); // Shake animation duration
-        });
+            }, 1000); // Shake animation duration
+        }
+    });
 
-      const button = document.querySelector(
-        '[data-collapse-toggle="navbar-default"]'
-      );
-      const navbarDefault = document.getElementById("navbar-default");
+    resetBtn.addEventListener("click", function () {
+        window.location.reload();
+    });
 
-      button.addEventListener("click", function () {
+    // Navbar collapse functionality
+    const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
+    const navbarDefault = document.getElementById("navbar-default");
+
+    button.addEventListener("click", function () {
         navbarDefault.classList.toggle("hidden");
-      });
+    });
 
-      document
-        .getElementById("reset-btn")
-        .addEventListener("click", function () {
-          location.href = "/catcher";
-        });
+    // Additional reset functionality if needed
+    document.getElementById("reset-btn").addEventListener("click", function () {
+        location.href = "/catcher";
+    });
+});
     </script>
   </body>
 </html>
