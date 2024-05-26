@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-<main class="catchIMG">
+<main>
   <div class="container">
     <div class="row">
       <section class="col-md-9">
@@ -11,10 +11,7 @@
               </h5>
               <img src="<%= pokemon.sprites.front_default %>" class="card-img-top" alt="...">
               <div class="card-body text-center">
-                <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex/<%= pokemon.id %>">Check Stats!</a>
-                <!-- Add checkbox for caught Pokémon filter -->
-                <label for="caughtPokemon_<%= pokemon.id %>">Caught</label>
-                <input type="checkbox" id="caughtPokemon_<%= pokemon.id %>" name="caughtPokemon_<%= pokemon.id %>" value="<%= pokemon.id %>" <% if (user.caughtPokemon.includes(pokemon.id)) { %> checked <% } %> >
+                <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
               </div>
             </div>
           <% }); %>
@@ -29,7 +26,7 @@
                 </a>
               </li>
             <% } %>
-            <% for (let i = startPage; i <= endPage; i++) { %>
+            <% for (let i = 1; i <= totalPages; i++) { %>
               <li class="page-item <%= i === page ? 'active' : '' %>">
                 <a class="page-link" href="?page=<%= i %>"><%= i %></a>
               </li>
@@ -48,4 +45,3 @@
     </div>
   </div>
 </main>
-<%- include('partials/footer') %>
