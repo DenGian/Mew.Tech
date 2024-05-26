@@ -138,12 +138,13 @@ async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
     }
 }
 
-async function getAllPokemon(): Promise<PokemonData[]> {
+async function getAllPokemon(skip: number = 0, limit: number = Infinity): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
     try {
-        const data = await collectionPokemon.find({}).toArray();
-        return data;
+        const pokemonData = await collectionPokemon.find({}).skip(skip).limit(limit).toArray();
+        const totalPokemonCount = await collectionPokemon.countDocuments();
+        return { pokemonData, totalPokemonCount };
     } catch (error) {
-        throw new Error(`An error occurred while fetching data: ${error}`);
+        throw new Error(`An error occurred while fetching Pokémon data: ${error}`);
     }
 }
 
