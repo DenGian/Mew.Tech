@@ -78,7 +78,7 @@ async function isUsernameRegistered(username: string): Promise<boolean> {
     }
 }
 
-async function registerUser(email: string, password: string, username: string): Promise<void> {
+async function registerUser(email: string, password: string, username: string, selectedPokemonId?: string): Promise<void> {
     try {
         const emailExists = await isEmailRegistered(email);
         if (emailExists) {
@@ -89,13 +89,15 @@ async function registerUser(email: string, password: string, username: string): 
             throw new Error("Username is already taken.");
         }
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        await collectionUsers.insertOne({
+        const newUser: User = {
             email,
             password: hashedPassword,
             username,
             role: "USER",
-            caughtPokemon: []
-        });
+            caughtPokemon: [],
+            selectedPokemon: selectedPokemonId ? selectedPokemonId : undefined
+        };
+        await collectionUsers.insertOne(newUser);
         console.log("User registered successfully.");
     } catch (error) {
         console.error("Error registering user:", error);
@@ -221,4 +223,4 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered };
+export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
