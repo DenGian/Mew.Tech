@@ -1,0 +1,68 @@
+<%- include('partials/header') %>
+<main>
+  <div class="container mt-5">
+    <!-- Display the focused Pokémon with its stats -->
+    <% if (pokemon) { %>
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <div class="card pokedex-card">
+          <div class="pokedex-header text-center">
+            <h5>
+              #<%= pokemon.id %> <%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %>
+            </h5>
+          </div>
+          <div class="pokedex-body">
+            <img
+              src="<%= pokemon.sprites.front_default %>"
+              alt="<%= pokemon.name %> image"
+              class="card-img-top"
+            />
+            <div class="card-body text-center">
+              <h5>Stats</h5>
+              <table class="table">
+                <tbody>
+                  <% pokemon.stats.forEach(stat => { %>
+                  <tr>
+                    <th><%= stat.name %></th>
+                    <td><%= stat.base_stat %></td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <p>No Pokémon data available.</p>
+    <% } %>
+
+    <!-- Display Evolutionary Chain -->
+    <h2>Evolutionary Chain</h2>
+    <% if (pokemon && pokemon.evolution_chain) { %>
+    <div class="row justify-content-center">
+      <% pokemon.evolution_chain.forEach(chainEntry => { %>
+      <div class="col-md-4">
+        <div class="card pokedex-card">
+          <div class="pokedex-header text-center">
+            <h5>
+              #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
+            </h5>
+          </div>
+          <div class="pokedex-body">
+            <img
+              src="<%= chainEntry.sprite %>"
+              alt="<%= chainEntry.name %> image"
+            />
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <% } else { %>
+    <p>No evolution data available.</p>
+    <% } %>
+  </div>
+</main>
+<%- include('partials/footer') %>
