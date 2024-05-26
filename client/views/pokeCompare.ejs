@@ -55,10 +55,8 @@
         justify-content: center;
         margin-bottom: 20px;
         margin-left: 20px;
-
         width: 90%; /* Zorg ervoor dat de zoekbalk even breed is als de container */
       }
-
       .search-bar input {
         padding: 10px;
         border: 4px solid #cc0000; /* Pokémon red */
@@ -70,7 +68,6 @@
           100% - 120px
         ); /* Breedte aangepast om naast de knop te passen */
       }
-
       .search-bar button {
         width: 100px; /* Breedte van de knop */
       }
@@ -115,7 +112,14 @@
         box-shadow: 2px 2px 0px #aaa;
         padding: 15px;
         margin-top: 20px;
-   
+      }
+      header {
+        background: linear-gradient(to right, #ff0000, #ffcc00);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
       }
     </style>
   </head>
@@ -156,24 +160,30 @@
           </button>
         </div>
         <div
-          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 ml-auto"
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
           id="navbar-default"
         >
-          <ul class="flex flex-col lg:flex-row sm:space-x-4 text-white">
-            <li><a class="hover:text-yellow-500" href="/main">Home</a></li>
-            <li><a class="hover:text-yellow-500" href="/battler">Duel</a></li>
-            <li><a class="hover:text-yellow-500" href="/catcher">Catch</a></li>
-            <li>
-              <a class="hover:text-yellow-500" href="/compare">Vergelijk</a>
+          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/main">Home</a>
             </li>
-            <li>
-              <a class="hover:text-yellow-500" href="/pokeDex">PokéDex</a>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/battler">Duel</a>
             </li>
-            <li>
-              <a class="hover:text-yellow-500" href="/pokeGuess">Wie is het?</a>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/catcher">Catch</a>
             </li>
-            <li>
-              <a class="hover:text-yellow-500" href="/viewer">Mijn Pokémon</a>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
             </li>
           </ul>
         </div>
@@ -225,7 +235,8 @@
                       <td
                         class="<%= stats1[0] > stats2[0] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[0] > stats2[0] ? '+' : '-' %> <%= stats1[0] %>
+                        <%= stats1[0] > stats2[0] ? '+' : '-' %> <%= stats1[0]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -233,7 +244,8 @@
                       <td
                         class="<%= stats1[1] > stats2[1] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[1] > stats2[1] ? '+' : '-' %> <%= stats1[1] %>
+                        <%= stats1[1] > stats2[1] ? '+' : '-' %> <%= stats1[1]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -241,7 +253,8 @@
                       <td
                         class="<%= stats1[2] > stats2[2] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[2] > stats2[2] ? '+' : '-' %> <%= stats1[2] %>
+                        <%= stats1[2] > stats2[2] ? '+' : '-' %> <%= stats1[2]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -249,7 +262,8 @@
                       <td
                         class="<%= stats1[3] > stats2[3] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[3] > stats2[3] ? '+' : '-' %> <%= stats1[3] %>
+                        <%= stats1[3] > stats2[3] ? '+' : '-' %> <%= stats1[3]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -257,7 +271,8 @@
                       <td
                         class="<%= stats1[4] > stats2[4] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[4] > stats2[4] ? '+' : '-' %> <%= stats1[4] %>
+                        <%= stats1[4] > stats2[4] ? '+' : '-' %> <%= stats1[4]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -265,7 +280,8 @@
                       <td
                         class="<%= stats1[5] > stats2[5] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats1[5] > stats2[5] ? '+' : '-' %> <%= stats1[5] %>
+                        <%= stats1[5] > stats2[5] ? '+' : '-' %> <%= stats1[5]
+                        %>
                       </td>
                     </tr>
                   </tbody>
@@ -314,7 +330,8 @@
                       <td
                         class="<%= stats2[0] > stats1[0] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[0] > stats1[0] ? '+' : '-' %> <%= stats2[0] %>
+                        <%= stats2[0] > stats1[0] ? '+' : '-' %> <%= stats2[0]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -322,7 +339,8 @@
                       <td
                         class="<%= stats2[1] > stats1[1] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[1] > stats1[1] ? '+' : '-' %> <%= stats2[1] %>
+                        <%= stats2[1] > stats1[1] ? '+' : '-' %> <%= stats2[1]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -330,7 +348,8 @@
                       <td
                         class="<%= stats2[2] > stats1[2] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[2] > stats1[2] ? '+' : '-' %> <%= stats2[2] %>
+                        <%= stats2[2] > stats1[2] ? '+' : '-' %> <%= stats2[2]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -338,7 +357,8 @@
                       <td
                         class="<%= stats2[3] > stats1[3] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[3] > stats1[3] ? '+' : '-' %> <%= stats2[3] %>
+                        <%= stats2[3] > stats1[3] ? '+' : '-' %> <%= stats2[3]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -346,7 +366,8 @@
                       <td
                         class="<%= stats2[4] > stats1[4] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[4] > stats1[4] ? '+' : '-' %> <%= stats2[4] %>
+                        <%= stats2[4] > stats1[4] ? '+' : '-' %> <%= stats2[4]
+                        %>
                       </td>
                     </tr>
                     <tr>
@@ -354,7 +375,8 @@
                       <td
                         class="<%= stats2[5] > stats1[5] ? 'higher' : 'lower' %>"
                       >
-                        <%= stats2[5] > stats1[5] ? '+' : '-' %> <%= stats2[5] %>
+                        <%= stats2[5] > stats1[5] ? '+' : '-' %> <%= stats2[5]
+                        %>
                       </td>
                     </tr>
                   </tbody>
