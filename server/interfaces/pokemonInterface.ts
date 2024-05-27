@@ -9,6 +9,7 @@ export interface PokemonData {
   abilities: { ability: { name: string } }[];
   url: string | null;
   evolution_chain: { id: string; name: string; sprite: string }[];
+  types: { type: { name: string } }[];
 }
 
 export interface PokemonResponse {
