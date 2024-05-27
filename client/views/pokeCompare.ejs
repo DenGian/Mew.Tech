@@ -213,11 +213,13 @@
                       <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
                   </div>
                   <div class="pokedex-body">
+                    <a href="/pokeDex/<%= randomPokemon.id %>">
                       <img
                           src="<%= randomPokemon.sprites.front_default %>"
                           class="pokemon-img mx-auto"
                           alt="<%= randomPokemon.name %>"
                       />
+                    </a>
                       <div class="card-body text-center">
                           <h5 class="card-title">Stats</h5>
                           <table class="table table-stats mx-auto">
@@ -286,11 +288,13 @@
                       <h5>#<%= randomPokemon2.id %> <%= randomPokemon2.name %></h5>
                   </div>
                   <div class="pokedex-body">
+                    <a href="/pokeDex/<%= randomPokemon2.id %>">
                       <img
                           src="<%= randomPokemon2.sprites.front_default %>"
                           class="pokemon-img mx-auto"
                           alt="<%= randomPokemon2.name %>"
                       />
+                    </a>
                       <div class="card-body text-center">
                           <h5 class="card-title text-center">Stats</h5>
                           <table class="table table-stats mx-auto">
