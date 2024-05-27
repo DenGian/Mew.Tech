@@ -1,45 +1,42 @@
-import express, { Router } from "express";
-import {
-  displayRandomPokemon,
-  getEvolutionChain,
-} from "../utils/helper-functions";
+import express, { Router, Request, Response } from "express";
+import { getAllPokemon, getPokemonById } from "../config/database";
+import { calculateTotalPages } from "../utils/helper-functions";
 
 const router: Router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const searchPokemon = req.query.searchPokemon as string | undefined;
-    const randomPokemon = await displayRandomPokemon();
-    if (!randomPokemon) {
-      throw new Error("No random Pokémon found.");
-    }
-    const pokemonId = randomPokemon.id; // Ensure randomPokemon has an id property
-    const evolutionChain = await getEvolutionChain(pokemonId);
+const POKEMON_PER_PAGE = 4; 
+const MAX_PAGES_DISPLAYED = 7;
 
-    res.render("pokeDex", {
-      pokemonData: randomPokemon,
-      searchPokemon,
-      evolutionChainWithSprites: evolutionChain,
-    });
-  } catch (error) {
-    console.error("Error fetching random Pokémon:", error);
-    res.status(500).send("Failed to load page due to server error.");
-  }
+router.get("/", async (req: Request<{}, any, any, { page?: string }>, res: Response) => {
+    try {
+        const page = parseInt(req.query.page?.toString() || "1");
+        const skip = (page - 1) * POKEMON_PER_PAGE;
+        const { pokemonData, totalPokemonCount } = await getAllPokemon(skip, POKEMON_PER_PAGE);
+        const totalPages = calculateTotalPages(totalPokemonCount, POKEMON_PER_PAGE);
+        let startPage = Math.max(1, page - Math.floor(MAX_PAGES_DISPLAYED / 2));
+        let endPage = Math.min(totalPages, startPage + MAX_PAGES_DISPLAYED - 1);
+        if (endPage - startPage + 1 < MAX_PAGES_DISPLAYED) {
+            startPage = Math.max(1, endPage - MAX_PAGES_DISPLAYED + 1);
+        }
+        res.render("pokeDex", { pokemonData, page, totalPages, startPage, endPage });
+    } catch (error) {
+        console.error("Error fetching Pokémon:", error);
+        res.status(500).send("Failed to load page due to server error.");
+    }
 });
 
-// router.get("/search", async (req, res) => {
-//   const searchQuery = req.query.searchPokemon;
-//   try {
-//     // Implement a search function to find Pokémon based on `searchQuery`
-//     const searchResults = await searchPokemon(searchQuery);
-//     res.render("pokeDex", {
-//       pokemonData: searchResults,
-//       searchPokemon: searchQuery,
-//     });
-//   } catch (error) {
-//     console.error("Error during search:", error);
-//     res.status(500).send("Failed to perform search.");
-//   }
-// });
+router.get('/:pokemonId', async (req, res) => {
+  try {
+      const pokemonId = req.params.pokemonId;
+      const pokemon = await getPokemonById(pokemonId);
+      if (!pokemon) {
+          return res.status(404).send('Pokémon not found');
+      }
+      res.render('detail-pokemon', { pokemon });
+  } catch (error) {
+      console.error('Error fetching Pokémon stats:', error);
+      res.status(500).send('Failed to load Pokémon stats due to server error.');
+  }
+});
 
 export default router;

@@ -78,7 +78,7 @@ async function isUsernameRegistered(username: string): Promise<boolean> {
     }
 }
 
-async function registerUser(email: string, password: string, username: string): Promise<void> {
+async function registerUser(email: string, password: string, username: string, selectedPokemonId?: string): Promise<void> {
     try {
         const emailExists = await isEmailRegistered(email);
         if (emailExists) {
@@ -89,12 +89,15 @@ async function registerUser(email: string, password: string, username: string): 
             throw new Error("Username is already taken.");
         }
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        await collectionUsers.insertOne({
+        const newUser: User = {
             email,
             password: hashedPassword,
             username,
-            role: "USER"
-        });
+            role: "USER",
+            caughtPokemon: [],
+            selectedPokemon: selectedPokemonId ? selectedPokemonId : undefined
+        };
+        await collectionUsers.insertOne(newUser);
         console.log("User registered successfully.");
     } catch (error) {
         console.error("Error registering user:", error);
@@ -166,12 +169,13 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
     }
   }
 
-async function getAllPokemon(): Promise<PokemonData[]> {
+async function getAllPokemon(skip: number = 0, limit: number = Infinity): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
     try {
-        const data = await collectionPokemon.find({}).toArray();
-        return data;
+        const pokemonData = await collectionPokemon.find({}).skip(skip).limit(limit).toArray();
+        const totalPokemonCount = await collectionPokemon.countDocuments();
+        return { pokemonData, totalPokemonCount };
     } catch (error) {
-        throw new Error(`An error occurred while fetching data: ${error}`);
+        throw new Error(`An error occurred while fetching Pokémon data: ${error}`);
     }
 }
 
@@ -219,4 +223,4 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered };
+export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };

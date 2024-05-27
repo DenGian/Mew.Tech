@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 import path from "path";
 import indexRouter from "./routes/index";
 import mainRouter from "./routes/main"
-import accesDeniedRouter from "./routes/accesDenied";
+import accessDeniedRouter from "./routes/accessDenied";
 import battlerRouter from "./routes/battler";
 import catcherRouter from "./routes/catcher";
 import compareRouter from "./routes/compare";
 import contactRouter from "./routes/contact";
 import guessRouter from "./routes/guess";
 import loginRouter from "./routes/login";
-import logoutRouter from "./routes/logout"
+import logoutRouter from "./routes/logout";
 import pokeDexRouter from "./routes/pokeDex";
 import registerRouter from "./routes/register";
 import viewerRouter from "./routes/viewer";
@@ -46,7 +46,7 @@ app.use(flashMiddleware);
 
 app.use("/", indexRouter);
 app.use("/main", mainRouter);
-app.use("/acces-denied", accesDeniedRouter);
+app.use("/access-denied", accessDeniedRouter);
 app.use("/battler", secureMiddleware, battlerRouter);
 app.use("/catcher", secureMiddleware, catcherRouter);
 app.use("/compare", secureMiddleware, compareRouter);
