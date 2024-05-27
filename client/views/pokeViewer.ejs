@@ -1,47 +1,256 @@
-
-<main>
-  <div class="container">
-    <div class="row">
-      <section class="col-md-9">
-        <div class="card-group py-3">
-          <% pokemonData.forEach(pokemon => { %>
-            <div class="card card-myPoke">
-              <h5 class="card-title text-center main-card-header">
-                <%= pokemon.name %> #<%= pokemon.id %>
-              </h5>
-              <img src="<%= pokemon.sprites.front_default %>" class="card-img-top" alt="...">
-              <div class="card-body text-center">
-                <a class="btn btn-lg btn-danger rounded-pill" href="./pokeDex.html">Check Stats!</a>
-              </div>
-            </div>
-          <% }); %>
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Profielpagina van de gebruiker waar je informatie kunt bijwerken en een hoofd-Pokémon kunt kiezen."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, profiel, bijwerken, hoofd-Pokémon, AP Hogeschool, project"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mijn Profiel - Mew.Tech</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        background-image: url("../assets/images/grassland.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Press Start 2P", cursive;
+        padding: 1rem;
+        min-height: 100vh;
+      }
+      .pixel-border {
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+      }
+      .pixel-button {
+        background-color: #444;
+        color: #fff;
+        border: 2px solid #222;
+        text-shadow: 1px 1px 0px #000;
+      }
+      .pixel-button:hover {
+        background-color: #555;
+      }
+      .pixel-button-pokemon {
+        background-color: #ffcc00; /* Pokémon yellow */
+        color: #fff;
+        border: 2px solid #cc0000; /* Pokémon red */
+        text-shadow: 1px 1px 0px #000;
+        text-align: center;
+      }
+      .pixel-button-pokemon:hover {
+        background-color: #ffdd00;
+      }
+      .pokemon-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        animation: appear 1s forwards;
+      }
+      .pokemon-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 10px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .profile-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 20px;
+        text-align: center;
+        margin: 0 auto;
+        max-width: 600px;
+      }
+      .tutorial-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 2px solid #444;
+        box-shadow: 2px 2px 0px #aaa;
+        padding: 15px;
+        margin-top: 20px;
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      header {
+        background: linear-gradient(to right, #ff0000, #ffcc00);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="pixel-border p-4 mb-4">
+      <nav
+        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
+      >
+        <div class="flex justify-between items-center w-full sm:w-auto">
+          <a class="text-2xl font-bold flex items-center" href="/main">
+            <img
+              src="./assets/images/logo.webp"
+              alt="logo"
+              class="h-10 w-10 mr-2"
+            />
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </div>
-        <!-- Pagination Links -->
-        <nav aria-label="Page navigation">
-          <ul class="pagination justify-content-center">
-            <% if (page > 1) { %>
-              <li class="page-item">
-                <a class="page-link" href="?page=<%= page - 1 %>" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-            <% } %>
-            <% for (let i = 1; i <= totalPages; i++) { %>
-              <li class="page-item <%= i === page ? 'active' : '' %>">
-                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
-              </li>
-            <% } %>
-            <% if (page < totalPages) { %>
-              <li class="page-item">
-                <a class="page-link" href="?page=<%= page + 1 %>" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            <% } %>
+        <div
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
+          id="navbar-default"
+        >
+          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/main">Home</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/battler">Duel</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/catcher">Vangen</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+            </li>
           </ul>
-        </nav>
-      </section>
-  
-    </div>
-  </div>
-</main>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-4">
+      <h2 class="text-center text-3xl mb-4">Mijn Profiel</h2>
+      <div class="profile-box">
+        <h3 class="text-2xl mb-4">Gebruikersinformatie</h3>
+        <form action="/profile/update" method="POST" class="mb-4">
+          <div class="mb-4">
+            <label
+              for="username"
+              class="block text-lg font-medium text-gray-700"
+              >Gebruikersnaam:</label
+            >
+            <input
+              type="text"
+              class="form-input mt-1 block w-full"
+              id="username"
+              name="username"
+              value="JohnDoe"
+            />
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-lg font-medium text-gray-700"
+              >E-mail:</label
+            >
+            <input
+              type="email"
+              class="form-input mt-1 block w-full"
+              id="email"
+              name="email"
+              value="john@example.com"
+            />
+          </div>
+          <button type="submit" class="pixel-button-pokemon py-2 px-4 rounded">
+            Informatie opslaan
+          </button>
+        </form>
+
+        <h3 class="text-2xl mb-4">Kies je hoofd-Pokémon</h3>
+        <form action="/profile/set-main-pokemon" method="POST">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <% const caughtPokemons = [ { id: 1, name: "Pikachu", sprite:
+            "/assets/images/pikachu.webp" }, { id: 2, name: "Charmander",
+            sprite: "/assets/images/charmander.webp" }, { id: 3, name:
+            "Squirtle", sprite: "/assets/images/squirtle.webp" }, { id: 4, name:
+            "Bulbasaur", sprite: "/assets/images/bulbasaur.webp" } ]; %> <%
+            caughtPokemons.forEach(pokemon => { %>
+            <div class="pokemon-box">
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="mainPokemon"
+                  value="<%= pokemon.id %>"
+                  class="hidden"
+                />
+                <img
+                  src="<%= pokemon.sprite %>"
+                  alt="<%= pokemon.name %>"
+                  class="pokemon-img mx-auto mb-2"
+                />
+                <p class="text-xl"><%= pokemon.name %></p>
+              </label>
+            </div>
+            <% }); %>
+          </div>
+          <button
+            type="submit"
+            class="pixel-button-pokemon py-2 px-4 rounded mt-4"
+          >
+            Hoofd-Pokémon instellen
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+  </body>
+</html>
