@@ -224,11 +224,11 @@ async function getPokemonById(pokemonId: string): Promise<PokemonData | null> {
     }
 }
 
-export async function updateLanguage(pokemonId: string, updatedPokemon: PokemonData) {
+async function updatePokemonName(pokemonId: string, newName: string) {
     try {
-        await collectionPokemon.updateOne({ id: pokemonId }, { $set: updatedPokemon });
+        await collectionPokemon.updateOne({ id: pokemonId }, { $set: { name: newName } });
     } catch (error) {
-        throw new Error(`An error occurred while updating language: ${error}`);
+        throw new Error(`An error occurred while updating Pokémon name: ${error}`);
     }
 }
 
@@ -247,5 +247,5 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+export { connect, getAllPokemon, updatePokemonName, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
 
