@@ -1,156 +1,133 @@
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <title>Mew.Tech - Spelkeuze</title>
-    <style>
-      /* Adding pixel art effect by enlarging pixels */
-      .pixelated {
-        image-rendering: pixelated; /* For most non-IE browsers */
-        image-rendering: -moz-crisp-edges; /* For Firefox */
-        image-rendering: crisp-edges; /* For Chrome */
-      }
-    </style>
-  </head>
-  <body
-    class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-[Press_Start_2P] h-screen flex flex-col"
-  >
-    <header class="text-center p-5 bg-opacity-70 bg-gray-800">
-      <h1 class="text-3xl text-yellow-400">Welkom bij het WPL van Mew.Tech</h1>
-      <div class="flex justify-center gap-4 mt-4">
-        <a
-          href="/register"
-          class="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition duration-300"
-        >
-          Registreren
-        </a>
-        <a
-          href="/login"
-          class="bg-green-600 hover:bg-green-800 text-white py-2 px-4 rounded transition duration-300"
-        >
-          Inloggen
-        </a>
-      </div>
-    </header>
+<%- include('partials/landingheader') %>
+<body
+  class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-[Press_Start_2P] h-screen flex flex-col"
+>
+  <header class="text-center p-5 bg-opacity-70 bg-gray-800">
+    <h1 class="text-3xl text-yellow-400">Welkom bij het WPL van Mew.Tech</h1>
+    <div class="flex justify-center gap-4 mt-4">
+      <a
+        href="/register"
+        class="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition duration-300"
+      >
+        Registreren
+      </a>
+      <a
+        href="/login"
+        class="bg-green-600 hover:bg-green-800 text-white py-2 px-4 rounded transition duration-300"
+      >
+        Inloggen
+      </a>
+    </div>
+  </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center">
-      <h2 class="text-xl mb-3 text-yellow-300">Kies uit de volgende opties:</h2>
-      <div class="w-full max-w-screen-lg space-y-4">
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
-        >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/fifa-logo.png"
-              alt="FIFA"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">FIFA</span>
-          </div>
-          <a
-            href="/access-denied"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
+  <main class="flex-grow flex flex-col items-center justify-center">
+    <h2 class="text-xl mb-3 text-yellow-300">Kies uit de volgende opties:</h2>
+    <div class="w-full max-w-screen-lg space-y-4">
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/fifa-logo.png"
+            alt="FIFA"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">FIFA</span>
         </div>
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+        <a
+          href="/access-denied"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
         >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/fortnite-logo.png"
-              alt="Fortnite"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">Fortnite</span>
-          </div>
-          <a
-            href="/access-denied"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
-        </div>
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
-        >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/legoMasters-logo.png"
-              alt="Lego Masters"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">Lego Masters</span>
-          </div>
-          <a
-            href="/access-denied"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
-        </div>
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
-        >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/lotr-logo.png"
-              alt="LOTR"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">Lord of the Rings</span>
-          </div>
-          <a
-            href="/access-denied"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
-        </div>
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
-        >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/mtg-logo.png"
-              alt="MTG"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">Magic: The Gathering</span>
-          </div>
-          <a
-            href="/access-denied"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
-        </div>
-        <div
-          class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
-        >
-          <div class="flex items-center">
-            <img
-              src="./assets/images/logo-wpl/pokemon-logo.png"
-              alt="Pokémon"
-              class="h-16 pixelated"
-            />
-            <span class="ml-4">Pokémon</span>
-          </div>
-          <a
-            href="/main"
-            class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
-            >Start</a
-          >
-        </div>
       </div>
-    </main>
-    <footer class="p-4 bg-gray-800 bg-opacity-70 text-center">
-      <p class="text-sm text-white">Mew.Tech &copy; 2024</p>
-    </footer>
-  </body>
-</html>
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/fortnite-logo.png"
+            alt="Fortnite"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">Fortnite</span>
+        </div>
+        <a
+          href="/access-denied"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
+        >
+      </div>
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/legoMasters-logo.png"
+            alt="Lego Masters"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">Lego Masters</span>
+        </div>
+        <a
+          href="/access-denied"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
+        >
+      </div>
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/lotr-logo.png"
+            alt="LOTR"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">Lord of the Rings</span>
+        </div>
+        <a
+          href="/access-denied"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
+        >
+      </div>
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/mtg-logo.png"
+            alt="MTG"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">Magic: The Gathering</span>
+        </div>
+        <a
+          href="/access-denied"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
+        >
+      </div>
+      <div
+        class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
+      >
+        <div class="flex items-center">
+          <img
+            src="./assets/images/logo-wpl/pokemon-logo.png"
+            alt="Pokémon"
+            class="h-16 pixelated"
+          />
+          <span class="ml-4">Pokémon</span>
+        </div>
+        <a
+          href="/main"
+          class="bg-red-600 hover:bg-red-800 text-white py-2 px-4 rounded transition duration-300"
+          >Start</a
+        >
+      </div>
+    </div>
+  </main>
+  <footer class="p-4 bg-gray-800 bg-opacity-70 text-center">
+    <p class="text-sm text-white">Mew.Tech &copy; 2024</p>
+  </footer>
+</body>

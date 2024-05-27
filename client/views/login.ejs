@@ -1,40 +1,36 @@
-<%- include('partials/landingPageHeader') %>
-  <body class="landing-page">
-    <div class="main">
-      <h3 class="text-center font-bold text-lg mb-4">Login</h3>
-      <form action="/login" method="post">
-        <div class="mb-4">
-          <label for="email" class="form-label block mb-2">E-mail</label>
-          <input
-            type="email"
-            class="form-control block w-full px-3 py-2"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label for="password" class="form-label block mb-2">Wachtwoord</label>
-          <input
-            type="password"
-            class="form-control block w-full px-3 py-2"
-            id="password"
-            name="password"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full py-2 pixel-button rounded text-sm"
-        >
-          Login
-        </button>
-        <p class="text-center mt-4">
-          <a href="/register" class="text-blue-500 hover:underline"
-            >Maak Account</a
-          >.
-        </p>
-      </form>
-    </div>
-  </body>
-</html>
+<%- include('partials/loginheader') %>
+<body class="landing-page">
+  <div class="main">
+    <h3 class="text-center font-bold text-lg mb-4">Login</h3>
+    <form action="/login" method="post">
+      <div class="mb-4">
+        <label for="email" class="form-label block mb-2">E-mail</label>
+        <input
+          type="email"
+          class="form-control block w-full px-3 py-2"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label block mb-2">Wachtwoord</label>
+        <input
+          type="password"
+          class="form-control block w-full px-3 py-2"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="w-full py-2 pixel-button rounded text-sm">
+        Login
+      </button>
+      <p class="text-center mt-4">
+        <a href="/register" class="text-blue-500 hover:underline"
+          >Maak Account</a
+        >.
+      </p>
+    </form>
+  </div>
+</body>

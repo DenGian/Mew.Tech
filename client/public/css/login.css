@@ -84,3 +84,9 @@ body {
 .back-link:hover {
   background-color: #6ba4ff; /* Lighter blue on hover */
 }
+
+.pixelated {
+  image-rendering: pixelated; /* For most non-IE browsers */
+  image-rendering: -moz-crisp-edges; /* For Firefox */
+  image-rendering: crisp-edges; /* For Chrome */
+}

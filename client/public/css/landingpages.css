@@ -1,0 +1,5 @@
+.pixelated {
+  image-rendering: pixelated; /* For most non-IE browsers */
+  image-rendering: -moz-crisp-edges; /* For Firefox */
+  image-rendering: crisp-edges; /* For Chrome */
+}
