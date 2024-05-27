@@ -1,4 +1,4 @@
-import { Collection, MongoClient } from "mongodb";
+import { Collection, MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { PokemonData } from "../interfaces/pokemonInterface";
@@ -106,6 +106,7 @@ async function registerUser(email: string, password: string, username: string, s
 }
 
 ///////////////////////////////
+
 async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
     const speciesResponse = await axios.get(speciesUrl);
     const speciesData = speciesResponse.data;
@@ -179,6 +180,21 @@ async function getAllPokemon(skip: number = 0, limit: number = Infinity): Promis
     }
 }
 
+async function getCaughtPokemon(userId: any) {
+    try {
+        const user = await collectionUsers.findOne({ _id: new ObjectId(userId) });
+        if (!user) {
+            throw new Error("User not found");
+        }
+        const caughtPokemonIds = user.caughtPokemon;
+        const caughtPokemonData = await collectionPokemon.find({ id: { $in: caughtPokemonIds } }).toArray();
+        return caughtPokemonData;
+    } catch (error) {
+        console.error("Error fetching caught Pokémon:", error);
+        throw new Error("Failed to fetch caught Pokémon.");
+    }
+}
+
 async function filteredPokemon(searchTerm: string): Promise<PokemonData[]> {
     const lowerCaseSearchTerm = searchTerm.toLowerCase().trim();
     try {
@@ -223,4 +239,4 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
