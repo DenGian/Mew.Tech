@@ -166,7 +166,8 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<{ id: string; na
           stats: pokemon.stats.map((stat: any) => ({ name: stat.stat.name, base_stat: stat.base_stat })),
           abilities: pokemon.abilities.map((ability: any) => ({ ability: { name: ability.ability.name } })),
           url: speciesUrl,
-          evolution_chain: evolutionChain
+          evolution_chain: evolutionChain,
+          types: pokemon.types.map((type: any) => ({ type: { name: type.type.name } }))
         };
   
         await collectionPokemon.insertOne(pokemonData);
