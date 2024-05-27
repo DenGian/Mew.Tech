@@ -1,79 +1,10 @@
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        background-color: #f0f0f0;
-        background-image: url("../assets/images/grassland.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: "Press Start 2P", cursive;
-        height: 100vh; /* Full height of viewport */
-        display: flex;
-        align-items: center; /* Center vertically */
-        justify-content: center; /* Center horizontally */
-        cursor: url("../assets/images/pokeball_cursor.png"), auto; /* Custom cursor */
-      }
-      .main {
-        animation: fadeIn 1s ease-out forwards;
-        background: rgba(
-          255,
-          255,
-          255,
-          0.8
-        ); /* Slightly transparent background */
-        border-radius: 10px;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-      .pixel-button {
-        background-color: #ffcc00; /* Pokémon yellow */
-        color: #fff;
-        border: 2px solid #cc0000; /* Pokémon red */
-        text-shadow: 1px 1px 0px #000;
-        transition: background-color 0.3s ease;
-      }
-      .pixel-button:hover {
-        background-color: #ffdd00;
-      }
-      .form-control {
-        background-color: #ffcc00; /* Pokémon yellow */
-        border: 2px solid #cc0000; /* Pokémon red */
-        color: #000;
-      }
-      .form-label {
-        color: #000;
-      }
-    </style>
-    <title>Mew.Tech - Login</title>
-  </head>
+<%- include('partials/landingPageHeader') %>
   <body class="landing-page">
     <div class="main">
       <h3 class="text-center font-bold text-lg mb-4">Login</h3>
       <form action="/login" method="post">
         <div class="mb-4">
-          <label for="email" class="form-label block mb-2">Email</label>
+          <label for="email" class="form-label block mb-2">E-mail</label>
           <input
             type="email"
             class="form-control block w-full px-3 py-2"
@@ -83,7 +14,7 @@
           />
         </div>
         <div class="mb-4">
-          <label for="password" class="form-label block mb-2">Password</label>
+          <label for="password" class="form-label block mb-2">Wachtwoord</label>
           <input
             type="password"
             class="form-control block w-full px-3 py-2"
@@ -92,7 +23,10 @@
             required
           />
         </div>
-        <button type="submit" class="w-full py-2 pixel-button rounded text-sm">
+        <button
+          type="submit"
+          class="w-full py-2 pixel-button rounded text-sm"
+        >
           Login
         </button>
         <p class="text-center mt-4">

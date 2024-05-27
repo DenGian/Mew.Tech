@@ -1,0 +1,86 @@
+body {
+  background-color: #f0f0f0;
+  background-image: url("../assets/images/grassland.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Press Start 2P", cursive;
+  height: 100vh; /* Full height of viewport */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  cursor: url("../assets/images/pokeball_cursor.png"), auto; /* Custom cursor */
+}
+.main {
+  animation: fadeIn 1s ease-out forwards;
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+.main-register {
+  animation: fadeIn 1s ease-out forwards;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly more opaque for better readability */
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px; /* Better control over form width */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.pixel-button {
+  background-color: #ffcc00; /* Pokémon yellow */
+  color: #fff;
+  border: 2px solid #cc0000; /* Pokémon red */
+  text-shadow: 1px 1px 0px #000;
+  transition: background-color 0.3s ease;
+}
+.pixel-button-register {
+  background-color: #ffcc00; /* Pokémon yellow */
+  color: #fff;
+  border: 3px solid #cc0000; /* Pokémon red */
+  text-shadow: 1px 1px 0px #000;
+  font-family: "Press Start 2P";
+  padding: 8px 0; /* Better padding */
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Ensure cursor changes on hover */
+}
+.pixel-button:hover {
+  background-color: #ffdd00;
+}
+.form-control {
+  background-color: #ffcc00; /* Pokémon yellow */
+  border: 2px solid #cc0000; /* Pokémon red */
+  color: #000;
+}
+.form-label {
+  color: #000;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.back-link {
+  background-color: #4d96ff; /* Blue for contrast */
+  border: 2px solid #0041c2; /* Darker blue border */
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+.back-link:hover {
+  background-color: #6ba4ff; /* Lighter blue on hover */
+}
