@@ -107,6 +107,35 @@ nav a:hover {
 
 /* MAIN */
 
+.links {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  text-align: center;
+}
+.links ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.links li {
+  margin: 10px 0;
+}
+.links a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 36px;
+  font-weight: normal;
+  transition: font-weight 0.3s, transform 0.3s;
+}
+.links a:hover {
+  font-weight: bold;
+  transform: scale(1.5);
+}
 /*arrow access-denied*/
 .back-arrow {
   position: fixed;
@@ -175,7 +204,7 @@ ul.list-inline i.bi {
 }
 
 .footer {
-  background: linear-gradient(to bottom, rgba(248, 246, 240) 65%, white 35%);
+  background: white;
   padding: 10px 0;
   overflow: visible;
 }
@@ -322,9 +351,12 @@ footer h3 {
 }
 
 .battleIMG {
-  background-image: url("../assets/images/battleplace.png");
+  background-image: url("../assets/images/pokeworld.webp");
   background-size: cover;
   background-position: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
 }
 
 @media (min-width: 992px) {

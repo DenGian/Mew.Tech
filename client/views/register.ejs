@@ -7,14 +7,14 @@
           <div class="card my-5">
             <div class="card-body">
               <section>
-                <h2>Welkom bij onze Registratie pagina</h2>
+                <h2 class="card-title text-center">Registreer hier</h2>
 
                 <% if (message) { %>
                 <p class="<%= message.type %>"><%= message.message %></p>
                 <% } %>
                 <form action="/register" method="POST">
                   <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">E-mail</label>
                     <input
                       type="email"
                       class="form-control"

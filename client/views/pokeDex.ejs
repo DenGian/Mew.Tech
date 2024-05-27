@@ -2,26 +2,7 @@
 <main class="catchIMG">
   <div class="container">
     <div class="row">
-      <section class="col-md-9 mb-3 mb-md-0">
-        <nav class="navbar bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand">Zoek Pokémon</a>
-            <form class="d-flex" role="search" action="/search" method="GET">
-              <input
-                class="form-control me-2"
-                type="search"
-                name="searchPokemon"
-                placeholder="Search"
-                aria-label="Search"
-                value="<%= searchPokemon %>"
-              />
-              <button class="btn btn-outline-danger" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-        </nav>
-        <h1 class="text-center">PokeDex</h1>
+      <section class="col-md-10 mb-3 mb-md-0">
         <div class="container mt-5">
           <!-- Display the focused Pokémon with its stats -->
           <% if (pokemonData) { %>
@@ -30,7 +11,9 @@
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>
-                    #<%= pokemonData.id %> <%= pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1) %>
+                    #<%= pokemonData.id %> <%=
+                    pokemonData.name.charAt(0).toUpperCase() +
+                    pokemonData.name.slice(1) %>
                   </h5>
                 </div>
                 <div class="pokedex-body">
@@ -61,14 +44,17 @@
           <% } %>
 
           <h2>Evolutionary Chain</h2>
-          <% if (evolutionChainWithSprites && evolutionChainWithSprites.length > 0) { %>
+          <% if (evolutionChainWithSprites && evolutionChainWithSprites.length >
+          0) { %>
           <div class="row justify-content-center">
             <% evolutionChainWithSprites.forEach(chainEntry => { %>
             <div class="col-md-4">
               <div class="card pokedex-card">
                 <div class="pokedex-header text-center">
                   <h5>
-                    #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
+                    #<%= chainEntry.id %> <%=
+                    chainEntry.name.charAt(0).toUpperCase() +
+                    chainEntry.name.slice(1) %>
                   </h5>
                 </div>
                 <div class="pokedex-body">
@@ -95,12 +81,17 @@
                   <h5>Venusaur #002</h5>
                 </div>
                 <div class="pokedex-body">
-                  <img src="<%= chainEntry.sprite %>" class="animation" class="card-img-top" alt="<%= chainEntry.name %>" />
+                  <img
+                    src="<%= chainEntry.sprite %>"
+                    class="animation"
+                    class="card-img-top"
+                    alt="<%= chainEntry.name %>"
+                  />
                   <!-- <img
                     src=""
                     alt=""
                   /> -->
-                  
+
                   <img
                     src="<%= chainEntry.sprite %>"
                     alt="<%= chainEntry.name %> image"
@@ -119,4 +110,3 @@
     </div>
   </div>
 </main>
-<%- include('partials/footer') %>
