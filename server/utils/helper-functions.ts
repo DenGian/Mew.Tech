@@ -34,8 +34,8 @@ async function getEvolutionChain(pokemonId: string): Promise<{ name: string, id:
     if (!pokemon || !pokemon.evolution_chain) return [];
 
     const evolutionChain: { name: string, id: string, sprite: string }[] = [];
-    for (const evoId of pokemon.evolution_chain) {
-      const evoPokemon = await collectionPokemon.findOne({ id: evoId });
+    for (const evo of pokemon.evolution_chain) {
+      const evoPokemon = await collectionPokemon.findOne({ id: evo.id });
       if (evoPokemon) {
         evolutionChain.push({
           name: evoPokemon.name,

@@ -34,35 +34,54 @@
         </div>
       </div>
     </div>
+    <!-- Add input fields for wins and losses -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <div class="card pokedex-card">
+          <div class="card-body text-center">
+            <h5>Wins and Losses</h5>
+            <form action="/update-wins-losses/<%= pokemon.id %>" method="POST">
+              <div class="form-group">
+                <label for="wins">Wins:</label>
+                <input type="number" class="form-control" id="wins" name="wins" value="<%= pokemon.wins || 0 %>" />
+              </div>
+              <div class="form-group">
+                <label for="losses">Losses:</label>
+                <input type="number" class="form-control" id="losses" name="losses" value="<%= pokemon.losses || 0 %>" />
+              </div>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <% } else { %>
     <p>No Pokémon data available.</p>
     <% } %>
 
-    <!-- Display Evolutionary Chain -->
-    <h2>Evolutionary Chain</h2>
-    <% if (pokemon && pokemon.evolution_chain) { %>
+    <!-- Update the detail-pokemon.ejs template -->
+<h2>Evolutionary Chain</h2>
+<% if (pokemon && pokemon.evolution_chain) { %>
     <div class="row justify-content-center">
-      <% pokemon.evolution_chain.forEach(chainEntry => { %>
-      <div class="col-md-4">
-        <div class="card pokedex-card">
-          <div class="pokedex-header text-center">
-            <h5>
-              #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
-            </h5>
-          </div>
-          <div class="pokedex-body">
-            <img
-              src="<%= chainEntry.sprite %>"
-              alt="<%= chainEntry.name %> image"
-            />
-          </div>
-        </div>
-      </div>
-      <% }); %>
+        <% pokemon.evolution_chain.forEach(chainEntry => { %>
+            <div class="col-md-4">
+                <div class="card pokedex-card">
+                    <div class="pokedex-header text-center">
+                        <h5>
+                            #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
+                        </h5>
+                    </div>
+                    <div class="pokedex-body">
+                        <img src="<%= chainEntry.sprite %>" alt="<%= chainEntry.name %> image" />
+                    </div>
+                </div>
+            </div>
+        <% }); %>
     </div>
-    <% } else { %>
+<% } else { %>
     <p>No evolution data available.</p>
-    <% } %>
+<% } %>
+
   </div>
 </main>
 <%- include('partials/footer') %>
