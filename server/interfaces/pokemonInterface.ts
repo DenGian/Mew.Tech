@@ -1,13 +1,14 @@
 import { ObjectId } from "mongodb";
 
 export interface PokemonData {
+  _id?: ObjectId;
   id: string;
   name: string;
   sprites: { front_default: string };
   stats: { name: string, base_stat: number }[];
   abilities: { ability: { name: string } }[];
   url: string | null;
-  evolution_chain: string[]; // To store the evolution chain
+  evolution_chain: { id: string; name: string; sprite: string }[];
 }
 
 export interface PokemonResponse {
