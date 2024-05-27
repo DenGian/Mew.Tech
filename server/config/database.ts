@@ -107,28 +107,36 @@ async function registerUser(email: string, password: string, username: string, s
 
 ///////////////////////////////
 
-async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
-    const speciesResponse = await axios.get(speciesUrl);
-    const speciesData = speciesResponse.data;
-    const evolutionChainUrl = speciesData.evolution_chain.url;
-  
-    const evolutionResponse = await axios.get(evolutionChainUrl);
-    const evolutionData = evolutionResponse.data;
-  
-    const chain: any = evolutionData.chain;
-    const evolutionIds: string[] = [];
-  
-    const traverseChain = (chainLink: any) => {
-      const id = chainLink.species.url.split('/').slice(-2, -1)[0];
-      evolutionIds.push(id);
-      if (chainLink.evolves_to.length > 0) {
-        chainLink.evolves_to.forEach((evolution: any) => traverseChain(evolution));
-      }
-    };
-  
-    traverseChain(chain);
-    return evolutionIds;
-  }
+async function fetchEvolutionChain(speciesUrl: string): Promise<{ id: string; name: string; sprite: string }[]> {
+    try {
+        const speciesResponse = await axios.get(speciesUrl);
+        const speciesData = speciesResponse.data;
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+
+        const evolutionResponse = await axios.get(evolutionChainUrl);
+        const evolutionData = evolutionResponse.data;
+
+        const chain: any = evolutionData.chain;
+        const evolutionChain: { id: string; name: string; sprite: string }[] = [];
+
+        const traverseChain = async (chainLink: any) => {
+            const id = chainLink.species.url.split('/').slice(-2, -1)[0];
+            const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            const pokemonData = pokemonResponse.data;
+            evolutionChain.push({ id, name: pokemonData.name, sprite: pokemonData.sprites.front_default });
+
+            if (chainLink.evolves_to.length > 0) {
+                await Promise.all(chainLink.evolves_to.map(async (evolution: any) => await traverseChain(evolution)));
+            }
+        };
+
+        await traverseChain(chain);
+        return evolutionChain;
+    } catch (error) {
+        console.error('Error fetching evolution chain:', error);
+        throw new Error('Failed to fetch evolution chain.');
+    }
+}
   
   async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
     const MAX_POKEMON_ID = 251;
@@ -145,7 +153,7 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
         const pokemon = response.data;
   
         const speciesUrl = pokemon.species ? pokemon.species.url : null;
-        let evolutionChain: string[] = [];
+        let evolutionChain: { id: string; name: string; sprite: string; }[] = [];
   
         if (speciesUrl) {
           evolutionChain = await fetchEvolutionChain(speciesUrl);
@@ -240,3 +248,4 @@ async function connect() {
 }
 
 export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+
