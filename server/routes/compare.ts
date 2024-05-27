@@ -9,21 +9,26 @@ router.get("/", async (req, res) => {
         const searchPokemon1: string | undefined = req.query.searchPokemon1 as string | undefined;
         const searchPokemon2: string | undefined = req.query.searchPokemon2 as string | undefined;
 
-        const randomPokemon = await displayRandomPokemon();
-        const randomPokemon2 = await displayRandomPokemon();
+        const randomPokemonResult = searchPokemon1 ? await filteredPokemon(searchPokemon1) : await displayRandomPokemon();
+        const randomPokemon2Result = searchPokemon2 ? await filteredPokemon(searchPokemon2) : await displayRandomPokemon();
 
-        const filtered1 = searchPokemon1 ? await filteredPokemon(searchPokemon1) : undefined;
-        const filtered2 = searchPokemon2 ? await filteredPokemon(searchPokemon2) : undefined;
+        const randomPokemon = Array.isArray(randomPokemonResult) ? randomPokemonResult[0] : randomPokemonResult;
+        const randomPokemon2 = Array.isArray(randomPokemon2Result) ? randomPokemon2Result[0] : randomPokemon2Result;
+
+        const stats1 = randomPokemon ? randomPokemon.stats.map(stat => stat.base_stat) : [];
+        const stats2 = randomPokemon2 ? randomPokemon2.stats.map(stat => stat.base_stat) : [];
 
         res.render("pokeCompare", 
-        { randomPokemon, 
+        { 
+          randomPokemon, 
           randomPokemon2, 
-          filtered1, 
-          filtered2, 
           searchPokemon1, 
-          searchPokemon2 });
+          searchPokemon2, 
+          stats1, 
+          stats2 
+        });
     } catch (error) {
-        console.error("Error fetching random Pokémon:", error);
+        console.error("Error fetching Pokémon:", error);
         res.status(500).send("Failed to load page due to server error.");
     }
 });
