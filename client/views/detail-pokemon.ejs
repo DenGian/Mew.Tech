@@ -7,29 +7,38 @@
       <div class="col-md-6">
         <div class="card pokedex-card">
           <div class="pokedex-header text-center">
-            <h5>
-              #<%= pokemon.id %> <%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %>
-            </h5>
-          </div>
-          <div class="pokedex-body">
-            <img
-              src="<%= pokemon.sprites.front_default %>"
-              alt="<%= pokemon.name %> image"
-              class="card-img-top"
-            />
-            <div class="card-body text-center">
-              <h5>Stats</h5>
-              <table class="table">
-                <tbody>
-                  <% pokemon.stats.forEach(stat => { %>
-                  <tr>
-                    <th><%= stat.name %></th>
-                    <td><%= stat.base_stat %></td>
-                  </tr>
-                  <% }); %>
-                </tbody>
-              </table>
-            </div>
+            <!-- Add input field for Pokémon's name -->
+            <form action="/pokeDex/<%= pokemon.id %>" method="POST">
+              <div class="form-group">
+                <label for="newName">Name:</label>
+                <input type="text" class="form-control" id="newName" name="newName" value="<%= pokemon.name %>" />
+              </div>
+              <!-- Display Pokémon's ID and capitalize the first letter of the name -->
+              <h5>
+                #<%= pokemon.id %> <%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %>
+              </h5>
+              <div class="pokedex-body">
+                <img
+                  src="<%= pokemon.sprites.front_default %>"
+                  alt="<%= pokemon.name %> image"
+                  class="card-img-top"
+                />
+                <div class="card-body text-center">
+                  <h5>Stats</h5>
+                  <table class="table">
+                    <tbody>
+                      <% pokemon.stats.forEach(stat => { %>
+                      <tr>
+                        <th><%= stat.name %></th>
+                        <td><%= stat.base_stat %></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Name</button>
+            </form>
           </div>
         </div>
       </div>
@@ -49,7 +58,7 @@
                 <label for="losses">Losses:</label>
                 <input type="number" class="form-control" id="losses" name="losses" value="<%= pokemon.losses || 0 %>" />
               </div>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">Save Wins/Losses</button>
             </form>
           </div>
         </div>
@@ -72,7 +81,9 @@
                         </h5>
                     </div>
                     <div class="pokedex-body">
-                        <img src="<%= chainEntry.sprite %>" alt="<%= chainEntry.name %> image" />
+                        <a href="/pokeDex/<%= chainEntry.id %>">
+                          <img src="<%= chainEntry.sprite %>" alt="<%= chainEntry.name %> image" />
+                        </a>
                     </div>
                 </div>
             </div>
