@@ -40,7 +40,7 @@
         <div class="card pokedex-card">
           <div class="card-body text-center">
             <h5>Wins and Losses</h5>
-            <form action="/update-wins-losses/<%= pokemon.id %>" method="POST">
+            <form action="/pokeDex/<%= pokemon.id %>" method="POST">
               <div class="form-group">
                 <label for="wins">Wins:</label>
                 <input type="number" class="form-control" id="wins" name="wins" value="<%= pokemon.wins || 0 %>" />
