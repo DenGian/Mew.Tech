@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { getCaughtPokemon, getPokemonById } from "../config/database";
+import { getCaughtPokemon, getPokemonById, collectionPokemon } from "../config/database";
 import { calculateTotalPages } from "../utils/helper-functions";
 
 const router: Router = express.Router();
@@ -42,6 +42,34 @@ router.get('/:pokemonId', async (req, res) => {
     } catch (error) {
         console.error('Error fetching Pokémon stats:', error);
         res.status(500).send('Failed to load Pokémon stats due to server error.');
+    }
+});
+
+router.post('/:pokemonId', async (req, res) => {
+    try {
+        // Extract the Pokémon ID from the URL parameters
+        const { pokemonId } = req.params;
+
+        // Retrieve the wins and losses values from the request body
+        const { wins, losses } = req.body;
+
+        // Validate wins and losses values
+        if (isNaN(wins) || isNaN(losses)) {
+            throw new Error('Wins and losses must be valid numbers.');
+        }
+
+        // Update the corresponding Pokémon document in the database
+        await collectionPokemon.updateOne(
+            { id: pokemonId },
+            { $set: { wins: parseInt(wins), losses: parseInt(losses) } }
+        );
+
+        // Redirect the user back to the same page
+        res.redirect(`/${pokemonId}`);
+    } catch (error) {
+        // Handle errors and send an error response to the client
+        console.error('Error updating wins and losses:', error);
+        res.status(500).send('Failed to update wins and losses');
     }
 });
 
