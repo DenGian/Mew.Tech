@@ -19,13 +19,34 @@
         image-rendering: -moz-crisp-edges; /* For Firefox */
         image-rendering: crisp-edges; /* For Chrome */
       }
+
+      .game-text {
+        font-family: "Press Start 2P", cursive;
+        color: #ffcc00;
+        text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, -2px 2px 0 #000,
+          2px -2px 0 #000;
+      }
     </style>
   </head>
   <body
     class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-[Press_Start_2P] h-screen flex flex-col"
   >
     <header class="text-center p-5 bg-opacity-70 bg-gray-800 relative">
-      <h1 class="text-3xl text-yellow-400">Welkom bij het WPL van Mew.Tech</h1>
+      <div class="absolute top-0 left-0 p-5 hidden lg:block">
+        <% if (user) { %>
+        <span class="game-text">Ingelogd als: <%= user.username %></span>
+        <% } else { %>
+        <span class="game-text">Ingelogd als: Gast</span>
+        <% } %>
+      </div>
+      <h1 class="game-text text-3xl">Welkom bij het WPL van Mew.Tech</h1>
+      <div class="lg:hidden mt-4">
+        <% if (user) { %>
+        <span class="game-text block">Ingelogd als: <%= user.username %></span>
+        <% } else { %>
+        <span class="game-text block">Ingelogd als: Gast</span>
+        <% } %>
+      </div>
       <div class="flex justify-center gap-4 mt-4">
         <a
           href="/register"
@@ -46,17 +67,10 @@
           Uitloggen
         </a>
       </div>
-      <div class="absolute top-0 right-0 p-5">
-        <% if (user) { %>
-          <span class="text-white">Ingelogd als: <%= user.username %></span>
-        <% } else { %>
-          <span class="text-white">Ingelogd als: Gast</span>
-        <% } %>
-      </div>
     </header>
 
     <main class="flex-grow flex flex-col items-center justify-center">
-      <h2 class="text-xl mb-3 text-yellow-300">Kies uit de volgende opties:</h2>
+      <h2 class="game-text text-xl mb-3">Kies uit de volgende opties:</h2>
       <div class="w-full max-w-screen-lg space-y-4">
         <div
           class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-6 rounded-lg flex justify-between items-center transition duration-300"
@@ -67,7 +81,7 @@
               alt="FIFA"
               class="h-16 pixelated"
             />
-            <span class="ml-4">FIFA</span>
+            <span class=" ml-4">FIFA</span>
           </div>
           <a
             href="/access-denied"
@@ -84,7 +98,7 @@
               alt="Fortnite"
               class="h-16 pixelated"
             />
-            <span class="ml-4">Fortnite</span>
+            <span class=" ml-4">Fortnite</span>
           </div>
           <a
             href="/access-denied"
@@ -101,7 +115,7 @@
               alt="Lego Masters"
               class="h-16 pixelated"
             />
-            <span class="ml-4">Lego Masters</span>
+            <span class=" ml-4">Lego Masters</span>
           </div>
           <a
             href="/access-denied"
@@ -135,7 +149,7 @@
               alt="MTG"
               class="h-16 pixelated"
             />
-            <span class="ml-4">Magic: The Gathering</span>
+            <span class=" ml-4">Magic: The Gathering</span>
           </div>
           <a
             href="/access-denied"

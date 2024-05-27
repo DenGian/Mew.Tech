@@ -205,7 +205,7 @@
     <main class="container mx-auto p-4">
       <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
       <div id="initial-message" class="text-center text-xl mb-4">
-        A wild <%= randomPokemon.name %> has appeared!
+        Een wilde <%= randomPokemon.name %> is verschenen!
       </div>
       <div
         id="pokemon-container"
@@ -256,83 +256,91 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-    // Hide initial message after 2 seconds and show the Pokémon container
-    setTimeout(function () {
-        document.getElementById("initial-message").style.display = "none";
-        document.getElementById("pokemon-container").style.display = "flex";
-    }, 2000);
+        // Hide initial message after 2 seconds and show the Pokémon container
+        setTimeout(function () {
+          document.getElementById("initial-message").style.display = "none";
+          document.getElementById("pokemon-container").style.display = "flex";
+        }, 2000);
 
-    let attempts = 3; // Maximum number of attempts to catch a Pokémon
-    const pokeballBtn = document.getElementById("pokeball-btn");
-    const pokemonImg = document.getElementById("pokemon-img");
-    const attemptsLeft = document.getElementById("attempts-left");
-    const catchResult = document.getElementById("catch-result");
-    const resetBtn = document.getElementById("reset-btn");
+        let attempts = 3; // Maximum number of attempts to catch a Pokémon
+        const pokeballBtn = document.getElementById("pokeball-btn");
+        const pokemonImg = document.getElementById("pokemon-img");
+        const attemptsLeft = document.getElementById("attempts-left");
+        const catchResult = document.getElementById("catch-result");
+        const resetBtn = document.getElementById("reset-btn");
 
-    pokeballBtn.addEventListener("click", async function () {
-        if (attempts > 0) {
+        pokeballBtn.addEventListener("click", async function () {
+          if (attempts > 0) {
             pokeballBtn.disabled = true;
             pokemonImg.classList.add("shake");
 
             setTimeout(async function () {
-                pokemonImg.classList.remove("shake");
+              pokemonImg.classList.remove("shake");
 
-                const catchRate = 0.1;
-                const random = Math.random();
+              const catchRate = 0.1;
+              const random = Math.random();
 
-                if (random < catchRate) {
-                    // Post to server to catch the Pokémon
-                    const response = await fetch("/catcher/catch-pokemon", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ pokemonId: "<%= randomPokemon.id %>" })
-                    });
-                    const result = await response.json();
+              if (random < catchRate) {
+                // Post to server to catch the Pokémon
+                const response = await fetch("/catcher/catch-pokemon", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    pokemonId: "<%= randomPokemon.id %>",
+                  }),
+                });
+                const result = await response.json();
 
-                    if (result.success) {
-                        catchResult.textContent = "Pokémon gevangen!";
-                        catchResult.style.color = "green";
-                    } else {
-                        catchResult.textContent = result.message;
-                        catchResult.style.color = "red";
-                    }
-                    pokeballBtn.disabled = true;
-                    resetBtn.style.display = "block";
+                if (result.success) {
+                  catchResult.textContent = "Pokémon gevangen!";
+                  catchResult.style.color = "green";
+                  // Keep the Pokémon image visible
                 } else {
-                    attempts--;
-                    if (attempts > 0) {
-                        catchResult.textContent = "Pokémon niet gevangen, probeer opnieuw.";
-                        catchResult.style.color = "red";
-                    } else {
-                        catchResult.textContent = "Pokémon is ontsnapt!";
-                        catchResult.style.color = "red";
-                        pokeballBtn.disabled = true;
-                        resetBtn.style.display = "block";
-                    }
-                    attemptsLeft.textContent = "Pogingen: " + attempts;
-                    pokeballBtn.disabled = false;
+                  catchResult.textContent = result.message;
+                  catchResult.style.color = "red";
+                  pokemonImg.style.display = "block"; // Show Pokémon image again
                 }
+                resetBtn.style.display = "block";
+              } else {
+                attempts--;
+                if (attempts > 0) {
+                  catchResult.textContent =
+                    "Pokémon niet gevangen, probeer opnieuw.";
+                  catchResult.style.color = "red";
+                  pokemonImg.style.display = "block"; // Show Pokémon image again
+                } else {
+                  catchResult.textContent = "Pokémon is ontsnapt!";
+                  catchResult.style.color = "red";
+                  resetBtn.style.display = "block";
+                }
+                attemptsLeft.textContent = "Pogingen: " + attempts;
+              }
+              pokeballBtn.disabled = false;
             }, 1000); // Shake animation duration
-        }
-    });
+          }
+        });
 
-    resetBtn.addEventListener("click", function () {
-        window.location.reload();
-    });
+        resetBtn.addEventListener("click", function () {
+          window.location.reload();
+        });
 
-    // Navbar collapse functionality
-    const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
-    const navbarDefault = document.getElementById("navbar-default");
+        // Navbar collapse functionality
+        const button = document.querySelector(
+          '[data-collapse-toggle="navbar-default"]'
+        );
+        const navbarDefault = document.getElementById("navbar-default");
 
-    button.addEventListener("click", function () {
-        navbarDefault.classList.toggle("hidden");
-    });
+        button.addEventListener("click", function () {
+          navbarDefault.classList.toggle("hidden");
+        });
 
-    // Additional reset functionality if needed
-    document.getElementById("reset-btn").addEventListener("click", function () {
-        location.href = "/catcher";
-    });
-});
+        // Additional reset functionality if needed
+        document
+          .getElementById("reset-btn")
+          .addEventListener("click", function () {
+            location.href = "/catcher";
+          });
+      });
     </script>
   </body>
 </html>
