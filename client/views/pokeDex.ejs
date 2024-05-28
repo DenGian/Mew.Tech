@@ -146,6 +146,10 @@
     .nav-pokemon-name {
       font-size: 1rem; /* Smaller font size */
     }
+    .uncaught {
+      background-color: #444;
+      color: #ff0000;
+    }
     </style>
   </head>
   <body>
@@ -247,7 +251,7 @@
   
       <div class="pokemon-grid" id="pokemon-container">
         <% pokemonData.forEach(pokemon => { %>
-        <div class="pokemon-box" data-id="<%= pokemon.id %>">
+        <div class="pokemon-box <% if (!pokemon.isCaught) { %>uncaught<% } %>" data-id="<%= pokemon.id %>">
           <h5 class="card-title text-center pokemon-name">
             #<%= pokemon.id %> <%= pokemon.name %>
           </h5>
