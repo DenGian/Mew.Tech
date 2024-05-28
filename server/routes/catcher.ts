@@ -3,23 +3,34 @@ import {
   displayRandomPokemon,
   capitalizeFirstLetter,
 } from "../utils/helper-functions";
-import { collectionUsers } from "../config/database";
+import { collectionUsers, getSelectedPokemon } from "../config/database";
 import { ObjectId } from "mongodb";
+import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-    try {
-        const randomPokemon = await displayRandomPokemon();
-        if (randomPokemon) {
-            randomPokemon.name = capitalizeFirstLetter(randomPokemon.name);
-        }
-        const maxAttempts = 3;
-        res.render("pokeCatcher", { randomPokemon, maxAttempts });
-    } catch (error) {
-        console.error("Error fetching random Pokémon:", error);
-        res.status(500).send("Failed to load page due to server error.");
+  try {
+    const user: User | undefined = req.session.user;
+
+    // Fetch selected Pokémon if user is logged in
+    let selectedPokemon = null;
+    if (user) {
+      const selectedPokemonId = user.selectedPokemon || '';
+      selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
     }
+
+    const randomPokemon = await displayRandomPokemon();
+    if (randomPokemon) {
+      randomPokemon.name = capitalizeFirstLetter(randomPokemon.name);
+    }
+    const maxAttempts = 3;
+
+    res.render("pokeCatcher", { randomPokemon, maxAttempts, selectedPokemon, user: req.session.user });
+  } catch (error) {
+    console.error("Error fetching random Pokémon:", error);
+    res.status(500).send("Failed to load page due to server error.");
+  }
 });
 
 router.post("/catch-pokemon", async (req: Request, res: Response) => {
@@ -27,9 +38,7 @@ router.post("/catch-pokemon", async (req: Request, res: Response) => {
   const { pokemonId } = req.body;
 
   if (!userId) {
-    return res
-      .status(401)
-      .json({ success: false, message: "User not authenticated." });
+    return res.status(401).json({ success: false, message: "User not authenticated." });
   }
 
   try {

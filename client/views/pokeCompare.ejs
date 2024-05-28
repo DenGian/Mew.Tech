@@ -126,6 +126,17 @@
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
       }
+      .nav-pokemon-img {
+      width: 80px; /* Increased size */
+      height: 80px; /* Increased size */
+      object-fit: contain;
+      margin-right: -5px;
+      margin-top: -50px;
+      margin-bottom: -50px;
+    }
+    .nav-pokemon-name {
+      font-size: 1rem; /* Smaller font size */
+    }
     </style>
   </head>
   <body>
@@ -141,6 +152,12 @@
               class="h-10 w-10 mr-2"
             />
           </a>
+          <% if (selectedPokemon) { %>
+            <div class="flex items-center ml-4">
+              <img src="<%= selectedPokemon.sprites.front_default %>" alt="<%= selectedPokemon.name %>" class="nav-pokemon-img mr-2" />
+              <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
+            </div>
+            <% } %>
           <button
             data-collapse-toggle="navbar-default"
             type="button"

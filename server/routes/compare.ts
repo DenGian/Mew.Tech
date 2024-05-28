@@ -3,12 +3,24 @@ import {
   displayRandomPokemon,
   capitalizeFirstLetter,
 } from "../utils/helper-functions";
-import { filteredPokemon } from "../config/database";
+import { filteredPokemon, getSelectedPokemon } from "../config/database";
+import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
+    const user: User | undefined = req.session.user;
+
+    // Fetch selected Pokémon if user is logged in
+    let selectedPokemon = null;
+    if (user) {
+      const selectedPokemonId = user.selectedPokemon || "";
+      selectedPokemon = selectedPokemonId
+        ? await getSelectedPokemon(selectedPokemonId)
+        : null;
+    }
+
     const searchPokemon1: string | undefined = req.query.searchPokemon1 as
       | string
       | undefined;
@@ -51,6 +63,8 @@ router.get("/", async (req, res) => {
       searchPokemon2,
       stats1,
       stats2,
+      selectedPokemon,
+      user: req.session.user,
     });
   } catch (error) {
     console.error("Error fetching Pokémon:", error);
