@@ -1,68 +1,340 @@
-<%- include('partials/header') %>
-<main>
-  <div class="container mt-5">
-    <!-- Display the focused Pokémon with its stats -->
-    <% if (pokemon) { %>
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-6">
-        <div class="card pokedex-card">
-          <div class="pokedex-header text-center">
-            <h5>
-              #<%= pokemon.id %> <%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %>
-            </h5>
-          </div>
-          <div class="pokedex-body">
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        background-image: url("../assets/images/grassland.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Press Start 2P", cursive;
+        padding: 1rem;
+        min-height: 100vh;
+      }
+      .pixel-border {
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+      }
+      .pixel-button {
+        background-color: #444;
+        color: #fff;
+        border: 2px solid #222;
+        text-shadow: 1px 1px 0px #000;
+      }
+      .pixel-button:hover {
+        background-color: #555;
+      }
+      .pixel-button-pokemon {
+        background-color: #ffcc00; /* Pokémon yellow */
+        color: #fff;
+        border: 2px solid #cc0000; /* Pokémon red */
+        text-shadow: 1px 1px 0px #000;
+        text-align: center;
+      }
+      .pixel-button-pokemon:hover {
+        background-color: #ffdd00;
+      }
+      .pokemon-img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+        animation: appear 1s forwards;
+      }
+      .pokemon-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 10px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .tutorial-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 2px solid #444;
+        box-shadow: 2px 2px 0px #aaa;
+        padding: 15px;
+        margin-top: 20px;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20%,
+        60% {
+          transform: translateX(-10px);
+        }
+        40%,
+        80% {
+          transform: translateX(10px);
+        }
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes capture {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+      }
+      .shake {
+        animation: shake 0.5s;
+      }
+      .capture {
+        animation: capture 0.5s forwards;
+      }
+      header {
+        background: linear-gradient(to right, #ff0000, #ffcc00);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="pixel-border p-4 mb-4">
+      <nav
+        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
+      >
+        <div class="flex justify-between items-center w-full sm:w-auto">
+          <a class="text-2xl font-bold flex items-center" href="/main">
             <img
-              src="<%= pokemon.sprites.front_default %>"
-              alt="<%= pokemon.name %> image"
-              class="card-img-top"
+              src="./assets/images/logo.webp"
+              alt="logo"
+              class="h-10 w-10 mr-2"
             />
-            <div class="card-body text-center">
-              <h5>Stats</h5>
-              <table class="table">
-                <tbody>
-                  <% pokemon.stats.forEach(stat => { %>
-                  <tr>
-                    <th><%= stat.name %></th>
-                    <td><%= stat.base_stat %></td>
-                  </tr>
-                  <% }); %>
-                </tbody>
-              </table>
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
+          id="navbar-default"
+        >
+          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/main">Home</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/battler">Duel</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/catcher">Vangen</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-4">
+      <!-- Display the focused Pokémon with its stats -->
+      <% if (pokemon) { %>
+      <div class="flex justify-center mb-5">
+        <div class="w-full max-w-md">
+          <div class="pokemon-box">
+            <div class="text-center">
+              <!-- Add input field for Pokémon's name -->
+              <form
+                action="/pokeDex/<%= pokemon.id %>"
+                method="POST"
+                class="mb-4"
+              >
+                <div class="flex items-center justify-center space-x-2">
+                  <label
+                    for="newName"
+                    class="block text-lg font-medium text-gray-700"
+                    >Naam:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-input mt-1 block w-1/2"
+                    id="newName"
+                    name="newName"
+                    value="<%= pokemon.name %>"
+                  />
+                  <button
+                    type="submit"
+                    class="pixel-button-pokemon py-2 px-4 rounded"
+                  >
+                    Hernoem
+                  </button>
+                </div>
+              </form>
+              <!-- Display Pokémon's ID and capitalize the first letter of the name -->
+              <h5 class="text-xl mb-4">
+                #<%= pokemon.id %> <%= pokemon.name.charAt(0).toUpperCase() +
+                pokemon.name.slice(1) %>
+              </h5>
+              <div>
+                <img
+                  src="<%= pokemon.sprites.front_default %>"
+                  alt="<%= pokemon.name %> afbeelding"
+                  class="pokemon-img mx-auto mb-4"
+                />
+                <div class="text-center">
+                  <h5 class="text-2xl font-bold mb-2">Stats</h5>
+                  <table class="table-auto w-full text-left mb-4">
+                    <tbody>
+                      <% pokemon.stats.forEach(stat => { %>
+                      <tr>
+                        <th class="px-4 py-2"><%= stat.name %></th>
+                        <td class="px-4 py-2"><%= stat.base_stat %></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-center">
+                  <form action="/pokeDex/<%= pokemon.id %>" method="POST">
+                    <div class="mb-4">
+                      <label
+                        for="wins"
+                        class="block text-lg font-medium text-gray-700"
+                        >Overwinningen:</label
+                      >
+                      <input
+                        type="number"
+                        class="form-input mt-1 block w-full"
+                        id="wins"
+                        name="wins"
+                        value="<%= pokemon.wins || 0 %>"
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <label
+                        for="losses"
+                        class="block text-lg font-medium text-gray-700"
+                        >Verliezen:</label
+                      >
+                      <input
+                        type="number"
+                        class="form-input mt-1 block w-full"
+                        id="losses"
+                        name="losses"
+                        value="<%= pokemon.losses || 0 %>"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      class="pixel-button-pokemon py-2 px-4 rounded"
+                    >
+                      Opslaan
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <% } else { %>
-    <p>No Pokémon data available.</p>
-    <% } %>
+      <% } else { %>
+      <p class="text-center text-xl">Geen Pokémon gegevens beschikbaar.</p>
+      <% } %>
 
-    <!-- Display Evolutionary Chain -->
-    <h2>Evolutionary Chain</h2>
-    <% if (pokemon && pokemon.evolution_chain) { %>
-    <div class="row justify-content-center">
-      <% pokemon.evolution_chain.forEach(chainEntry => { %>
-      <div class="col-md-4">
-        <div class="card pokedex-card">
-          <div class="pokedex-header text-center">
-            <h5>
-              #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase() + chainEntry.name.slice(1) %> 
+      <!-- Update the detail-pokemon.ejs template -->
+      <h2 class="text-center text-3xl mb-4">Evoluties</h2>
+      <% if (pokemon && pokemon.evolution_chain) { %>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <% pokemon.evolution_chain.forEach(chainEntry => { %>
+        <div class="pokemon-box">
+          <div class="text-center">
+            <h5 class="text-xl mb-4">
+              #<%= chainEntry.id %> <%= chainEntry.name.charAt(0).toUpperCase()
+              + chainEntry.name.slice(1) %>
             </h5>
           </div>
-          <div class="pokedex-body">
-            <img
-              src="<%= chainEntry.sprite %>"
-              alt="<%= chainEntry.name %> image"
-            />
+          <div>
+            <a href="/pokeDex/<%= chainEntry.id %>">
+              <img
+                src="<%= chainEntry.sprite %>"
+                alt="<%= chainEntry.name %> afbeelding"
+                class="pokemon-img mx-auto mb-4"
+              />
+            </a>
           </div>
         </div>
+        <% }); %>
       </div>
-      <% }); %>
-    </div>
-    <% } else { %>
-    <p>No evolution data available.</p>
-    <% } %>
-  </div>
-</main>
-<%- include('partials/footer') %>
+      <% } else { %>
+      <p class="text-center text-xl">Geen evolutiegegevens beschikbaar.</p>
+      <% } %>
+    </main>
+
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+  </body>
+</html>

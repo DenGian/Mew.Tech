@@ -1,4 +1,4 @@
-import { Collection, MongoClient } from "mongodb";
+import { Collection, MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { PokemonData } from "../interfaces/pokemonInterface";
@@ -106,28 +106,37 @@ async function registerUser(email: string, password: string, username: string, s
 }
 
 ///////////////////////////////
-async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
-    const speciesResponse = await axios.get(speciesUrl);
-    const speciesData = speciesResponse.data;
-    const evolutionChainUrl = speciesData.evolution_chain.url;
-  
-    const evolutionResponse = await axios.get(evolutionChainUrl);
-    const evolutionData = evolutionResponse.data;
-  
-    const chain: any = evolutionData.chain;
-    const evolutionIds: string[] = [];
-  
-    const traverseChain = (chainLink: any) => {
-      const id = chainLink.species.url.split('/').slice(-2, -1)[0];
-      evolutionIds.push(id);
-      if (chainLink.evolves_to.length > 0) {
-        chainLink.evolves_to.forEach((evolution: any) => traverseChain(evolution));
-      }
-    };
-  
-    traverseChain(chain);
-    return evolutionIds;
-  }
+
+async function fetchEvolutionChain(speciesUrl: string): Promise<{ id: string; name: string; sprite: string }[]> {
+    try {
+        const speciesResponse = await axios.get(speciesUrl);
+        const speciesData = speciesResponse.data;
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+
+        const evolutionResponse = await axios.get(evolutionChainUrl);
+        const evolutionData = evolutionResponse.data;
+
+        const chain: any = evolutionData.chain;
+        const evolutionChain: { id: string; name: string; sprite: string }[] = [];
+
+        const traverseChain = async (chainLink: any) => {
+            const id = chainLink.species.url.split('/').slice(-2, -1)[0];
+            const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            const pokemonData = pokemonResponse.data;
+            evolutionChain.push({ id, name: pokemonData.name, sprite: pokemonData.sprites.front_default });
+
+            if (chainLink.evolves_to.length > 0) {
+                await Promise.all(chainLink.evolves_to.map(async (evolution: any) => await traverseChain(evolution)));
+            }
+        };
+
+        await traverseChain(chain);
+        return evolutionChain;
+    } catch (error) {
+        console.error('Error fetching evolution chain:', error);
+        throw new Error('Failed to fetch evolution chain.');
+    }
+}
   
   async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
     const MAX_POKEMON_ID = 251;
@@ -144,7 +153,7 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
         const pokemon = response.data;
   
         const speciesUrl = pokemon.species ? pokemon.species.url : null;
-        let evolutionChain: string[] = [];
+        let evolutionChain: { id: string; name: string; sprite: string; }[] = [];
   
         if (speciesUrl) {
           evolutionChain = await fetchEvolutionChain(speciesUrl);
@@ -157,7 +166,8 @@ async function fetchEvolutionChain(speciesUrl: string): Promise<string[]> {
           stats: pokemon.stats.map((stat: any) => ({ name: stat.stat.name, base_stat: stat.base_stat })),
           abilities: pokemon.abilities.map((ability: any) => ({ ability: { name: ability.ability.name } })),
           url: speciesUrl,
-          evolution_chain: evolutionChain
+          evolution_chain: evolutionChain,
+          types: pokemon.types.map((type: any) => ({ type: { name: type.type.name } }))
         };
   
         await collectionPokemon.insertOne(pokemonData);
@@ -176,6 +186,21 @@ async function getAllPokemon(skip: number = 0, limit: number = Infinity): Promis
         return { pokemonData, totalPokemonCount };
     } catch (error) {
         throw new Error(`An error occurred while fetching Pokémon data: ${error}`);
+    }
+}
+
+async function getCaughtPokemon(userId: any) {
+    try {
+        const user = await collectionUsers.findOne({ _id: new ObjectId(userId) });
+        if (!user) {
+            throw new Error("User not found");
+        }
+        const caughtPokemonIds = user.caughtPokemon;
+        const caughtPokemonData = await collectionPokemon.find({ id: { $in: caughtPokemonIds } }).toArray();
+        return caughtPokemonData;
+    } catch (error) {
+        console.error("Error fetching caught Pokémon:", error);
+        throw new Error("Failed to fetch caught Pokémon.");
     }
 }
 
@@ -200,11 +225,11 @@ async function getPokemonById(pokemonId: string): Promise<PokemonData | null> {
     }
 }
 
-export async function updateLanguage(pokemonId: string, updatedPokemon: PokemonData) {
+async function updatePokemonName(pokemonId: string, newName: string) {
     try {
-        await collectionPokemon.updateOne({ id: pokemonId }, { $set: updatedPokemon });
+        await collectionPokemon.updateOne({ id: pokemonId }, { $set: { name: newName } });
     } catch (error) {
-        throw new Error(`An error occurred while updating language: ${error}`);
+        throw new Error(`An error occurred while updating Pokémon name: ${error}`);
     }
 }
 
@@ -223,4 +248,5 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+export { connect, getAllPokemon, updatePokemonName, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+
