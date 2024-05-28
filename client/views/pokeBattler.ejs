@@ -195,6 +195,12 @@
                   <p class="stat-value"><%= pokemon1.stats[2].base_stat %></p>
                 </div>
               </div>
+              <div class="abilities-container">
+                <h5 class="stat-title">Krachten:</h5>
+                <% pokemon1.abilities.forEach(ability => { %>
+                  <button class="pixel-button"><%= ability.ability.name %></button>
+                <% }); %>
+              </div>
             </div>
           </div>
         </div>
