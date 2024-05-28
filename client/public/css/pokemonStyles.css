@@ -474,21 +474,21 @@ header {
 }
 
 .caught {
-  background-color: green !important;
-  border-color: darkgreen !important;
-}
-.not-caught {
-  background-color: red !important;
-  border-color: darkred !important;
-}
-.nav-pokemon-img {
-  width: 80px; /* Increased size */
-  height: 80px; /* Increased size */
-  object-fit: contain;
-  margin-right: -5px;
-  margin-top: -50px;
-  margin-bottom: -50px;
-}
-.nav-pokemon-name {
-  font-size: 1rem; /* Smaller font size */
-}
+        background-color: green !important;
+        border-color: darkgreen !important;
+      }
+      .not-caught {
+        background-color: red !important;
+        border-color: darkred !important;
+      }
+      .nav-pokemon-img {
+        width: 80px; /* Increased size */
+        height: 80px; /* Increased size */
+        object-fit: contain;
+        margin-right: -5px;
+        margin-top: -50px;
+        margin-bottom: -50px;
+      }
+      .nav-pokemon-name {
+        font-size: 1rem; /* Smaller font size */
+      }
