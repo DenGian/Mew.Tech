@@ -1,32 +1,44 @@
-// route.ts
-
 import express, { Router, Request, Response } from "express";
-import { getAllPokemon } from "../config/database";
-import { calculateTotalPages } from "../utils/helper-functions";
+import { updateUser } from "../config/database";
+import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
-const POKEMON_PER_PAGE = 12; // Number of Pokémon per page
+router.get("/", (req, res) => {
+    const user: User | undefined = req.session.user;
+    res.render("pokeViewer", { user }); 
+});
 
-router.get("/", async (req: Request<{}, any, any, { page?: string }>, res: Response) => {
+function isUserDefined(user: any): user is User {
+    return user !== undefined && user._id !== undefined;
+}
+
+router.post("/", async (req: Request, res: Response) => {
   try {
-    // Get page number from query parameters (default to 1 if not provided)
-    const page = parseInt(req.query.page?.toString() || "1");
-
-    // Calculate skip value based on the page number
-    const skip = (page - 1) * POKEMON_PER_PAGE;
-
-    // Fetch Pokémon data and total count from the database
-    const { pokemonData, totalPokemonCount } = await getAllPokemon(skip, POKEMON_PER_PAGE);
-
-    // Calculate total pages based on total count and Pokémon per page
-    const totalPages = calculateTotalPages(totalPokemonCount, POKEMON_PER_PAGE);
-
-    // Render the EJS template with the fetched Pokémon data
-    res.render("pokeViewer", { pokemonData, page, totalPages });
+      const { username, email } = req.body; 
+      const user = req.session.user;
+      if (!user || !isUserDefined(user)) {
+          res.status(400).send("User not found in session or missing ID");
+          return;
+      }
+      await updateUser(user._id!.toString(), username, email);
+      if (username) {
+          req.session.user!.username = username;
+      }
+      if (email) {
+          req.session.user!.email = email;
+      }
+      req.session.save((err) => {
+          if (err) {
+              console.error("Error saving session:", err);
+              res.status(500).render("error", { message: "An error occurred while saving your session.", error: err });
+              return;
+          }
+          res.redirect("/main");
+      });
   } catch (error) {
-    console.error("Error fetching Pokémon:", error);
-    res.status(500).send("Failed to load page due to server error.");
+      console.error("Error updating profile:", error);
+      res.status(500).render("error", { message: "An error occurred while updating your profile.", error });
   }
 });
 
