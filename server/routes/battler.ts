@@ -1,11 +1,11 @@
-import express, { Router } from "express";
+import express, { Router, Request, Response } from "express";
 import { User } from "../interfaces/userInterface";
 import { getSelectedPokemon, filteredPokemon } from "../config/database";
 import { displayRandomPokemon, capitalizeFirstLetter } from "../utils/helper-functions";
 
 const router: Router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const user: User | undefined = req.session.user;
     const searchPokemon2: string | undefined = req.query.searchPokemon2 as string | undefined;
