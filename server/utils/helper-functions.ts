@@ -8,7 +8,7 @@ import { PokemonData } from "../interfaces/pokemonInterface";
 // Function to display a random Pokémon
 async function displayRandomPokemon(): Promise<PokemonData | null> {
   try {
-    const { pokemonData } = await getAllPokemon(0, 0); // Retrieve all Pokémon from the database
+    const { pokemonData } = await getAllPokemon(); // Retrieve all Pokémon from the database
     if (pokemonData.length === 0) {
       throw new Error("No Pokémon found in the database.");
     }
