@@ -77,6 +77,14 @@
         text-align: center;
         margin: 0 auto;
         cursor: pointer;
+        height: 180px; /* Fixed height for uniformity */
+      }
+      .pokemon-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100px; /* Ensure the text truncates within the box */
+        margin: 0 auto;
       }
       .profile-box {
         background-color: rgba(255, 255, 255, 0.221);
@@ -85,7 +93,8 @@
         padding: 20px;
         text-align: center;
         margin-right: 20px; /* Add margin to the right */
-        width: 250px; /* Set fixed width for profile box */
+        width: 100%; /* Set fixed width for profile box */
+        max-width: 250px; /* Maximum width for large screens */
       }
       .caught-pokemon-box {
         background-color: rgba(255, 255, 255, 0.221);
@@ -97,18 +106,7 @@
       }
       .pokemon-grid {
         display: grid;
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(150px, 1fr)
-        ); /* Make all boxes the same size */
         gap: 10px;
-      }
-      .tutorial-box {
-        background-color: rgba(255, 255, 255, 0.221);
-        border: 2px solid #444;
-        box-shadow: 2px 2px 0px #aaa;
-        padding: 15px;
-        margin-top: 20px;
       }
       .highlighted {
         border-color: #00ff00 !important; /* Highlight border color */
@@ -133,6 +131,39 @@
       /* Add this CSS to style the selected Pokémon */
       .selected-pokemon {
         border-color: #00ff00; /* Green border for selected Pokémon */
+      }
+
+      /* Custom media queries for responsive grid */
+      .pokemon-grid {
+        grid-template-columns: repeat(2, 1fr); /* Default: 2 columns */
+      }
+      @media (min-width: 640px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(2, 1fr); /* Small screens: 2 columns */
+        }
+      }
+      @media (min-width: 768px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(4, 1fr); /* Medium screens: 4 columns */
+        }
+      }
+      @media (min-width: 1024px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(4, 1fr); /* Large screens: 4 columns */
+        }
+      }
+      @media (min-width: 1280px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(
+            6,
+            1fr
+          ); /* Extra-large screens: 6 columns */
+        }
+      }
+      @media (min-width: 1536px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(8, 1fr); /* 2XL screens: 8 columns */
+        }
       }
     </style>
   </head>
@@ -203,14 +234,14 @@
       </nav>
     </header>
 
-    <main class="container mx-auto p-4 flex flex-col lg:flex-row">
-      <div class="profile-box lg:w-1/4">
-        <h3 class="text-2xl mb-4">Gebruikersinformatie</h3>
+    <main class="container mx-auto p-4 flex flex-col lg:flex-row lg:space-x-4">
+      <div class="profile-box w-full lg:w-1/5 mb-4 lg:mb-0">
+        <h3 class="text-md mb-4">info</h3>
         <form action="/viewer" method="POST" class="mb-4">
           <div class="mb-4">
             <label
               for="username"
-              class="block text-lg font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700"
               >Gebruikersnaam:</label
             >
             <input
@@ -222,7 +253,7 @@
             />
           </div>
           <div class="mb-4">
-            <label for="email" class="block text-lg font-medium text-gray-700"
+            <label for="email" class="block text-sm font-medium text-gray-700"
               >E-mail:</label
             >
             <input
@@ -233,11 +264,14 @@
               value="<%= user.email %>"
             />
           </div>
-          <button type="submit" class="pixel-button-pokemon py-2 px-4 rounded">
+          <button
+            type="submit"
+            class="pixel-button-pokemon text-sm py-2 px-4 rounded"
+          >
             Informatie opslaan
           </button>
         </form>
-        <h3 class="text-2xl mb-4">Geselecteerde Hoofd-Pokémon</h3>
+        <h3 class="text-md mb-4">Geselecteerde Hoofd-Pokémon</h3>
         <% if (selectedPokemon) { %>
         <div class="pokemon-box">
           <img
@@ -251,9 +285,14 @@
         <p>Geen hoofd-Pokémon geselecteerd</p>
         <% } %>
       </div>
-      <div class="caught-pokemon-box lg:w-3/4 lg:ml-4">
-        <h3 class="text-2xl mb-4">Kies je hoofd-Pokémon</h3>
-        <form id="pokemonForm" action="/viewer/set-main-pokemon" method="POST">
+      <div class="caught-pokemon-box flex-grow">
+        <h3 class="text-md mb-4">Kies je hoofd-Pokémon</h3>
+        <form
+          id="pokemonForm"
+          action="/viewer/set-main-pokemon"
+          method="POST"
+          class="flex-grow"
+        >
           <div class="pokemon-grid">
             <% caughtPokemon.forEach(pokemon => { %>
             <div class="pokemon-box" data-pokemon-id="<%= pokemon.id %>">
@@ -271,7 +310,7 @@
                     class="pokemon-img mx-auto mb-2"
                   />
                 </a>
-                <p class="text-xl"><%= pokemon.name %></p>
+                <p class="text-sm pokemon-name"><%= pokemon.name %></p>
               </label>
             </div>
             <% }); %>
