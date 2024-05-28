@@ -94,11 +94,14 @@
               if (result.success) {
                 catchResult.textContent = "Pokémon gevangen!";
                 catchResult.style.color = "green";
+                pokeballBtn.classList.add("caught");
+                pokeballBtn.classList.remove("not-caught");
                 // Keep the Pokémon image visible
               } else {
                 catchResult.textContent = result.message;
                 catchResult.style.color = "red";
                 pokemonImg.style.display = "block"; // Show Pokémon image again
+                
               }
               resetBtn.style.display = "block";
             } else {
@@ -112,7 +115,8 @@
                 catchResult.textContent = "Pokémon is ontsnapt!";
                 catchResult.style.color = "red";
                 resetBtn.style.display = "block";
-              }
+              }pokeballBtn.classList.add("not-caught"); 
+              pokeballBtn.classList.remove("caught");
               attemptsLeft.textContent = "Pogingen: " + attempts;
             }
             pokeballBtn.disabled = false;
