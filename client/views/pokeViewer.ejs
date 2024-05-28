@@ -272,14 +272,17 @@
           </button>
         </form>
         <h3 class="text-md mb-4">Geselecteerde Hoofd-Pokémon</h3>
+        <a href="/pokeDex/<%= selectedPokemon.id %>">
         <% if (selectedPokemon) { %>
         <div class="pokemon-box">
+          <p class="text-xl"><%= selectedPokemon.name %></p>
           <img
             src="<%= selectedPokemon.sprites.front_default %>"
             alt="<%= selectedPokemon.name %>"
             class="pokemon-img mx-auto mb-2"
           />
-          <p class="text-xl"><%= selectedPokemon.name %></p>
+          </a>
+         
         </div>
         <% } else { %>
         <p>Geen hoofd-Pokémon geselecteerd</p>
@@ -296,6 +299,7 @@
           <div class="pokemon-grid">
             <% caughtPokemon.forEach(pokemon => { %>
             <div class="pokemon-box" data-pokemon-id="<%= pokemon.id %>">
+              <p class="text-sm pokemon-name"><%= pokemon.name %></p>
               <label class="cursor-pointer">
                 <input
                   type="radio"
@@ -303,14 +307,13 @@
                   value="<%= pokemon.id %>"
                   class="hidden"
                 />
-                <a href="/pokeDex/<%= pokemon.id %>">
                   <img
                     src="<%= pokemon.sprites.front_default %>"
                     alt="<%= pokemon.name %>"
                     class="pokemon-img mx-auto mb-2"
                   />
                 </a>
-                <p class="text-sm pokemon-name"><%= pokemon.name %></p>
+                
               </label>
             </div>
             <% }); %>
