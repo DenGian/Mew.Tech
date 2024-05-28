@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { getCaughtPokemon, getPokemonById, updatePokemonName, getAllPokemon, filteredPokemon, collectionPokemon } from "../config/database";
+import { getCaughtPokemon, getPokemonById, updatePokemonName, getAllPokemon, filteredPokemon, collectionUsers, collectionPokemon } from "../config/database";
 
 const router: Router = express.Router();
 
@@ -8,20 +8,28 @@ router.get("/", async (req: Request<{}, any, any, { showAll?: string, search?: s
         const showAll = req.query.showAll === "true";
         const searchTerm = req.query.search || "";
         let pokemonData;
-
-        if (searchTerm) {
-            pokemonData = await filteredPokemon(searchTerm);
-        } else if (showAll) {
-            const result = await getAllPokemon();
-            pokemonData = result.pokemonData;
+        if (showAll) {
+            if (searchTerm) {
+                pokemonData = await filteredPokemon(searchTerm);
+            } else {
+                const result = await getAllPokemon();
+                pokemonData = result.pokemonData;
+            }
         } else {
             if (!req.session.user || !req.session.user._id) {
                 return res.status(401).send("User not authenticated");
             }
             const userId = req.session.user._id.toString();
-            pokemonData = await getCaughtPokemon(userId);
-        }
+            const caughtPokemon = await getCaughtPokemon(userId);
 
+            if (searchTerm) {
+                pokemonData = caughtPokemon.filter(pokemon => 
+                    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            } else {
+                pokemonData = caughtPokemon;
+            }
+        }
         res.render("pokeDex", { pokemonData, showAll, searchTerm });
     } catch (error) {
         console.error("Error fetching Pokémon:", error);
