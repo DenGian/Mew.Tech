@@ -240,6 +240,23 @@ async function getPokemonById(pokemonId: string): Promise<PokemonData | null> {
     }
 }
 
+
+async function updateSelectedPokemon(userId: string, selectedPokemonId: string): Promise<void> {
+    try {
+        const result = await collectionUsers.updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { selectedPokemon: selectedPokemonId } }
+        );
+        if (result.matchedCount === 0) {
+            throw new Error("No user found with the given ID");
+        }
+        console.log(`Selected Pokémon updated successfully for user with ID ${userId}`);
+    } catch (error) {
+        console.error("Error updating selected Pokémon:", error);
+        throw new Error("Failed to update selected Pokémon.");
+    }
+}
+
 async function updatePokemonName(pokemonId: string, newName: string) {
     try {
         await collectionPokemon.updateOne({ id: pokemonId }, { $set: { name: newName } });
@@ -263,5 +280,5 @@ async function connect() {
     });
 }
 
-export { connect, getAllPokemon, updatePokemonName, updateUser, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
+export { connect, getAllPokemon, updatePokemonName, updateSelectedPokemon, updateUser, getPokemonById, filteredPokemon, loadPokemonsFromApi, collectionPokemon, getCaughtPokemon, registerUser, isEmailRegistered, isUsernameRegistered, collectionUsers };
 
