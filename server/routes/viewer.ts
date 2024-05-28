@@ -1,33 +1,80 @@
-// route.ts
-
 import express, { Router, Request, Response } from "express";
-import { getAllPokemon } from "../config/database";
-import { calculateTotalPages } from "../utils/helper-functions";
+import { updateUser, getCaughtPokemon, getSelectedPokemon, updateSelectedPokemon } from "../config/database";
+import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
-const POKEMON_PER_PAGE = 12; // Number of Pokémon per page
+router.get("/", async (req, res) => {
+    const user: User | undefined = req.session.user;
+    if (!user) {
+        res.status(400).send("User not found in session");
+        return;
+    }
 
-router.get("/", async (req: Request<{}, any, any, { page?: string }>, res: Response) => {
-  try {
-    // Get page number from query parameters (default to 1 if not provided)
-    const page = parseInt(req.query.page?.toString() || "1");
+    try {
+        const caughtPokemon = await getCaughtPokemon(user._id);
+        const selectedPokemonId = user.selectedPokemon || '';
+        const selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+        res.render("pokeViewer", { user, caughtPokemon, selectedPokemon });
+    } catch (error) {
+        console.error("Error fetching caught Pokémon:", error);
+        res.status(500).render("error", { message: "An error occurred while fetching caught Pokémon.", error });
+    }
+});
 
-    // Calculate skip value based on the page number
-    const skip = (page - 1) * POKEMON_PER_PAGE;
+function isUserDefined(user: any): user is User {
+    return user !== undefined && user._id !== undefined;
+}
 
-    // Fetch Pokémon data and total count from the database
-    const { pokemonData, totalPokemonCount } = await getAllPokemon(skip, POKEMON_PER_PAGE);
+router.post("/", async (req: Request, res: Response) => {
+    try {
+        const { username, email } = req.body;
+        const user = req.session.user;
+        if (!user || !isUserDefined(user)) {
+            res.status(400).send("User not found in session or missing ID");
+            return;
+        }
+        await updateUser(user._id!.toString(), username, email);
+        if (username) {
+            req.session.user!.username = username;
+        }
+        if (email) {
+            req.session.user!.email = email;
+        }
+        req.session.save((err) => {
+            if (err) {
+                console.error("Error saving session:", err);
+                res.status(500).render("error", { message: "An error occurred while saving your session.", error: err });
+                return;
+            }
+            res.redirect("/viewer");
+        });
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).render("error", { message: "An error occurred while updating your profile.", error });
+    }
+});
 
-    // Calculate total pages based on total count and Pokémon per page
-    const totalPages = calculateTotalPages(totalPokemonCount, POKEMON_PER_PAGE);
-
-    // Render the EJS template with the fetched Pokémon data
-    res.render("pokeViewer", { pokemonData, page, totalPages });
-  } catch (error) {
-    console.error("Error fetching Pokémon:", error);
-    res.status(500).send("Failed to load page due to server error.");
-  }
+router.post("/set-main-pokemon", async (req: Request, res: Response) => {
+    try {
+        console.log("POST request to /viewer/set-main-pokemon received");
+        const userId: string | undefined = req.session.user?._id?.toString();
+        const selectedPokemonId: string | undefined = req.body.mainPokemon;
+        console.log("UserID:", userId);
+        console.log("SelectedPokemonId:", selectedPokemonId);
+        if (!userId || !selectedPokemonId) {
+            console.error("User ID or selected Pokémon ID not provided");
+            res.status(400).send("User ID or selected Pokémon ID not provided");
+            return;
+        }
+        req.session.user!.selectedPokemon = selectedPokemonId;
+        await updateSelectedPokemon(userId, selectedPokemonId);
+        console.log("Main Pokémon updated successfully");
+        res.redirect("/viewer");
+    } catch (error) {
+        console.error("Error setting main Pokémon:", error);
+        res.status(500).render("error", { message: "An error occurred while setting the main Pokémon.", error });
+    }
 });
 
 export default router;

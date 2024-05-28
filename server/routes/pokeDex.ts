@@ -50,7 +50,6 @@ router.post('/:pokemonId', async (req, res) => {
         const { pokemonId } = req.params;
         const { newName, wins, losses } = req.body;
         if (newName) {
-            // Update the Pokémon's name
             await updatePokemonName(pokemonId, newName);
         }
         if (!isNaN(wins) && !isNaN(losses)) {
