@@ -1,6 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import { updateUser, getCaughtPokemon, getSelectedPokemon, updateSelectedPokemon } from "../config/database";
 import { User } from "../interfaces/userInterface";
+import { capitalizeFirstLetter } from "../utils/helper-functions";
 
 const router: Router = express.Router();
 
@@ -15,6 +16,13 @@ router.get("/", async (req, res) => {
         const caughtPokemon = await getCaughtPokemon(user._id);
         const selectedPokemonId = user.selectedPokemon || '';
         const selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+
+        // Capitalize Pokémon names
+        caughtPokemon.forEach(pokemon => pokemon.name = capitalizeFirstLetter(pokemon.name));
+        if (selectedPokemon) {
+            selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
+        }
+
         res.render("pokeViewer", { user, caughtPokemon, selectedPokemon });
     } catch (error) {
         console.error("Error fetching caught Pokémon:", error);
@@ -34,6 +42,7 @@ router.post("/", async (req: Request, res: Response) => {
             res.status(400).send("User not found in session or missing ID");
             return;
         }
+
         await updateUser(user._id!.toString(), username, email);
         if (username) {
             req.session.user!.username = username;
