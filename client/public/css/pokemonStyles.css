@@ -14,6 +14,11 @@ body {
   box-shadow: 4px 4px 0px #aaa;
 }
 
+.pixel-border-inputs {
+  border: 4px solid #cc0000;
+  box-shadow: 2px 2px 0px #aaa;
+}
+
 .pixel-button {
   background-color: #444;
   color: #fff;
@@ -64,6 +69,12 @@ body {
   animation: appear 1s forwards;
 }
 
+.pokemon-img-viewer {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  animation: appear 1s forwards;
+}
 .pokemon-img-container {
   position: relative;
   display: inline-block;
@@ -134,6 +145,16 @@ body {
   background-color: rgba(255, 255, 255, 0.206);
   animation: bounceIn 1s;
   position: relative;
+}
+
+.profile-box {
+  background-color: rgba(255, 255, 255, 0.221);
+  border: 4px solid #444;
+  box-shadow: 4px 4px 0px #aaa;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 @keyframes bounceIn {
@@ -310,4 +331,33 @@ header {
 
 .search-bar button {
   width: 100px; /* Button width */
+}
+
+.pagination a {
+  background-color: #ffcc00;
+  color: #000;
+  border: 2px solid #cc0000;
+  padding: 5px 10px;
+  text-shadow: 1px 1px 0px #000;
+}
+.pagination a:hover {
+  background-color: #ffdd00;
+}
+.pagination .active a {
+  background-color: #cc0000;
+  color: #fff;
+}
+.border-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cc0000;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.border-checkbox:checked {
+  background-color: #ffdd00;
 }

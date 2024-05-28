@@ -1,259 +1,93 @@
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
-    />
-    <meta
-      name="keywords"
-      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
-    />
-    <meta
-      name="author"
-      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
-    />
-    <title>Mew.Tech - PokéDex</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
-    <link
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        background-color: #f0f0f0;
-        background-image: url("../assets/images/grassland.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: "Press Start 2P", cursive;
-        padding: 1rem;
-        min-height: 100vh;
-      }
-      .pixel-border {
-        border: 4px solid black;
-        box-shadow: 4px 4px 0px #aaa;
-      }
-      .pixel-border-inputs {
-        border: 4px solid #cc0000;
-        box-shadow: 2px 2px 0px #aaa;
-      }
-      .pixel-button {
-        background-color: #ffcc00; /* Pokémon yellow */
-        color: #fff;
-        border: 2px solid #cc0000; /* Pokémon red */
-        text-shadow: 1px 1px 0px #000;
-        font-size: 12px;
-      }
-      .pixel-button:hover {
-        background-color: #ffdd00;
-      }
-      .pokemon-box {
-        background-color: rgba(255, 255, 255, 0.5);
-        border: 4px solid #444;
-        box-shadow: 4px 4px 0px #aaa;
-        padding: 10px;
-        text-align: center;
-        margin: 20px;
-      }
-      .pokemon-img {
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
-      }
-      .card-title,
-      .card h5 {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-      }
-      .pagination a {
-        background-color: #ffcc00;
-        color: #000;
-        border: 2px solid #cc0000;
-        padding: 5px 10px;
-        text-shadow: 1px 1px 0px #000;
-      }
-      .pagination a:hover {
-        background-color: #ffdd00;
-      }
-      .pagination .active a {
-        background-color: #cc0000;
-        color: #fff;
-      }
-      header {
-        background: linear-gradient(to right, #ff0000, #ffcc00);
-        color: white;
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-      }
-    </style>
-  </head>
-  <body>
-    <header class="pixel-border p-4 mb-4">
-      <nav
-        class="container mx-auto flex flex-col sm:flex-row items-center px-4"
-      >
-        <div class="flex justify-between items-center w-full sm:w-auto">
-          <a class="text-2xl font-bold flex items-center" href="/main">
-            <img
-              src="./assets/images/logo.webp"
-              alt="logo"
-              class="h-10 w-10 mr-2"
-            />
-          </a>
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
-        <div
-          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
-          id="navbar-default"
-        >
-          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/main">Home</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/battler">Duel</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/catcher">Catch</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+<%- include('partials/header') %>
+<body>
+  <main class="container mx-auto p-4">
+    <div
+      class="search-bar flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto space-y-4 md:space-y-0 md:space-x-4"
+    >
+      <input
+        type="text"
+        id="search"
+        name="searchPokemon"
+        class="pixel-border-inputs p-2 flex-grow md:w-auto bg-yellow-300 border-red-600 text-gray-500"
+        placeholder="Zoek Pokémon"
+        aria-label="Zoek Pokémon"
+      />
 
-    <main class="container mx-auto p-4">
-      <div
-        class="search-bar flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto space-y-4 md:space-y-0 md:space-x-4"
-      >
+      <label class="flex items-center space-x-2">
         <input
-          type="text"
-          id="search"
-          name="searchPokemon"
-          class="pixel-border-inputs p-2 flex-grow md:w-auto bg-yellow-300 border-red-600 text-gray-500"
-          placeholder="Zoek Pokémon"
-          aria-label="Zoek Pokémon"
+          type="checkbox"
+          id="caughtFilter"
+          class="form-checkbox text-yellow-500 border-red-600"
         />
+        <span class="text-sm text-black">Toon alle Pokémon</span>
+      </label>
+    </div>
 
-        <label class="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            id="caughtFilter"
-            class="form-checkbox text-yellow-500 border-red-600"
-          />
-          <span class="text-sm text-black">Toon alle Pokémon</span>
-        </label>
-      </div>
-
-      <div class="flex flex-wrap justify-center" id="pokemon-container">
-        <% pokemonData.forEach(pokemon => { %>
-        <div class="pokemon-box" data-id="<%= pokemon.id %>">
-          <h5 class="card-title text-center main-card-header">
-            #<%= pokemon.id %> <%= pokemon.name %>
-          </h5>
-          <img
-            src="<%= pokemon.sprites.front_default %>"
-            class="pokemon-img mx-auto"
-            alt="<%= pokemon.name %>"
-          />
-          <div class="card-body text-center">
-            <a
-              class="pixel-button py-2 px-4 rounded"
-              href="./pokeDex/<%= pokemon.id %>"
-              >Check Stats!</a
-            >
-          </div>
+    <div class="flex flex-wrap justify-center" id="pokemon-container">
+      <% pokemonData.forEach(pokemon => { %>
+      <div class="pokemon-box" data-id="<%= pokemon.id %>">
+        <h2 class="card-title text-center main-card-header">
+          #<%= pokemon.id %> <%= pokemon.name %>
+        </h2>
+        <img
+          src="<%= pokemon.sprites.front_default %>"
+          class="pokemon-img-compare mx-auto"
+          alt="<%= pokemon.name %>"
+        />
+        <div class="card-body text-center">
+          <a
+            class="pixel-button-compare py-2 px-4 rounded"
+            href="./pokeDex/<%= pokemon.id %>"
+            >Check Stats!</a
+          >
         </div>
-        <% }); %>
       </div>
+      <% }); %>
+    </div>
 
-      <!-- Pagination Links -->
-      <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-          <% if (page > 1) { %>
-          <li class="page-item">
-            <a
-              class="page-link pixel-button"
-              href="?page=<%= page - 1 %>"
-              aria-label="Previous"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
-          <li class="page-item <%= i === page ? 'active' : '' %>">
-            <a class="page-link pixel-button" href="?page=<%= i %>"><%= i %></a>
-          </li>
-          <% } %> <% if (page < totalPages) { %>
-          <li class="page-item">
-            <a
-              class="page-link pixel-button"
-              href="?page=<%= page + 1 %>"
-              aria-label="Next"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-          <% } %>
-        </ul>
-      </nav>
-    </main>
+    <!-- Pagination Links -->
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <% if (page > 1) { %>
+        <li class="page-item">
+          <a
+            class="page-link pixel-button-compare"
+            href="?page=<%= page - 1 %>"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= i === page ? 'active' : '' %>">
+          <a class="page-link pixel-button-compare" href="?page=<%= i %>"
+            ><%= i %></a
+          >
+        </li>
+        <% } %> <% if (page < totalPages) { %>
+        <li class="page-item">
+          <a
+            class="page-link pixel-button-compare"
+            href="?page=<%= page + 1 %>"
+            aria-label="Next"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+  </main>
 
-    <script>
-      const button = document.querySelector(
-        '[data-collapse-toggle="navbar-default"]'
-      );
-      const navbarDefault = document.getElementById("navbar-default");
+  <script>
+    const button = document.querySelector(
+      '[data-collapse-toggle="navbar-default"]'
+    );
+    const navbarDefault = document.getElementById("navbar-default");
 
-      button.addEventListener("click", function () {
-        navbarDefault.classList.toggle("hidden");
-      });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-  </body>
-</html>
+    button.addEventListener("click", function () {
+      navbarDefault.classList.toggle("hidden");
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+</body>
