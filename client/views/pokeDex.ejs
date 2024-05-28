@@ -1,74 +1,63 @@
 <%- include('partials/header') %>
 <body>
+
   <main class="container mx-auto p-4">
-    <div
-      class="search-bar flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto space-y-4 md:space-y-0 md:space-x-4"
-    >
+    <form method="get" action="/pokeDex" class="search-bar flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto space-y-4 md:space-y-0 md:space-x-4">
       <input
         type="text"
         id="search"
-        name="searchPokemon"
+        name="search"
         class="pixel-border-inputs p-2 flex-grow md:w-auto bg-yellow-300 border-red-600 text-gray-500"
         placeholder="Zoek Pokémon"
         aria-label="Zoek Pokémon"
+        value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>"
       />
-
-      <label class="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          id="caughtFilter"
-          class="form-checkbox text-yellow-500 border-red-600"
-        />
-      </label>
-
       <label class="flex items-center space-x-2">
         <input
           type="checkbox"
           id="showAllCheckbox"
+          name="showAll"
           class="form-checkbox text-yellow-500 border-red-600"
-          <%
-          if(showAll){%
-        />checked <% } %>
+          <% if (showAll) { %> checked <% } %>
+        />
         <span class="text-sm text-black">Toon alle Pokémon</span>
       </label>
-    </div>
+      <button type="submit" class="pixel-button py-2 px-4 rounded">Zoek</button>
+    </form>
 
     <div class="flex flex-wrap justify-center" id="pokemon-container">
       <% pokemonData.forEach(pokemon => { %>
       <div class="pokemon-box" data-id="<%= pokemon.id %>">
-        <h2 class="card-title text-center main-card-header">
+        <h5 class="card-title text-center main-card-header">
           #<%= pokemon.id %> <%= pokemon.name %>
-        </h2>
+        </h5>
         <img
           src="<%= pokemon.sprites.front_default %>"
-          class="pokemon-img-compare mx-auto"
+          class="pokemon-img mx-auto"
           alt="<%= pokemon.name %>"
         />
         <div class="card-body text-center">
-          <a
-            class="pixel-button-compare py-2 px-4 rounded"
-            href="./pokeDex/<%= pokemon.id %>"
-            >Check Stats!</a
-          >
+          <a class="pixel-button py-2 px-4 rounded" href="./pokeDex/<%= pokemon.id %>">Check Stats!</a>
         </div>
       </div>
+      <% }); %>
     </div>
   </main>
 
   <script>
-    const showAllCheckbox = document.getElementById("showAllCheckbox");
-    showAllCheckbox.addEventListener("change", function () {
-      const isChecked = showAllCheckbox.checked;
-      const queryParams = new URLSearchParams(window.location.search);
-      if (isChecked) {
-        queryParams.set("showAll", "true");
-      } else {
-        queryParams.delete("showAll");
-      }
-      const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-      window.location.href = newUrl;
-    });
+    const showAllCheckbox = document.getElementById('showAllCheckbox');
+showAllCheckbox.addEventListener('change', function () {
+  const isChecked = showAllCheckbox.checked;
+  const queryParams = new URLSearchParams(window.location.search);
+  if (isChecked) {
+    queryParams.set('showAll', 'true');
+  } else {
+    queryParams.delete('showAll');
+  }
+  const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
+  window.location.href = newUrl;
+});
   </script>
-
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </body>

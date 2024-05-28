@@ -51,7 +51,7 @@ body {
 .pixel-button-guess {
   transition: transform 0.2s;
 }
-
+.pixel-button-compare:hover,
 .pixel-button-pokemon:hover {
   background-color: #ffdd00;
   transform: scale(1.05);

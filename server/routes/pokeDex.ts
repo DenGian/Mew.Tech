@@ -1,25 +1,36 @@
 import express, { Router, Request, Response } from "express";
-import { getCaughtPokemon, getPokemonById, collectionPokemon, updatePokemonName, getAllPokemon } from "../config/database";
+import { getCaughtPokemon, getPokemonById, updatePokemonName, getAllPokemon, filteredPokemon, collectionUsers, collectionPokemon } from "../config/database";
 
 const router: Router = express.Router();
 
-router.get("/", async (req: Request<{}, any, any, { showAll?: string }>, res: Response) => {
+router.get("/", async (req: Request<{}, any, any, { showAll?: string, search?: string }>, res: Response) => {
     try {
         const showAll = req.query.showAll === "true";
+        const searchTerm = req.query.search || "";
         let pokemonData;
-        let totalPokemonCount;
         if (showAll) {
-            ({ pokemonData, totalPokemonCount } = await getAllPokemon());
+            if (searchTerm) {
+                pokemonData = await filteredPokemon(searchTerm);
+            } else {
+                const result = await getAllPokemon();
+                pokemonData = result.pokemonData;
+            }
         } else {
             if (!req.session.user || !req.session.user._id) {
                 return res.status(401).send("User not authenticated");
             }
             const userId = req.session.user._id.toString();
-            const caughtPokemonData = await getCaughtPokemon(userId);
-            totalPokemonCount = caughtPokemonData.length;
-            pokemonData = caughtPokemonData;
+            const caughtPokemon = await getCaughtPokemon(userId);
+
+            if (searchTerm) {
+                pokemonData = caughtPokemon.filter(pokemon => 
+                    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            } else {
+                pokemonData = caughtPokemon;
+            }
         }
-        res.render("pokeDex", { pokemonData, showAll });
+        res.render("pokeDex", { pokemonData, showAll, searchTerm });
     } catch (error) {
         console.error("Error fetching Pokémon:", error);
         res.status(500).send("Failed to load page due to server error.");
