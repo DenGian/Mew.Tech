@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { updateUser, getCaughtPokemon } from "../config/database";
+import { updateUser, getCaughtPokemon, updateSelectedPokemon } from "../config/database";
 import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
@@ -13,7 +13,8 @@ router.get("/", async (req, res) => {
 
   try {
       const caughtPokemon = await getCaughtPokemon(user._id);
-      res.render("pokeViewer", { user, caughtPokemon });
+      const selectedPokemonId = ''; 
+      res.render("pokeViewer", { user, caughtPokemon, selectedPokemonId });
   } catch (error) {
       console.error("Error fetching caught Pokémon:", error);
       res.status(500).render("error", { message: "An error occurred while fetching caught Pokémon.", error });
@@ -45,11 +46,33 @@ router.post("/", async (req: Request, res: Response) => {
               res.status(500).render("error", { message: "An error occurred while saving your session.", error: err });
               return;
           }
-          res.redirect("/main");
+          res.redirect("/viewer");
       });
   } catch (error) {
       console.error("Error updating profile:", error);
       res.status(500).render("error", { message: "An error occurred while updating your profile.", error });
+  }
+});
+
+router.post("/set-main-pokemon", async (req: Request, res: Response) => {
+  try {
+      console.log("POST request to /viewer/set-main-pokemon received");
+      const userId: string | undefined = req.session.user?._id?.toString();
+      const selectedPokemonId: string | undefined = req.body.mainPokemon;
+      console.log("UserID:", userId);
+      console.log("SelectedPokemonId:", selectedPokemonId);
+      if (!userId || !selectedPokemonId) {
+          console.error("User ID or selected Pokémon ID not provided");
+          res.status(400).send("User ID or selected Pokémon ID not provided");
+          return;
+      }
+      req.session.user!.selectedPokemon = selectedPokemonId;
+      await updateSelectedPokemon(userId, selectedPokemonId);
+      console.log("Main Pokémon updated successfully");
+      res.redirect("/viewer");
+  } catch (error) {
+      console.error("Error setting main Pokémon:", error);
+      res.status(500).render("error", { message: "An error occurred while setting the main Pokémon.", error });
   }
 });
 
