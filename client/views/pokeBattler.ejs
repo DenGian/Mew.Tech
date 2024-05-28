@@ -197,10 +197,12 @@
               </div>
               <div class="abilities-container">
                 <h5 class="stat-title">Krachten:</h5>
-                <% pokemon1.abilities.forEach(ability => { %>
-                  <button class="pixel-button"><%= ability.ability.name %></button>
+                <% pokemon1.abilities.forEach((ability, index) => { %>
+                  <button class="pixel-button" id="ability-${index}" onclick="displayAbilityDetails('<%= ability.ability.name %>')">
+                    <%= ability.ability.name %>
+                  </button>
                 <% }); %>
-              </div>
+              </div>              
             </div>
           </div>
         </div>
@@ -246,26 +248,63 @@
     <script>
       const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
       const navbarDefault = document.getElementById("navbar-default");
-  
+    
       button.addEventListener("click", function () {
         navbarDefault.classList.toggle("hidden");
       });
-  
+    
       // Function to update health bar and health text
       function updateHealthBar(pokemonIndex, currentHealth, totalHealth) {
         const healthBarFill = document.getElementById(`health-bar-fill-${pokemonIndex}`);
         const hpValue = document.getElementById(`hp-value-${pokemonIndex}`);
         const healthPercent = (currentHealth / totalHealth) * 100;
-  
+    
         healthBarFill.style.width = `${healthPercent}%`;
         hpValue.textContent = `${currentHealth}/${totalHealth}`;
       }
-  
+    
+      // Function to simulate damage and update health bars
+      function applyDamage(attackerIndex, defenderIndex, damage) {
+        const defenderCurrentHealth = parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent);
+        const newDefenderHealth = Math.max(0, defenderCurrentHealth - damage); // Ensure health doesn't go below 0
+    
+        // Update defender's health bar
+        updateHealthBar(defenderIndex, newDefenderHealth, 100); // Assuming total health is 100
+    
+        // Display a message indicating damage dealt
+        alert(`Pokémon ${attackerIndex} attacks! Pokémon ${defenderIndex} takes ${damage} damage!`);
+    
+        // Check if the defender's health is 0 or below
+        if (newDefenderHealth <= 0) {
+          // Declare the other Pokémon as the winner
+          const winnerIndex = attackerIndex;
+          alert(`Pokémon ${winnerIndex} wins!`);
+          // Optionally, reset the health bars or perform other actions for a new battle
+        }
+      }
+    
       // Example usage
-      // Update the health bar for both Pokémon (example: set health to 70% of total health)
-      updateHealthBar(1, 70, 100); // Assuming total health is 100
-      updateHealthBar(2, 70, 100); // Assuming total health is 100
+      // Initialize health bars
+      updateHealthBar(1, 100, 100); // Assuming total health is 100
+      updateHealthBar(2, 100, 100); // Assuming total health is 100
+    
+      // When an ability button is clicked, simulate an attack for both Pokémon
+      const abilityButtons = document.querySelectorAll('.pixel-button');
+      abilityButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          // Simulate a fixed amount of damage (e.g., 20) for demonstration purposes
+          const attackerIndex = 1; // Pokémon 1 is attacking
+          const defenderIndex = 2; // Pokémon 2 is defending
+          const damage = 20; // Fixed damage amount for demonstration
+    
+          // Apply damage to the defending Pokémon
+          applyDamage(attackerIndex, defenderIndex, damage);
+    
+          // Apply damage to the attacking Pokémon immediately after the first attack
+          applyDamage(defenderIndex, attackerIndex, damage);
+        });
+      });
     </script>
+    
   </body>
   </html>
-  
