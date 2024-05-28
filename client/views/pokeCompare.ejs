@@ -5,177 +5,223 @@
     <div class="flex flex-col lg:flex-row justify-center">
       <div class="w-full lg:w-1/3">
         <div class="search-bar">
-          <form class="flex w-full">
+          <form class="flex w-full" action="/compare" method="get">
+            <input
+              type="hidden"
+              name="searchPokemon2"
+              value="<%= searchPokemon2 %>"
+            />
             <input
               type="text"
               class="pixel-border flex-grow p-2"
               name="searchPokemon1"
               placeholder="Zoek Pokémon (bv. Charmander)"
               aria-label="Zoek Pokémon"
+              value="<%= searchPokemon1 %>"
             />
             <button
               class="pixel-button-compare py-2 px-4 rounded"
               type="submit"
-              formaction="/compare?update=randomPokemon1"
-              formmethod="get"
             >
               Zoeken
             </button>
           </form>
         </div>
+        <% if (randomPokemon) { %>
         <div id="pokemon1-container" class="pokemon-box">
           <div class="pokedex-header text-center">
             <h5>#<%= randomPokemon.id %> <%= randomPokemon.name %></h5>
           </div>
           <div class="pokedex-body">
-            <img
-              src="<%= randomPokemon.sprites.front_default %>"
-              class="pokemon-img-compare mx-auto"
-              alt="<%= randomPokemon.name %>"
-            />
+            <a href="/pokeDex/<%= randomPokemon.id %>">
+              <img
+                src="<%= randomPokemon.sprites.front_default %>"
+                class="pokemon-img-compare mx-auto"
+                alt="<%= randomPokemon.name %>"
+              />
+            </a>
             <div class="card-body text-center">
               <h5 class="card-title">Stats</h5>
               <table class="table table-stats mx-auto">
                 <tbody>
-                  <% const stats1 = randomPokemon.stats.map(stat =>
-                  stat.base_stat); %> <% const stats2 =
-                  randomPokemon2.stats.map(stat => stat.base_stat); %>
                   <tr>
-                    <th scope="row">HP</th>
+                    <th scope="row">Levenspunten</th>
                     <td
                       class="<%= stats1[0] > stats2[0] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[0] > stats2[0] ? '+' : '-' %> <%= stats1[0] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[0] > stats2[0] ? '+' : '-' %> <%= stats1[0]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Attack</th>
+                    <th scope="row">Aanval</th>
                     <td
                       class="<%= stats1[1] > stats2[1] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[1] > stats2[1] ? '+' : '-' %> <%= stats1[1] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[1] > stats2[1] ? '+' : '-' %> <%= stats1[1]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Defense</th>
+                    <th scope="row">Verdediging</th>
                     <td
                       class="<%= stats1[2] > stats2[2] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[2] > stats2[2] ? '+' : '-' %> <%= stats1[2] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[2] > stats2[2] ? '+' : '-' %> <%= stats1[2]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Special Attack</th>
+                    <th scope="row">Speciale Aan.</th>
                     <td
                       class="<%= stats1[3] > stats2[3] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[3] > stats2[3] ? '+' : '-' %> <%= stats1[3] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[3] > stats2[3] ? '+' : '-' %> <%= stats1[3]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Special Defense</th>
+                    <th scope="row">Speciale Ver.</th>
                     <td
                       class="<%= stats1[4] > stats2[4] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[4] > stats2[4] ? '+' : '-' %> <%= stats1[4] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[4] > stats2[4] ? '+' : '-' %> <%= stats1[4]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Speed</th>
+                    <th scope="row">Snelheid</th>
                     <td
                       class="<%= stats1[5] > stats2[5] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats1[5] > stats2[5] ? '+' : '-' %> <%= stats1[5] %>
+                      <span class="stat-comparison"
+                        ><%= stats1[5] > stats2[5] ? '+' : '-' %> <%= stats1[5]
+                        %></span
+                      >
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <% } %>
         </div>
+        <% } %>
       </div>
-
       <div class="w-full lg:w-1/3">
         <div class="search-bar">
-          <form class="flex w-full">
+          <form class="flex w-full" action="/compare" method="get">
+            <input
+              type="hidden"
+              name="searchPokemon1"
+              value="<%= searchPokemon1 %>"
+            />
             <input
               type="text"
               class="pixel-border flex-grow p-2"
-              name="searchPokemon1"
+              name="searchPokemon2"
               placeholder="Zoek Pokémon (bv. Charmander)"
               aria-label="Zoek Pokémon"
+              value="<%= searchPokemon2 %>"
             />
             <button
               class="pixel-button-compare py-2 px-4 rounded"
               type="submit"
-              formaction="/compare?update=randomPokemon2"
-              formmethod="get"
             >
               Zoeken
             </button>
           </form>
         </div>
+        <% if (randomPokemon2) { %>
         <div id="pokemon2-container" class="pokemon-box">
           <div class="pokedex-header text-center">
             <h5>#<%= randomPokemon2.id %> <%= randomPokemon2.name %></h5>
           </div>
           <div class="pokedex-body">
-            <img
-              src="<%= randomPokemon2.sprites.front_default %>"
-              class="pokemon-img-compare mx-auto"
-              alt="<%= randomPokemon2.name %>"
-            />
+            <a href="/pokeDex/<%= randomPokemon2.id %>">
+              <img
+                src="<%= randomPokemon2.sprites.front_default %>"
+                class="pokemon-img-compare mx-auto"
+                alt="<%= randomPokemon2.name %>"
+              />
+            </a>
             <div class="card-body text-center">
               <h5 class="card-title text-center">Stats</h5>
               <table class="table table-stats mx-auto">
                 <tbody>
                   <tr>
-                    <th scope="row">HP</th>
+                    <th scope="row">Levenspunten</th>
                     <td
                       class="<%= stats2[0] > stats1[0] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[0] > stats1[0] ? '+' : '-' %> <%= stats2[0] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[0] > stats1[0] ? '+' : '-' %> <%= stats2[0]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Attack</th>
+                    <th scope="row">Aanval</th>
                     <td
                       class="<%= stats2[1] > stats1[1] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[1] > stats1[1] ? '+' : '-' %> <%= stats2[1] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[1] > stats1[1] ? '+' : '-' %> <%= stats2[1]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Defense</th>
+                    <th scope="row">Verdediging</th>
                     <td
                       class="<%= stats2[2] > stats1[2] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[2] > stats1[2] ? '+' : '-' %> <%= stats2[2] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[2] > stats1[2] ? '+' : '-' %> <%= stats2[2]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Special Attack</th>
+                    <th scope="row">Speciale Aan.</th>
                     <td
                       class="<%= stats2[3] > stats1[3] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[3] > stats1[3] ? '+' : '-' %> <%= stats2[3] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[3] > stats1[3] ? '+' : '-' %> <%= stats2[3]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Special Defense</th>
+                    <th scope="row">Speciale Ver.</th>
                     <td
                       class="<%= stats2[4] > stats1[4] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[4] > stats1[4] ? '+' : '-' %> <%= stats2[4] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[4] > stats1[4] ? '+' : '-' %> <%= stats2[4]
+                        %></span
+                      >
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Speed</th>
+                    <th scope="row">Snelheid</th>
                     <td
                       class="<%= stats2[5] > stats1[5] ? 'higher' : 'lower' %>"
                     >
-                      <%= stats2[5] > stats1[5] ? '+' : '-' %> <%= stats2[5] %>
+                      <span class="stat-comparison"
+                        ><%= stats2[5] > stats1[5] ? '+' : '-' %> <%= stats2[5]
+                        %></span
+                      >
                     </td>
                   </tr>
                 </tbody>
@@ -183,8 +229,10 @@
             </div>
           </div>
         </div>
+        <% } %>
       </div>
     </div>
+
     <div class="container mx-auto py-8">
       <div class="tutorial-box">
         <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
@@ -201,7 +249,6 @@
       </div>
     </div>
   </main>
-
   <script>
     const button = document.querySelector(
       '[data-collapse-toggle="navbar-default"]'
@@ -211,7 +258,6 @@
     button.addEventListener("click", function () {
       navbarDefault.classList.toggle("hidden");
     });
-
     document.getElementById("reset-btn").addEventListener("click", function () {
       location.href = "/catcher";
     });

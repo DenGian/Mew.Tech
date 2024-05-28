@@ -3,3 +3,9 @@
   image-rendering: -moz-crisp-edges; /* For Firefox */
   image-rendering: crisp-edges; /* For Chrome */
 }
+.game-text {
+  font-family: "Press Start 2P", cursive;
+  color: #ffcc00;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, -2px 2px 0 #000,
+    2px -2px 0 #000;
+}
