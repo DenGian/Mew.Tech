@@ -1,115 +1,139 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Neem deel aan spannende Pokémon-gevechten op Mew.Tech. Kies je Pokémon, vecht en ontdek wie de sterkste is!"
-    />
-    <meta
-      name="keywords"
-      content="Pokémon, gevecht, duel, AP Hogeschool, project, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
-    />
-    <meta
-      name="author"
-      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
-    />
-    <title>Mew.Tech - PokéBattler</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
-    <link
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        background-color: #f0f0f0;
-        background-image: url("../assets/images/grassland.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: "Press Start 2P", cursive;
-        padding: 1rem;
-        min-height: 100vh;
-      }
-      .pixel-border {
-        border: 4px solid #444;
-        box-shadow: 4px 4px 0px #aaa;
-      }
-      .pixel-button {
-        background-color: #ffcc00; /* Pokémon yellow */
-        color: #fff;
-        border: 2px solid #cc0000; /* Pokémon red */
-        text-shadow: 1px 1px 0px #000;
-        font-size: 12px;
-      }
-      .pixel-button:hover {
-        background-color: #ffdd00;
-      }
-      .battle-container {
-        background-color: rgba(255, 255, 255, 0.5);
-        border: 4px solid #444;
-        box-shadow: 4px 4px 0px #aaa;
-        padding: 10px;
-        text-align: center;
-        margin: 20px;
-      }
-      .pokemon-img {
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
-      }
-      .health-bar-container {
-        margin-top: 10px;
-      }
-      .health-bar {
-        background-color: #e0e0e0;
-        border: 2px solid #444;
-        width: 100%;
-        height: 20px;
-        position: relative;
-        margin-top: 5px;
-      }
-      .health-bar-fill {
-        background-color: #76c893;
-        height: 100%;
-        width: 100%; /* This will be dynamically updated */
-      }
-      .battle-stats {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-      }
-      .stat {
-        width: 45%;
-      }
-      .stat-title {
-        font-size: 1rem;
-        margin-bottom: 5px;
-      }
-      .stat-value {
-        font-size: 0.875rem;
-      }
-      .tutorial-box {
-        background-color: rgba(255, 255, 255, 0.221);
-        border: 2px solid #444;
-        box-shadow: 2px 2px 0px #aaa;
-        padding: 15px;
-        margin-top: 20px;
-      }
-      header {
-        background: linear-gradient(to right, #ff0000, #ffcc00);
-        color: white;
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-      }
-      .nav-pokemon-img {
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Neem deel aan spannende Pokémon-gevechten op Mew.Tech. Kies je Pokémon, vecht en ontdek wie de sterkste is!"
+  />
+  <meta
+    name="keywords"
+    content="Pokémon, gevecht, duel, AP Hogeschool, project, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+  />
+  <meta
+    name="author"
+    content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+  />
+  <title>Mew.Tech - PokéBattler</title>
+  <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+  <link
+    href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f0f0f0;
+      background-image: url("../assets/images/grassland.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: "Press Start 2P", cursive;
+      padding: 1rem;
+      min-height: 100vh;
+    }
+    .pixel-border {
+      border: 4px solid #444;
+      box-shadow: 4px 4px 0px #aaa;
+    }
+    .pixel-button {
+      background-color: #ffcc00; /* Pokémon yellow */
+      color: #fff;
+      border: 2px solid #cc0000; /* Pokémon red */
+      text-shadow: 1px 1px 0px #000;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 4px;
+    }
+    .pixel-button:hover {
+      background-color: #ffdd00;
+    }
+    .pixel-button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .new-battle-button {
+      display: none;
+      background-color: #ffcc00; /* Pokémon yellow */
+      color: #fff;
+      border: 2px solid #cc0000; /* Pokémon red */
+      text-shadow: 1px 1px 0px #000;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius: 4px;
+      display: block;
+    }
+    .new-battle-button:hover {
+      background-color: #ffdd00;
+    }
+    .battle-container {
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 4px solid #444;
+      box-shadow: 4px 4px 0px #aaa;
+      padding: 10px;
+      text-align: center;
+      margin: 20px;
+    }
+    .pokemon-img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
+    .health-bar-container {
+      margin-top: 10px;
+    }
+    .health-bar {
+      background-color: #e0e0e0;
+      border: 2px solid #444;
+      width: 100%;
+      height: 20px;
+      position: relative;
+      margin-top: 5px;
+    }
+    .health-bar-fill {
+      background-color: #76c893;
+      height: 100%;
+      width: 100%; /* This will be dynamically updated */
+    }
+    .battle-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .stat {
+      width: 45%;
+    }
+    .stat-title {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    .stat-value {
+      font-size: 0.875rem;
+    }
+    .tutorial-box {
+      background-color: rgba(255, 255, 255, 0.221);
+      border: 2px solid #444;
+      box-shadow: 2px 2px 0px #aaa;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    header {
+      background: linear-gradient(to right, #ff0000, #ffcc00);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    .nav-pokemon-img {
       width: 80px; /* Increased size */
       height: 80px; /* Increased size */
       object-fit: contain;
@@ -120,191 +144,363 @@
     .nav-pokemon-name {
       font-size: 1rem; /* Smaller font size */
     }
-    </style>
-  </head>
-  <body>
-    <header class="pixel-border p-4 mb-4">
-      <nav class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4">
-        <div class="flex justify-between items-center w-full sm:w-auto">
-          <a class="text-2xl font-bold flex items-center" href="/main">
-            <img src="./assets/images/logo.webp" alt="logo" class="h-10 w-10 mr-2" />
-          </a>
-          <% if (selectedPokemon) { %>
-            <div class="flex items-center ml-4">
-              <img src="<%= selectedPokemon.sprites.front_default %>" alt="<%= selectedPokemon.name %>" class="nav-pokemon-img mr-2" />
-              <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
-            </div>
-          <% } %>
-          <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
+    #battle-log {
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px solid #444;
+      background-color: rgba(255, 255, 255, 0.2);
+      height: 150px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <header class="pixel-border p-4 mb-4">
+    <nav class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4">
+      <div class="flex justify-between items-center w-full sm:w-auto">
+        <a class="text-2xl font-bold flex items-center" href="/main">
+          <img
+            src="./assets/images/logo.webp"
+            alt="logo"
+            class="h-10 w-10 mr-2"
+          />
+        </a>
+        <% if (selectedPokemon) { %>
+        <div class="flex items-center ml-4">
+          <img
+            src="<%= selectedPokemon.sprites.front_default %>"
+            alt="<%= selectedPokemon.name %>"
+            class="nav-pokemon-img mr-2"
+          />
+          <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
         </div>
-        <div class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto" id="navbar-default">
-          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/main">Home</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/battler">Duel</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/catcher">Catch</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <main class="container mx-auto p-4">
-      <h2 class="text-center text-3xl mb-4">PokéBattler</h2>
-      <div class="flex flex-col lg:flex-row justify-center">
-        <div class="w-full lg:w-1/3">
-          <div class="battle-container">
-            <div class="pokedex-header text-center">
-              <h5>#<%= pokemon1.id %> <%= pokemon1.name %></h5>
-            </div>
-            <div class="pokedex-body">
-              <img src="<%= pokemon1.sprites.front_default %>" class="pokemon-img mx-auto" alt="<%= pokemon1.name %>" />
-              <div class="health-bar-container">
-                <p class="stat-title">Levenspunten: <span id="hp-value-1"><%= pokemon1.stats[0].base_stat %></span>/<%= pokemon1.stats[0].base_stat %></p>
-                <div class="health-bar">
-                  <div class="health-bar-fill" id="health-bar-fill-1"></div>
-                </div>
-              </div>
-              <div class="battle-stats">
-                <div class="stat">
-                  <h5 class="stat-title">Aanval</h5>
-                  <p class="stat-value"><%= pokemon1.stats[1].base_stat %></p>
-                </div>
-                <div class="stat">
-                  <h5 class="stat-title">Verdediging</h5>
-                  <p class="stat-value"><%= pokemon1.stats[2].base_stat %></p>
-                </div>
-              </div>
-              <div class="abilities-container">
-                <h5 class="stat-title">Krachten:</h5>
-                <% pokemon1.abilities.forEach((ability, index) => { %>
-                  <button class="pixel-button" id="ability-${index}" onclick="displayAbilityDetails('<%= ability.ability.name %>')">
-                    <%= ability.ability.name %>
-                  </button>
-                <% }); %>
-              </div>              
-            </div>
+        <% } %>
+        <button
+          data-collapse-toggle="navbar-default"
+          type="button"
+          class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-default"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-6 h-6"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div
+        class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
+        id="navbar-default"
+      >
+        <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/main">Home</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/battler">Duel</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/catcher">Catch</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main class="container mx-auto p-4">
+    <h2 class="text-center text-3xl mb-4">PokéBattler</h2>
+    <div class="flex flex-col lg:flex-row justify-center">
+      <div class="w-full lg:w-1/3">
+        <div class="battle-container">
+          <div class="pokedex-header text-center">
+            <h5>#<%= pokemon1.id %> <%= pokemon1.name %></h5>
           </div>
-        </div>
-        <div class="w-full lg:w-1/3">
-          <div class="battle-container">
-            <div class="pokedex-header text-center">
-              <h5>#<%= pokemon2.id %> <%= pokemon2.name %></h5>
+          <div class="pokedex-body">
+            <img
+              src="<%= pokemon1.sprites.front_default %>"
+              class="pokemon-img mx-auto"
+              alt="<%= pokemon1.name %>"
+            />
+            <div class="health-bar-container">
+              <p class="stat-title">
+                Levenspunten:
+                <span id="hp-value-1"></span>
+              </p>
+              <div class="health-bar">
+                <div
+                  class="health-bar-fill"
+                  id="health-bar-fill-1"
+                  style="width: 100%"
+                ></div>
+              </div>
             </div>
-            <div class="pokedex-body">
-              <img src="<%= pokemon2.sprites.front_default %>" class="pokemon-img mx-auto" alt="<%= pokemon2.name %>" />
-              <div class="health-bar-container">
-                <p class="stat-title">Levenspunten: <span id="hp-value-2"><%= pokemon2.stats[0].base_stat %></span>/<%= pokemon2.stats[0].base_stat %></p>
-                <div class="health-bar">
-                  <div class="health-bar-fill" id="health-bar-fill-2"></div>
-                </div>
+            <div class="battle-stats">
+              <div class="stat">
+                <h5 class="stat-title">Aanval</h5>
+                <p class="stat-value"><%= pokemon1.stats[1].base_stat %></p>
               </div>
-              <div class="battle-stats">
-                <div class="stat">
-                  <h5 class="stat-title">Aanval</h5>
-                  <p class="stat-value"><%= pokemon2.stats[1].base_stat %></p>
-                </div>
-                <div class="stat">
-                  <h5 class="stat-title">Verdediging</h5>
-                  <p class="stat-value"><%= pokemon2.stats[2].base_stat %></p>
-                </div>
+              <div class="stat">
+                <h5 class="stat-title">Verdediging</h5>
+                <p class="stat-value"><%= pokemon1.stats[2].base_stat %></p>
               </div>
+            </div>
+            <div class="abilities-container">
+              <h5 class="stat-title">Krachten:</h5>
+              <% pokemon1.abilities.forEach((ability, index) => { %>
+              <button
+                class="pixel-button"
+                id="ability-<%= index %>"
+                onclick="applyAbilityDamage(1, 2, <%= pokemon1.stats[1].base_stat %>, <%= pokemon2.stats[2].base_stat %>, '<%= pokemon1.name %>', '<%= pokemon2.name %>', '<%= pokemon2.id %>')"
+              >
+                <%= ability.ability.name %>
+              </button>
+              <% }); %>
             </div>
           </div>
         </div>
       </div>
-      <div class="container mx-auto py-8">
-        <div class="tutorial-box">
-          <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
-          <p class="mb-2">Welkom bij de Pokémon Battle! Volg deze stappen om te beginnen:</p>
-          <ol class="list-decimal list-inside mb-4">
-            <li>Kies je Pokémon uit de lijst of zoek een specifieke Pokémon.</li>
-            <li>Klik op de "Begin Gevecht" knop om de strijd te beginnen.</li>
-            <li>Bekijk de statistieken en zie welke Pokémon als winnaar uit de bus komt!</li>
-          </ol>
+      <div class="w-full lg:w-1/3">
+        <div class="battle-container">
+          <div class="pokedex-header text-center">
+            <h5>#<%= pokemon2.id %> <%= pokemon2.name %></h5>
+          </div>
+          <div class="pokedex-body">
+            <img
+              src="<%= pokemon2.sprites.front_default %>"
+              class="pokemon-img mx-auto"
+              alt="<%= pokemon2.name %>"
+            />
+            <div class="health-bar-container">
+              <p class="stat-title">
+                Levenspunten:
+                <span id="hp-value-2"></span>
+              </p>
+              <div class="health-bar">
+                <div
+                  class="health-bar-fill"
+                  id="health-bar-fill-2"
+                  style="width: 100%"
+                ></div>
+              </div>
+            </div>
+            <div class="battle-stats">
+              <div class="stat">
+                <h5 class="stat-title">Aanval</h5>
+                <p class="stat-value"><%= pokemon2.stats[1].base_stat %></p>
+              </div>
+              <div class="stat">
+                <h5 class="stat-title">Verdediging</h5>
+                <p class="stat-value"><%= pokemon2.stats[2].base_stat %></p>
+              </div>
+            </div>
+            <div class="abilities-container">
+              <h5 class="stat-title">Krachten:</h5>
+              <% pokemon2.abilities.forEach((ability, index) => { %>
+              <button
+                class="pixel-button"
+                id="ability-enemy-<%= index %>"
+                disabled
+              >
+                <%= ability.ability.name %>
+              </button>
+              <% }); %>
+            </div>
+          </div>
         </div>
       </div>
-    </main>
-    <script>
-      const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
-      const navbarDefault = document.getElementById("navbar-default");
-    
-      button.addEventListener("click", function () {
-        navbarDefault.classList.toggle("hidden");
-      });
-    
-      // Function to update health bar and health text
-      function updateHealthBar(pokemonIndex, currentHealth, totalHealth) {
-        const healthBarFill = document.getElementById(`health-bar-fill-${pokemonIndex}`);
-        const hpValue = document.getElementById(`hp-value-${pokemonIndex}`);
-        const healthPercent = (currentHealth / totalHealth) * 100;
-    
-        healthBarFill.style.width = `${healthPercent}%`;
-        hpValue.textContent = `${currentHealth}/${totalHealth}`;
+    </div>
+    <button id="new-battle-button" class="new-battle-button">New Battle</button>
+    <div id="battle-log"></div>
+    <div class="container mx-auto py-8">
+      <div class="tutorial-box">
+        <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
+        <p class="mb-2">
+          Welkom bij de Pokémon Battle! Volg deze stappen om te beginnen:
+        </p>
+        <ol class="list-decimal list-inside mb-4">
+          <li>
+            Kies je Pokémon uit de lijst of zoek een specifieke Pokémon.
+          </li>
+          <li>Klik op de "Begin Gevecht" knop om de strijd te beginnen.</li>
+          <li>
+            Bekijk de statistieken en zie welke Pokémon als winnaar uit de bus
+            komt!
+          </li>
+        </ol>
+      </div>
+    </div>
+  </main>
+  <script>
+    const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
+    const navbarDefault = document.getElementById("navbar-default");
+
+    button.addEventListener("click", function () {
+      navbarDefault.classList.toggle("hidden");
+    });
+
+    // Function to update health bar and health text
+    function updateHealthBar(pokemonIndex, currentHealth, totalHealth) {
+      const healthBarFill = document.getElementById(`health-bar-fill-${pokemonIndex}`);
+      const hpValue = document.getElementById(`hp-value-${pokemonIndex}`);
+      const healthPercent = (currentHealth / totalHealth) * 100;
+
+      healthBarFill.style.width = `${healthPercent}%`;
+      hpValue.textContent = `${currentHealth}/${totalHealth}`;
+    }
+
+    // Function to log battle events
+    function logBattleEvent(message) {
+      const battleLog = document.getElementById('battle-log');
+      const newLogEntry = document.createElement('p');
+      newLogEntry.textContent = message;
+      battleLog.appendChild(newLogEntry);
+      battleLog.scrollTop = battleLog.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    // Function to simulate damage and update health bars
+    async function applyDamage(attackerIndex, defenderIndex, damage, attackerName, defenderName, defenderId) {
+      const defenderCurrentHealth = parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent.split('/')[0]);
+      const newDefenderHealth = Math.max(0, defenderCurrentHealth - damage); // Ensure health doesn't go below 0
+
+      // Update defender's health bar
+      updateHealthBar(defenderIndex, newDefenderHealth, parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent.split('/')[1]));
+
+      // Log the damage dealt
+      logBattleEvent(`${attackerName} attacks! ${defenderName} takes ${damage} damage!`);
+
+      // Check if the defender's health is 0 or below
+      if (newDefenderHealth <= 0) {
+        // Declare the other Pokémon as the winner
+        logBattleEvent(`${attackerName} wins!`);
+        disableAbilityButtons();
+        showNewBattleButton();
+
+        // Attempt to catch the defeated Pokémon
+        await catchPokemon(defenderId, defenderName);
+        return true;
       }
-    
-      // Function to simulate damage and update health bars
-      function applyDamage(attackerIndex, defenderIndex, damage) {
-        const defenderCurrentHealth = parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent);
-        const newDefenderHealth = Math.max(0, defenderCurrentHealth - damage); // Ensure health doesn't go below 0
-    
-        // Update defender's health bar
-        updateHealthBar(defenderIndex, newDefenderHealth, 100); // Assuming total health is 100
-    
-        // Display a message indicating damage dealt
-        alert(`Pokémon ${attackerIndex} attacks! Pokémon ${defenderIndex} takes ${damage} damage!`);
-    
-        // Check if the defender's health is 0 or below
-        if (newDefenderHealth <= 0) {
-          // Declare the other Pokémon as the winner
-          const winnerIndex = attackerIndex;
-          alert(`Pokémon ${winnerIndex} wins!`);
-          // Optionally, reset the health bars or perform other actions for a new battle
+      return false;
+    }
+
+    // Function to disable all ability buttons
+    function disableAbilityButtons() {
+      const abilityButtons = document.querySelectorAll('.pixel-button');
+      abilityButtons.forEach(button => {
+        button.disabled = true;
+      });
+    }
+
+    // Function to show the New Battle button
+    function showNewBattleButton() {
+      const newBattleButton = document.getElementById('new-battle-button');
+      newBattleButton.style.display = 'block';
+    }
+
+    // Function to start a new battle
+    function startNewBattle() {
+      // Implement logic to reset the battle or navigate to a new battle page
+      location.reload(); // Simple way to reset the current battle
+    }
+
+    // Event listener for the New Battle button
+    document.getElementById('new-battle-button').addEventListener('click', startNewBattle);
+
+    // Function to apply ability damage
+    function applyAbilityDamage(attackerIndex, defenderIndex, attackStat, defenseStat, attackerName, defenderName, defenderId) {
+      // Check if the attacker can attack
+      const attackerCurrentHealth = parseInt(document.getElementById(`hp-value-${attackerIndex}`).textContent.split('/')[0]);
+      if (attackerCurrentHealth <= 0) {
+        logBattleEvent(`${attackerName} cannot attack because it has no health left!`);
+        return;
+      }
+
+      const damage = Math.max(1, (attackStat - (defenseStat / 2))); // Ensure at least 1 damage is dealt
+      const defenderKnockedOut = applyDamage(attackerIndex, defenderIndex, damage, attackerName, defenderName, defenderId);
+
+      if (defenderKnockedOut) {
+        return;
+      }
+
+      // Check if the defender can still attack
+      const defenderCurrentHealth = parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent.split('/')[0]);
+      if (defenderCurrentHealth > 0) {
+        const counterAttackStat = attackerIndex === 1 ? <%= pokemon2.stats[1].base_stat %> : <%= pokemon1.stats[1].base_stat %>;
+        const counterDefenseStat = attackerIndex === 1 ? <%= pokemon1.stats[2].base_stat %> : <%= pokemon2.stats[2].base_stat %>;
+        const counterDamage = Math.max(1, (counterAttackStat - (counterDefenseStat / 2))); // Ensure at least 1 damage is dealt
+
+        // Check if the defender is still alive before counter-attack
+        const newAttackerHealth = parseInt(document.getElementById(`hp-value-${attackerIndex}`).textContent.split('/')[0]);
+        if (newAttackerHealth > 0 && !defenderKnockedOut) {
+          applyDamage(defenderIndex, attackerIndex, counterDamage, defenderName, attackerName, attackerIndex === 1 ? <%= pokemon1.id %> : <%= pokemon2.id %>, attackerIndex === 1 ? <%= pokemon1.name %> : <%= pokemon2.name %>);
         }
       }
-    
-      // Example usage
-      // Initialize health bars
-      updateHealthBar(1, 100, 100); // Assuming total health is 100
-      updateHealthBar(2, 100, 100); // Assuming total health is 100
-    
-      // When an ability button is clicked, simulate an attack for both Pokémon
-      const abilityButtons = document.querySelectorAll('.pixel-button');
-      abilityButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-          // Simulate a fixed amount of damage (e.g., 20) for demonstration purposes
-          const attackerIndex = 1; // Pokémon 1 is attacking
-          const defenderIndex = 2; // Pokémon 2 is defending
-          const damage = 20; // Fixed damage amount for demonstration
-    
-          // Apply damage to the defending Pokémon
-          applyDamage(attackerIndex, defenderIndex, damage);
-    
-          // Apply damage to the attacking Pokémon immediately after the first attack
-          applyDamage(defenderIndex, attackerIndex, damage);
-        });
+    }
+
+    // Event listener for ability buttons
+    const abilityButtons = document.querySelectorAll('.pixel-button');
+    abilityButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        const attackerIndex = 1; // Pokémon 1 is attacking
+        const defenderIndex = 2; // Pokémon 2 is defending
+        const attackStat = <%= pokemon1.stats[1].base_stat %>;
+        const defenseStat = <%= pokemon2.stats[2].base_stat %>;
+
+        // Apply damage to the defending Pokémon
+        applyAbilityDamage(attackerIndex, defenderIndex, attackStat, defenseStat, '<%= pokemon1.name %>', '<%= pokemon2.name %>', '<%= pokemon2.id %>');
       });
-    </script>
-    
-  </body>
-  </html>
+    });
+
+    // Function to catch defeated Pokémon
+    async function catchPokemon(pokemonId, pokemonName) {
+      console.log("Attempting to catch Pokémon with ID:", pokemonId);
+      try {
+        const response = await fetch('/catcher/catch-pokemon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ pokemonId }),
+        });
+
+        const result = await response.json();
+        console.log("Catch result:", result);
+
+        if (result.success) {
+          logBattleEvent(`You have caught ${pokemonName}!`);
+        } else {
+          logBattleEvent(`Failed to catch ${pokemonName}: ${result.message}`);
+        }
+      } catch (error) {
+        logBattleEvent(`Error catching ${pokemonName}: ${error.message}`);
+      }
+    }
+
+    // Initialize health bars
+    const pokemon1HP = <%= pokemon1.stats[0].base_stat %>;
+    const pokemon2HP = <%= pokemon2.stats[0].base_stat %>;
+    updateHealthBar(1, pokemon1HP, pokemon1HP); // Use Pokémon 1's total health
+    updateHealthBar(2, pokemon2HP, pokemon2HP); // Use Pokémon 2's total health
+  </script>
+</body>
+</html>
