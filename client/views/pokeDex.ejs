@@ -41,54 +41,83 @@
         min-height: 100vh;
       }
       .pixel-border {
-        border: 4px solid black;
+        border: 4px solid #444;
         box-shadow: 4px 4px 0px #aaa;
       }
-      .pixel-border-inputs {
-        border: 4px solid #cc0000;
-        box-shadow: 2px 2px 0px #aaa;
-      }
       .pixel-button {
+        background-color:  #ffcc00;
+        color: #fff;
+        border: 2px solid #cc0000;
+        text-shadow: 1px 1px 0px #000;
+      }
+      .pixel-button:hover {
+        background-color: #555;
+      }
+      .pixel-button-pokemon {
         background-color: #ffcc00; /* Pokémon yellow */
         color: #fff;
         border: 2px solid #cc0000; /* Pokémon red */
         text-shadow: 1px 1px 0px #000;
-        font-size: 12px;
+        text-align: center;
+        font-size: 10px; /* Smaller button text */
       }
-      .pixel-button:hover {
+      .pixel-button-pokemon:hover {
         background-color: #ffdd00;
       }
+      .pokemon-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        animation: appear 1s forwards;
+      }
       .pokemon-box {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.221);
         border: 4px solid #444;
         box-shadow: 4px 4px 0px #aaa;
         padding: 10px;
         text-align: center;
-        margin: 20px;
+        margin: 0 auto;
+        cursor: pointer;
+        height: 180px; /* Fixed height for uniformity */
       }
-      .pokemon-img {
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
+      .pokemon-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100px; /* Ensure the text truncates within the box */
+        margin: 0 auto;
+        font-size: 10px; /* Smaller name text */
       }
-      .card-title,
-      .card h5 {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+      .pokemon-grid {
+        display: grid;
+        gap: 10px;
+        margin-top: 20px;
+        grid-template-columns: repeat(3, 1fr); /* Default: 2 columns */
       }
-      .pagination a {
-        background-color: #ffcc00;
-        color: #000;
-        border: 2px solid #cc0000;
-        padding: 5px 10px;
-        text-shadow: 1px 1px 0px #000;
+      @media (min-width: 640px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(4, 1fr); /* Small screens: 4 columns */
+        }
       }
-      .pagination a:hover {
-        background-color: #ffdd00;
+      @media (min-width: 768px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(5, 1fr); /* Medium screens: 6 columns */
+        }
       }
-      .pagination .active a {
-        background-color: #cc0000;
-        color: #fff;
+      @media (min-width: 1024px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(6, 1fr); /* Large screens: 8 columns */
+        }
+      }
+      @media (min-width: 1280px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(8, 1fr); /* Extra-large screens: 10 columns */
+        }
+      }
+      @media (min-width: 1536px) {
+        .pokemon-grid {
+          grid-template-columns: repeat(10, 1fr); /* 2XL screens: 12 columns */
+        }
       }
       header {
         background: linear-gradient(to right, #ff0000, #ffcc00);
@@ -97,6 +126,14 @@
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -173,7 +210,7 @@
           type="text"
           id="search"
           name="search"
-          class="pixel-border-inputs p-2 flex-grow md:w-auto bg-yellow-300 border-red-600 text-gray-500"
+          class="pixel-border p-2 flex-grow md:w-auto bg-yellow-300 border-red-600 text-gray-500"
           placeholder="Zoek Pokémon"
           aria-label="Zoek Pokémon"
           value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>"
@@ -191,10 +228,10 @@
         <button type="submit" class="pixel-button py-2 px-4 rounded">Zoek</button>
       </form>
   
-      <div class="flex flex-wrap justify-center" id="pokemon-container">
+      <div class="pokemon-grid" id="pokemon-container">
         <% pokemonData.forEach(pokemon => { %>
         <div class="pokemon-box" data-id="<%= pokemon.id %>">
-          <h5 class="card-title text-center main-card-header">
+          <h5 class="card-title text-center pokemon-name">
             #<%= pokemon.id %> <%= pokemon.name %>
           </h5>
           <img
@@ -203,7 +240,7 @@
             alt="<%= pokemon.name %>"
           />
           <div class="card-body text-center">
-            <a class="pixel-button py-2 px-4 rounded" href="./pokeDex/<%= pokemon.id %>">Check Stats!</a>
+            <a class="pixel-button-pokemon py-2 px-4 rounded" href="./pokeDex/<%= pokemon.id %>">Stats</a>
           </div>
         </div>
         <% }); %>
@@ -212,17 +249,17 @@
   
     <script>
       const showAllCheckbox = document.getElementById('showAllCheckbox');
-  showAllCheckbox.addEventListener('change', function () {
-    const isChecked = showAllCheckbox.checked;
-    const queryParams = new URLSearchParams(window.location.search);
-    if (isChecked) {
-      queryParams.set('showAll', 'true');
-    } else {
-      queryParams.delete('showAll');
-    }
-    const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-    window.location.href = newUrl;
-  });
+      showAllCheckbox.addEventListener('change', function () {
+        const isChecked = showAllCheckbox.checked;
+        const queryParams = new URLSearchParams(window.location.search);
+        if (isChecked) {
+          queryParams.set('showAll', 'true');
+        } else {
+          queryParams.delete('showAll');
+        }
+        const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
+        window.location.href = newUrl;
+      });
     </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
