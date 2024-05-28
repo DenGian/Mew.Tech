@@ -133,6 +133,14 @@
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
       }
+      .caught {
+        background-color: green !important;
+        border-color: darkgreen !important;
+      }
+      .not-caught {
+        background-color: red !important;
+        border-color: darkred !important;
+      }
     </style>
   </head>
   <body class="bg-gray-100">
@@ -277,7 +285,7 @@
             setTimeout(async function () {
               pokemonImg.classList.remove("shake");
 
-              const catchRate = 1;
+              const catchRate = 0.5;
               const random = Math.random();
 
               if (random < catchRate) {
@@ -294,6 +302,8 @@
                 if (result.success) {
                   catchResult.textContent = "Pokémon gevangen!";
                   catchResult.style.color = "green";
+                  pokeballBtn.classList.add("caught");
+                  pokeballBtn.classList.remove("not-caught");
                   // Keep the Pokémon image visible
                 } else {
                   catchResult.textContent = result.message;
@@ -313,6 +323,8 @@
                   catchResult.style.color = "red";
                   resetBtn.style.display = "block";
                 }
+                pokeballBtn.classList.add("not-caught");
+                pokeballBtn.classList.remove("caught");
                 attemptsLeft.textContent = "Pogingen: " + attempts;
               }
               pokeballBtn.disabled = false;
