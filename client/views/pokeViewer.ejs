@@ -211,11 +211,13 @@
                           value="<%= pokemon.id %>"
                           class="hidden"
                       />
+                      <a href="/pokeDex/<%= pokemon.id %>">
                       <img
                           src="<%= pokemon.sprites.front_default %>"
                           alt="<%= pokemon.name %>"
                           class="pokemon-img mx-auto mb-2"
                       />
+                      </a>
                       <p class="text-xl"><%= pokemon.name %></p>
                   </label>
               </div>
