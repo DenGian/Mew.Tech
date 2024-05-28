@@ -1,12 +1,23 @@
 import express, { Router, Request, Response } from "express";
-import { updateUser } from "../config/database";
+import { updateUser, getCaughtPokemon } from "../config/database";
 import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
-router.get("/", (req, res) => {
-    const user: User | undefined = req.session.user;
-    res.render("pokeViewer", { user }); 
+router.get("/", async (req, res) => {
+  const user: User | undefined = req.session.user;
+  if (!user) {
+      res.status(400).send("User not found in session");
+      return;
+  }
+
+  try {
+      const caughtPokemon = await getCaughtPokemon(user._id);
+      res.render("pokeViewer", { user, caughtPokemon });
+  } catch (error) {
+      console.error("Error fetching caught Pokémon:", error);
+      res.status(500).render("error", { message: "An error occurred while fetching caught Pokémon.", error });
+  }
 });
 
 function isUserDefined(user: any): user is User {
