@@ -1,0 +1,143 @@
+body {
+    background-color: #f0f0f0;
+    background-image: url("../assets/images/grassland.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Press Start 2P", cursive;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  .pixel-border {
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+  }
+  .pixel-button {
+    background-color: #444;
+    color: #fff;
+    border: 2px solid #222;
+    text-shadow: 1px 1px 0px #000;
+  }
+  .pixel-button:hover {
+    background-color: #555;
+  }
+  .pixel-button-pokemon {
+    background-color: #ffcc00; /* Pokémon yellow */
+    color: #fff;
+    border: 2px solid #cc0000; /* Pokémon red */
+    text-shadow: 1px 1px 0px #000;
+    text-align: center;
+  }
+  .pixel-button-pokemon:hover {
+    background-color: #ffdd00;
+  }
+  .pokemon-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    animation: appear 1s forwards;
+  }
+  .pokemon-box {
+    background-color: rgba(255, 255, 255, 0.221);
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    height: 180px; /* Fixed height for uniformity */
+  }
+  .pokemon-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px; /* Ensure the text truncates within the box */
+    margin: 0 auto;
+  }
+  .profile-box {
+    background-color: rgba(255, 255, 255, 0.221);
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+    padding: 20px;
+    text-align: center;
+    margin-right: 20px; /* Add margin to the right */
+    width: 100%; /* Set fixed width for profile box */
+    max-width: 250px; /* Maximum width for large screens */
+  }
+  .caught-pokemon-box {
+    background-color: rgba(255, 255, 255, 0.221);
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1; /* Allow it to fill the remaining space */
+  }
+  .pokemon-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .highlighted {
+    border-color: #00ff00 !important; /* Highlight border color */
+  }
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  header {
+    background: linear-gradient(to right, #ff0000, #ffcc00);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Add this CSS to style the selected Pokémon */
+  .selected-pokemon {
+    border-color: #00ff00; /* Green border for selected Pokémon */
+  }
+
+  /* Custom media queries for responsive grid */
+  .pokemon-grid {
+    grid-template-columns: repeat(2, 1fr); /* Default: 2 columns */
+  }
+  @media (min-width: 640px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(2, 1fr); /* Small screens: 2 columns */
+    }
+  }
+  @media (min-width: 768px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(4, 1fr); /* Medium screens: 4 columns */
+    }
+  }
+  @media (min-width: 1024px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(4, 1fr); /* Large screens: 4 columns */
+    }
+  }
+  @media (min-width: 1280px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(6, 1fr); /* Extra-large screens: 6 columns */
+    }
+  }
+  @media (min-width: 1536px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(8, 1fr); /* 2XL screens: 8 columns */
+    }
+  }
+  .nav-pokemon-img {
+    width: 80px; /* Increased size */
+    height: 80px; /* Increased size */
+    object-fit: contain;
+    margin-right: -5px;
+    margin-top: -50px;
+    margin-bottom: -50px;
+  }
+  .nav-pokemon-name {
+    font-size: 1rem; /* Smaller font size */
+  }

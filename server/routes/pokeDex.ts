@@ -1,74 +1,111 @@
 import express, { Router, Request, Response } from "express";
-import { getCaughtPokemon, getPokemonById, updatePokemonName, getAllPokemon, filteredPokemon, collectionUsers, collectionPokemon } from "../config/database";
+import { 
+  getCaughtPokemon, 
+  getPokemonById, 
+  updatePokemonName, 
+  getAllPokemon, 
+  filteredPokemon, 
+  collectionUsers, 
+  collectionPokemon, 
+  getSelectedPokemon 
+} from "../config/database";
+import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
 
 router.get("/", async (req: Request<{}, any, any, { showAll?: string, search?: string }>, res: Response) => {
-    try {
-        const showAll = req.query.showAll === "true";
-        const searchTerm = req.query.search || "";
-        let pokemonData;
-        if (showAll) {
-            if (searchTerm) {
-                pokemonData = await filteredPokemon(searchTerm);
-            } else {
-                const result = await getAllPokemon();
-                pokemonData = result.pokemonData;
-            }
-        } else {
-            if (!req.session.user || !req.session.user._id) {
-                return res.status(401).send("User not authenticated");
-            }
-            const userId = req.session.user._id.toString();
-            const caughtPokemon = await getCaughtPokemon(userId);
+  try {
+    const showAll = req.query.showAll === "true";
+    const searchTerm = req.query.search || "";
+    let pokemonData;
 
-            if (searchTerm) {
-                pokemonData = caughtPokemon.filter(pokemon => 
-                    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-            } else {
-                pokemonData = caughtPokemon;
-            }
-        }
-        res.render("pokeDex", { pokemonData, showAll, searchTerm });
-    } catch (error) {
-        console.error("Error fetching Pokémon:", error);
-        res.status(500).send("Failed to load page due to server error.");
+    // Fetch selected Pokémon if user is logged in
+    const user: User | undefined = req.session.user;
+    let selectedPokemon = null;
+    if (user) {
+      const selectedPokemonId = user.selectedPokemon || '';
+      selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
     }
+
+    if (showAll) {
+      if (searchTerm) {
+        pokemonData = await filteredPokemon(searchTerm);
+      } else {
+        const result = await getAllPokemon();
+        pokemonData = result.pokemonData;
+      }
+    } else {
+      if (!req.session.user || !req.session.user._id) {
+        return res.status(401).send("User not authenticated");
+      }
+      const userId = req.session.user._id.toString();
+      const caughtPokemon = await getCaughtPokemon(userId);
+
+      if (searchTerm) {
+        pokemonData = caughtPokemon.filter(pokemon =>
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      } else {
+        pokemonData = caughtPokemon;
+      }
+    }
+    res.render("pokeDex", { pokemonData, showAll, searchTerm, selectedPokemon, user: req.session.user });
+  } catch (error) {
+    console.error("Error fetching Pokémon:", error);
+    res.status(500).send("Failed to load page due to server error.");
+  }
 });
 
 router.get('/:pokemonId', async (req, res) => {
-    try {
-        const pokemonId = req.params.pokemonId;
-        const pokemon = await getPokemonById(pokemonId);
-        if (!pokemon) {
-            return res.status(404).send('Pokémon not found');
-        }
-        res.render('detail-pokemon', { pokemon });
-    } catch (error) {
-        console.error('Error fetching Pokémon stats:', error);
-        res.status(500).send('Failed to load Pokémon stats due to server error.');
+  try {
+    const pokemonId = req.params.pokemonId;
+    const pokemon = await getPokemonById(pokemonId);
+    if (!pokemon) {
+      return res.status(404).send('Pokémon not found');
     }
+
+    // Fetch selected Pokémon if user is logged in
+    const user: User | undefined = req.session.user;
+    let selectedPokemon = null;
+    if (user) {
+      const selectedPokemonId = user.selectedPokemon || '';
+      selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+    }
+
+    res.render('detail-pokemon', { pokemon, selectedPokemon, user: req.session.user });
+  } catch (error) {
+    console.error('Error fetching Pokémon stats:', error);
+    res.status(500).send('Failed to load Pokémon stats due to server error.');
+  }
 });
 
 router.post('/:pokemonId', async (req, res) => {
-    try {
-        const { pokemonId } = req.params;
-        const { newName, wins, losses } = req.body;
-        if (newName) {
-            await updatePokemonName(pokemonId, newName);
-        }
-        if (!isNaN(wins) && !isNaN(losses)) {
-            await collectionPokemon.updateOne(
-                { id: pokemonId },
-                { $set: { wins: parseInt(wins), losses: parseInt(losses) } }
-            );
-        }
-        res.redirect(`/pokeDex/${pokemonId}`);
-    } catch (error) {
-        console.error('Error updating Pokémon:', error);
-        res.status(500).send('Failed to update Pokémon');
+  try {
+    const { pokemonId } = req.params;
+    const { newName, wins, losses } = req.body;
+    if (newName) {
+      await updatePokemonName(pokemonId, newName);
     }
+    if (!isNaN(wins) && !isNaN(losses)) {
+      await collectionPokemon.updateOne(
+        { id: pokemonId },
+        { $set: { wins: parseInt(wins), losses: parseInt(losses) } }
+      );
+    }
+
+    // Fetch selected Pokémon if user is logged in
+    const user: User | undefined = req.session.user;
+    let selectedPokemon = null;
+    if (user) {
+      const selectedPokemonId = user.selectedPokemon || '';
+      selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+    }
+
+    res.redirect(`/pokeDex/${pokemonId}`);
+  } catch (error) {
+    console.error('Error updating Pokémon:', error);
+    res.status(500).send('Failed to update Pokémon');
+  }
 });
 
 export default router;

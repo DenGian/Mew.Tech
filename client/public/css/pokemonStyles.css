@@ -35,9 +35,9 @@ body {
 .pixel-button-compare,
 .pixel-button-pokedex,
 .pixel-button-guess {
-  background-color: #ffcc00; /* Pokémon yellow */
+  background-color: #ffcc00; 
   color: #fff;
-  border: 2px solid #cc0000; /* Pokémon red */
+  border: 2px solid #cc0000; 
   text-shadow: 1px 1px 0px #000;
   font-size: 12px;
 }
@@ -168,7 +168,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100px; /* Ensure the text truncates within the box */
+  width: 100px; 
   margin: 0 auto;
   font-size: 10px;
 }
@@ -179,9 +179,9 @@ body {
   box-shadow: 4px 4px 0px #aaa;
   padding: 20px;
   text-align: center;
-  margin-right: 20px; /* Add margin to the right */
-  width: 100%; /* Set fixed width for profile box */
-  max-width: 250px; /* Maximum width for large screens */
+  margin-right: 20px; 
+  width: 100%; 
+  max-width: 250px; 
 }
 
 .caught-pokemon-box {
@@ -190,7 +190,7 @@ body {
   box-shadow: 4px 4px 0px #aaa;
   padding: 20px;
   text-align: center;
-  flex-grow: 1; /* Allow it to fill the remaining space */
+  flex-grow: 1; 
 }
 
 @keyframes bounceIn {
@@ -247,16 +247,16 @@ header {
 }
 
 .highlighted {
-  border-color: #00ff00 !important; /* Highlight border color */
+  border-color: #00ff00 !important; 
 }
 
 .selected-pokemon {
-  border-color: #00ff00; /* Green border for selected Pokémon */
+  border-color: #00ff00; 
 }
 
-/* Custom media queries for responsive grid */
+
 .pokemon-grid {
-  grid-template-columns: repeat(2, 1fr); /* Default: 2 columns */
+  grid-template-columns: repeat(2, 1fr); 
 }
 @media (min-width: 640px) {
   .pokemon-grid {
@@ -471,4 +471,24 @@ header {
 
 .border-checkbox:checked {
   background-color: #ffdd00;
+}
+
+.caught {
+  background-color: green !important;
+  border-color: darkgreen !important;
+}
+.not-caught {
+  background-color: red !important;
+  border-color: darkred !important;
+}
+.nav-pokemon-img {
+  width: 80px; /* Increased size */
+  height: 80px; /* Increased size */
+  object-fit: contain;
+  margin-right: -5px;
+  margin-top: -50px;
+  margin-bottom: -50px;
+}
+.nav-pokemon-name {
+  font-size: 1rem; /* Smaller font size */
 }
