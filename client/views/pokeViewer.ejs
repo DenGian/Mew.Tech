@@ -76,6 +76,7 @@
         padding: 10px;
         text-align: center;
         margin: 0 auto;
+        cursor: pointer;
       }
       .profile-box {
         background-color: rgba(255, 255, 255, 0.221);
@@ -83,8 +84,24 @@
         box-shadow: 4px 4px 0px #aaa;
         padding: 20px;
         text-align: center;
-        margin: 0 auto;
-        max-width: 600px;
+        margin-right: 20px; /* Add margin to the right */
+        width: 250px; /* Set fixed width for profile box */
+      }
+      .caught-pokemon-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 20px;
+        text-align: center;
+        flex-grow: 1; /* Allow it to fill the remaining space */
+      }
+      .pokemon-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(150px, 1fr)
+        ); /* Make all boxes the same size */
+        gap: 10px;
       }
       .tutorial-box {
         background-color: rgba(255, 255, 255, 0.221);
@@ -92,6 +109,9 @@
         box-shadow: 2px 2px 0px #aaa;
         padding: 15px;
         margin-top: 20px;
+      }
+      .highlighted {
+        border-color: #00ff00 !important; /* Highlight border color */
       }
       @keyframes appear {
         from {
@@ -183,58 +203,104 @@
       </nav>
     </header>
 
-    <main class="container mx-auto p-4">
-      <h2 class="text-center text-3xl mb-4">Mijn Profiel</h2>
-      <div class="profile-box">
+    <main class="container mx-auto p-4 flex flex-col lg:flex-row">
+      <div class="profile-box lg:w-1/4">
         <h3 class="text-2xl mb-4">Gebruikersinformatie</h3>
         <form action="/viewer" method="POST" class="mb-4">
           <div class="mb-4">
-              <label for="username" class="block text-lg font-medium text-gray-700">Gebruikersnaam:</label>
-              <input type="text" class="form-input mt-1 block w-full" id="username" name="username" value="<%= user.username %>">
+            <label
+              for="username"
+              class="block text-lg font-medium text-gray-700"
+              >Gebruikersnaam:</label
+            >
+            <input
+              type="text"
+              class="form-input mt-1 block w-full"
+              id="username"
+              name="username"
+              value="<%= user.username %>"
+            />
           </div>
           <div class="mb-4">
-              <label for="email" class="block text-lg font-medium text-gray-700">E-mail:</label>
-              <input type="email" class="form-input mt-1 block w-full" id="email" name="email" value="<%= user.email %>">
+            <label for="email" class="block text-lg font-medium text-gray-700"
+              >E-mail:</label
+            >
+            <input
+              type="email"
+              class="form-input mt-1 block w-full"
+              id="email"
+              name="email"
+              value="<%= user.email %>"
+            />
           </div>
-          <button type="submit" class="pixel-button-pokemon py-2 px-4 rounded">Informatie opslaan</button>
-      </form>      
-      <div class="profile-box">
+          <button type="submit" class="pixel-button-pokemon py-2 px-4 rounded">
+            Informatie opslaan
+          </button>
+        </form>
+        <h3 class="text-2xl mb-4">Geselecteerde Hoofd-Pokémon</h3>
+        <% if (selectedPokemon) { %>
+        <div class="pokemon-box">
+          <img
+            src="<%= selectedPokemon.sprites.front_default %>"
+            alt="<%= selectedPokemon.name %>"
+            class="pokemon-img mx-auto mb-2"
+          />
+          <p class="text-xl"><%= selectedPokemon.name %></p>
+        </div>
+        <% } else { %>
+        <p>Geen hoofd-Pokémon geselecteerd</p>
+        <% } %>
+      </div>
+      <div class="caught-pokemon-box lg:w-3/4 lg:ml-4">
         <h3 class="text-2xl mb-4">Kies je hoofd-Pokémon</h3>
-        <form action="/viewer/set-main-pokemon" method="POST">
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <% caughtPokemon.forEach(pokemon => { %>
-              <div class="pokemon-box">
-                  <label class="cursor-pointer">
-                      <input
-                          type="radio"
-                          name="mainPokemon"
-                          value="<%= pokemon.id %>"
-                          class="hidden"
-                      />
-                      <a href="/pokeDex/<%= pokemon.id %>">
-                      <img
-                          src="<%= pokemon.sprites.front_default %>"
-                          alt="<%= pokemon.name %>"
-                          class="pokemon-img mx-auto mb-2"
-                      />
-                      </a>
-                      <p class="text-xl"><%= pokemon.name %></p>
-                  </label>
-              </div>
-              <% }); %>
+        <form id="pokemonForm" action="/viewer/set-main-pokemon" method="POST">
+          <div class="pokemon-grid">
+            <% caughtPokemon.forEach(pokemon => { %>
+            <div class="pokemon-box" data-pokemon-id="<%= pokemon.id %>">
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="mainPokemon"
+                  value="<%= pokemon.id %>"
+                  class="hidden"
+                />
+                <a href="/pokeDex/<%= pokemon.id %>">
+                  <img
+                    src="<%= pokemon.sprites.front_default %>"
+                    alt="<%= pokemon.name %>"
+                    class="pokemon-img mx-auto mb-2"
+                  />
+                </a>
+                <p class="text-xl"><%= pokemon.name %></p>
+              </label>
+            </div>
+            <% }); %>
           </div>
           <button
-              type="submit"
-              class="pixel-button-pokemon py-2 px-4 rounded mt-4"
+            type="submit"
+            class="pixel-button-pokemon py-2 px-4 rounded mt-4"
           >
-              Hoofd-Pokémon instellen
+            Hoofd-Pokémon instellen
           </button>
-      </form>
-      
-    </div>
+        </form>
+      </div>
     </main>
 
-    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const pokemonBoxes = document.querySelectorAll(".pokemon-box");
+
+        pokemonBoxes.forEach((box) => {
+          box.addEventListener("click", function () {
+            // Remove highlight from all boxes
+            pokemonBoxes.forEach((b) => b.classList.remove("highlighted"));
+            // Add highlight to the clicked box
+            box.classList.add("highlighted");
+            // Check the corresponding radio button
+            box.querySelector("input[type='radio']").checked = true;
+          });
+        });
+      });
+    </script>
   </body>
 </html>
-
