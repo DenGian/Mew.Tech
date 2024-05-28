@@ -213,16 +213,9 @@ async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
   }
 }
 
-async function getAllPokemon(
-  skip: number = 0,
-  limit: number = Infinity
-): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
+async function getAllPokemon(): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
   try {
-    const pokemonData = await collectionPokemon
-      .find({})
-      .skip(skip)
-      .limit(limit)
-      .toArray();
+    const pokemonData = await collectionPokemon.find({}).toArray();
     const totalPokemonCount = await collectionPokemon.countDocuments();
     return { pokemonData, totalPokemonCount };
   } catch (error) {

@@ -1,30 +1,25 @@
 import express, { Router, Request, Response } from "express";
-import { getCaughtPokemon, getPokemonById, collectionPokemon, updatePokemonName } from "../config/database";
-import { calculateTotalPages } from "../utils/helper-functions";
+import { getCaughtPokemon, getPokemonById, collectionPokemon, updatePokemonName, getAllPokemon } from "../config/database";
 
 const router: Router = express.Router();
 
-const POKEMON_PER_PAGE = 6; 
-const MAX_PAGES_DISPLAYED = 7;
-
-router.get("/", async (req: Request<{}, any, any, { page?: string }>, res: Response) => {
+router.get("/", async (req: Request<{}, any, any, { showAll?: string }>, res: Response) => {
     try {
-        if (!req.session.user || !req.session.user._id) {
-            return res.status(401).send("User not authenticated");
+        const showAll = req.query.showAll === "true";
+        let pokemonData;
+        let totalPokemonCount;
+        if (showAll) {
+            ({ pokemonData, totalPokemonCount } = await getAllPokemon());
+        } else {
+            if (!req.session.user || !req.session.user._id) {
+                return res.status(401).send("User not authenticated");
+            }
+            const userId = req.session.user._id.toString();
+            const caughtPokemonData = await getCaughtPokemon(userId);
+            totalPokemonCount = caughtPokemonData.length;
+            pokemonData = caughtPokemonData;
         }
-        const userId = req.session.user._id.toString();
-        const page = parseInt(req.query.page?.toString() || "1");
-        const skip = (page - 1) * POKEMON_PER_PAGE;
-        const caughtPokemonData = await getCaughtPokemon(userId);
-        const totalPokemonCount = caughtPokemonData.length;
-        const paginatedPokemon = caughtPokemonData.slice(skip, skip + POKEMON_PER_PAGE);
-        const totalPages = calculateTotalPages(totalPokemonCount, POKEMON_PER_PAGE);
-        let startPage = Math.max(1, page - Math.floor(MAX_PAGES_DISPLAYED / 2));
-        let endPage = Math.min(totalPages, startPage + MAX_PAGES_DISPLAYED - 1);
-        if (endPage - startPage + 1 < MAX_PAGES_DISPLAYED) {
-            startPage = Math.max(1, endPage - MAX_PAGES_DISPLAYED + 1);
-        }
-        res.render("pokeDex", { pokemonData: paginatedPokemon, page, totalPages, startPage, endPage });
+        res.render("pokeDex", { pokemonData, showAll });
     } catch (error) {
         console.error("Error fetching Pokémon:", error);
         res.status(500).send("Failed to load page due to server error.");
@@ -64,6 +59,5 @@ router.post('/:pokemonId', async (req, res) => {
         res.status(500).send('Failed to update Pokémon');
     }
 });
-
 
 export default router;
