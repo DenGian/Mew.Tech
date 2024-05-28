@@ -1,100 +1,299 @@
-<%- include('partials/header') %>
-<main class="catchIMG">
-  <div>
-    <div class="container">
-      <p class="text-center">Arena</p>
-      <div class="row">
-        <section class="col-md-12">
-          <div class="container mt-5">
-            <div class="row justify-content-center">
-              <div class="col-md-4 offset-md-3">
-                <div class="card-header text-white">
-                  <h2 class="card-title text-center">
-                    Je Pokémon: Bulbasaur #001
-                  </h2>
-                </div>
-                <img
-                  src="./assets/images/bulbasaur.png"
-                  class="animation"
-                  class="card-img-top"
-                  alt="Bulbasaur"
-                />
-                <div class="card-body pb-3">
-                  <h3 class="text-center">HP</h3>
-                  <div class="progress-bar-container">
-                    <label for="progressBarR"></label>
-                    <progress
-                      id="progressBarR"
-                      class=".p1 - .p100"
-                      value="20"
-                      max="100"
-                    >
-                      20%
-                    </progress>
-                  </div>
-                  <!-- Stats -->
-                  <div class="row">
-                    <div class="col-6">
-                      <h3 class="text-center">Aanval</h3>
-                      <p class="text-center">49</p>
-                    </div>
-                    <div class="col-6">
-                      <h3 class="text-center">Verdediging</h3>
-                      <p class="text-center">49</p>
-                    </div>
-                  </div>
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Neem deel aan spannende Pokémon-gevechten op Mew.Tech. Kies je Pokémon, vecht en ontdek wie de sterkste is!"
+    />
+    <meta
+      name="keywords"
+      content="Pokémon, gevecht, duel, AP Hogeschool, project, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+    />
+    <meta
+      name="author"
+      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+    />
+    <title>Mew.Tech - PokéBattler</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        background-image: url("../assets/images/grassland.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Press Start 2P", cursive;
+        padding: 1rem;
+        min-height: 100vh;
+      }
+      .pixel-border {
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+      }
+      .pixel-button {
+        background-color: #ffcc00; /* Pokémon yellow */
+        color: #fff;
+        border: 2px solid #cc0000; /* Pokémon red */
+        text-shadow: 1px 1px 0px #000;
+        font-size: 12px;
+      }
+      .pixel-button:hover {
+        background-color: #ffdd00;
+      }
+      .battle-container {
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 4px solid #444;
+        box-shadow: 4px 4px 0px #aaa;
+        padding: 10px;
+        text-align: center;
+        margin: 20px;
+      }
+      .pokemon-img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+      }
+      .health-bar-container {
+        margin-top: 10px;
+      }
+      .health-bar {
+        background-color: #e0e0e0;
+        border: 2px solid #444;
+        width: 100%;
+        height: 20px;
+        position: relative;
+        margin-top: 5px;
+      }
+      .health-bar-fill {
+        background-color: #76c893;
+        height: 100%;
+        width: 100%; /* This will be dynamically updated */
+      }
+      .battle-stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+      }
+      .stat {
+        width: 45%;
+      }
+      .stat-title {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+      .stat-value {
+        font-size: 0.875rem;
+      }
+      .tutorial-box {
+        background-color: rgba(255, 255, 255, 0.221);
+        border: 2px solid #444;
+        box-shadow: 2px 2px 0px #aaa;
+        padding: 15px;
+        margin-top: 20px;
+      }
+      header {
+        background: linear-gradient(to right, #ff0000, #ffcc00);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="pixel-border p-4 mb-4">
+      <nav
+        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
+      >
+        <div class="flex justify-between items-center w-full sm:w-auto">
+          <a class="text-2xl font-bold flex items-center" href="/main">
+            <img
+              src="./assets/images/logo.webp"
+              alt="logo"
+              class="h-10 w-10 mr-2"
+            />
+          </a>
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
+          id="navbar-default"
+        >
+          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/main">Home</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/battler">Duel</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/catcher">Catch</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+            </li>
+            <li class="text-left lg:text-center">
+              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container mx-auto p-4">
+      <h2 class="text-center text-3xl mb-4">PokéBattler</h2>
+      <div class="flex flex-col lg:flex-row justify-center">
+        <div class="w-full lg:w-1/3">
+          <div class="battle-container">
+            <div class="pokedex-header text-center">
+              <h5>#<%= pokemon1.id %> <%= pokemon1.name %></h5>
+            </div>
+            <div class="pokedex-body">
+              <img
+                src="<%= pokemon1.sprites.front_default %>"
+                class="pokemon-img mx-auto"
+                alt="<%= pokemon1.name %>"
+              />
+              <div class="health-bar-container">
+                <p class="stat-title">
+                  Levenspunten:
+                  <span id="hp-value-1"><%= pokemon1.stats[0].base_stat %></span
+                  >/<%= pokemon1.stats[0].base_stat %>
+                </p>
+                <div class="health-bar">
+                  <div class="health-bar-fill" id="health-bar-fill-1"></div>
                 </div>
               </div>
-              <div class="col-md-4 offset-md-1">
-                <div class="card-header text-white">
-                  <h2 class="card-title text-center">
-                    Vijand: Charmander #004
-                  </h2>
+              <div class="battle-stats">
+                <div class="stat">
+                  <h5 class="stat-title">Aanval</h5>
+                  <p class="stat-value"><%= pokemon1.stats[1].base_stat %></p>
                 </div>
-                <img
-                  src="./assets/images/bulbasaur.png"
-                  class="animation"
-                  class="card-img-top"
-                  alt="Charmander"
-                />
-                <div class="card-body pb-3">
-                  <h3 class="text-center">HP</h3>
-                  <div class="progress-bar-container">
-                    <label for="progressBarR"></label>
-                    <progress
-                      id="progressBarR"
-                      class=".p1 - .p100"
-                      value="60"
-                      max="100"
-                    >
-                      60%
-                    </progress>
-                  </div>
-
-                  <!-- Stats -->
-                  <div class="row">
-                    <div class="col-6">
-                      <h3 class="text-center">Aanval</h3>
-                      <p class="text-center">52</p>
-                    </div>
-                    <div class="col-6">
-                      <h3 class="text-center">Verdediging</h3>
-                      <p class="text-center">43</p>
-                    </div>
-                  </div>
+                <div class="stat">
+                  <h5 class="stat-title">Verdediging</h5>
+                  <p class="stat-value"><%= pokemon1.stats[2].base_stat %></p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center">
-            <div class="col text-center pb-3">
-              <button type="button" class="btn btn-danger btn-lg">
-                Aanvallen
-              </button>
+        </div>
+        <div class="w-full lg:w-1/3">
+          <div class="battle-container">
+            <div class="pokedex-header text-center">
+              <h5>#<%= pokemon2.id %> <%= pokemon2.name %></h5>
+            </div>
+            <div class="pokedex-body">
+              <img
+                src="<%= pokemon2.sprites.front_default %>"
+                class="pokemon-img mx-auto"
+                alt="<%= pokemon2.name %>"
+              />
+              <div class="health-bar-container">
+                <p class="stat-title">
+                  Levenspunten:
+                  <span id="hp-value-2"><%= pokemon2.stats[0].base_stat %></span
+                  >/<%= pokemon2.stats[0].base_stat %>
+                </p>
+                <div class="health-bar">
+                  <div class="health-bar-fill" id="health-bar-fill-2"></div>
+                </div>
+              </div>
+              <div class="battle-stats">
+                <div class="stat">
+                  <h5 class="stat-title">Aanval</h5>
+                  <p class="stat-value"><%= pokemon2.stats[1].base_stat %></p>
+                </div>
+                <div class="stat">
+                  <h5 class="stat-title">Verdediging</h5>
+                  <p class="stat-value"><%= pokemon2.stats[2].base_stat %></p>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
-  </div>
-</main>
+      <div class="container mx-auto py-8">
+        <div class="tutorial-box">
+          <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
+          <p class="mb-2">
+            Welkom bij de Pokémon Battle! Volg deze stappen om te beginnen:
+          </p>
+          <ol class="list-decimal list-inside mb-4">
+            <li>
+              Kies je Pokémon uit de lijst of zoek een specifieke Pokémon.
+            </li>
+            <li>Klik op de "Begin Gevecht" knop om de strijd te beginnen.</li>
+            <li>
+              Bekijk de statistieken en zie welke Pokémon als winnaar uit de bus
+              komt!
+            </li>
+          </ol>
+        </div>
+      </div>
+    </main>
+    <script>
+      const button = document.querySelector(
+        '[data-collapse-toggle="navbar-default"]'
+      );
+      const navbarDefault = document.getElementById("navbar-default");
+
+      button.addEventListener("click", function () {
+        navbarDefault.classList.toggle("hidden");
+      });
+
+      // Function to update health bar and health text
+      function updateHealthBar(pokemonIndex, currentHealth, totalHealth) {
+        const healthBarFill = document.getElementById(
+          `health-bar-fill-${pokemonIndex}`
+        );
+        const hpValue = document.getElementById(`hp-value-${pokemonIndex}`);
+        const healthPercent = (currentHealth / totalHealth) * 100;
+
+        healthBarFill.style.width = `${healthPercent}%`;
+        hpValue.textContent = `${currentHealth}/${totalHealth}`;
+      }
+
+      // Example usage
+      // Update the health bar for both Pokémon (example: set health to 70% of total health)
+      updateHealthBar(1, 70, 100); // Assuming total health is 100
+      updateHealthBar(2, 70, 100); // Assuming total health is 100
+    </script>
+  </body>
+</html>

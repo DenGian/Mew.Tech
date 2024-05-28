@@ -33,12 +33,18 @@ body {
 
 .pixel-button-pokemon,
 .pixel-button-compare,
+.pixel-button-pokedex,
 .pixel-button-guess {
   background-color: #ffcc00; /* Pokémon yellow */
   color: #fff;
   border: 2px solid #cc0000; /* Pokémon red */
   text-shadow: 1px 1px 0px #000;
   font-size: 12px;
+}
+
+.pixel-button-pokedex{
+  text-align: center;
+  font-size: 10px;
 }
 
 .pixel-button-pokemon {
@@ -164,6 +170,7 @@ body {
   text-overflow: ellipsis;
   width: 100px; /* Ensure the text truncates within the box */
   margin: 0 auto;
+  font-size: 10px;
 }
 
 .profile-box {
@@ -228,11 +235,17 @@ header {
   font-size: 2.5rem;
   text-shadow: 2px 2px #000;
 }
-
+.pokemon-grid-pokedex,
 .pokemon-grid {
   display: grid;
   gap: 10px;
 }
+
+.pokemon-grid-pokedex{
+   margin-top: 20px;
+        grid-template-columns: repeat(3, 1fr);
+}
+
 .highlighted {
   border-color: #00ff00 !important; /* Highlight border color */
 }
@@ -270,6 +283,33 @@ header {
     grid-template-columns: repeat(8, 1fr); /* 2XL screens: 8 columns */
   }
 }
+
+@media (min-width: 640px) {
+  .pokemon-grid-pokedex {
+    grid-template-columns: repeat(4, 1fr); /* Small screens: 4 columns */
+  }
+}
+@media (min-width: 768px) {
+  .pokemon-grid-pokedex {
+    grid-template-columns: repeat(5, 1fr); /* Medium screens: 6 columns */
+  }
+}
+@media (min-width: 1024px) {
+  .pokemon-grid-pokedex {
+    grid-template-columns: repeat(6, 1fr); /* Large screens: 8 columns */
+  }
+}
+@media (min-width: 1280px) {
+  .pokemon-grid-pokedex {
+    grid-template-columns: repeat(8, 1fr); /* Extra-large screens: 10 columns */
+  }
+}
+@media (min-width: 1536px) {
+  .pokemon-grid-pokedex {
+    grid-template-columns: repeat(10, 1fr); /* 2XL screens: 12 columns */
+  }
+}
+
 
 .game-grid {
   display: grid;

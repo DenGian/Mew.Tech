@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%- include('partials/header') %>
 <body class="bg-gray-100">
   <main class="container mx-auto p-4">
@@ -22,234 +21,6 @@
           alt="<%= randomPokemon.name %>"
         />
         <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
-=======
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
-    />
-    <meta
-      name="keywords"
-      content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
-    />
-    <meta
-      name="author"
-      content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
-    />
-    <title>Mew.Tech</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
-    <link
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        background-color: #f0f0f0;
-        background-image: url("../assets/images/grassland.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: "Press Start 2P", cursive;
-        padding: 1rem;
-        min-height: 100vh;
-      }
-      .pixel-border {
-        border: 4px solid #444;
-        box-shadow: 4px 4px 0px #aaa;
-      }
-      .pixel-button {
-        background-color: #444;
-        color: #fff;
-        border: 2px solid #222;
-        text-shadow: 1px 1px 0px #000;
-      }
-      .pixel-button:hover {
-        background-color: #555;
-      }
-      .pixel-button-pokemon {
-        background-color: #ffcc00; /* Pokémon yellow */
-        color: #fff;
-        border: 2px solid #cc0000; /* Pokémon red */
-        text-shadow: 1px 1px 0px #000;
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-      }
-      .pixel-button-pokemon:hover {
-        background-color: #ffdd00;
-      }
-      .pokemon-img {
-        width: 300px;
-        height: 300px;
-        object-fit: contain;
-        animation: appear 1s forwards;
-      }
-      .pokemon-box {
-        background-color: rgba(255, 255, 255, 0.221);
-        border: 4px solid #444;
-        box-shadow: 4px 4px 0px #aaa;
-        padding: 10px;
-        text-align: center;
-      }
-      .tutorial-box {
-        background-color: rgba(255, 255, 255, 0.221);
-        border: 2px solid #444;
-        box-shadow: 2px 2px 0px #aaa;
-        padding: 15px;
-        margin-top: 20px;
-      }
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        20%,
-        60% {
-          transform: translateX(-10px);
-        }
-        40%,
-        80% {
-          transform: translateX(10px);
-        }
-      }
-      @keyframes appear {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      @keyframes capture {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(0);
-          opacity: 0;
-        }
-      }
-      .shake {
-        animation: shake 0.5s;
-      }
-      .capture {
-        animation: capture 0.5s forwards;
-      }
-      header {
-        background: linear-gradient(to right, #ff0000, #ffcc00);
-        color: white;
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-      }
-      .caught {
-        background-color: green !important;
-        border-color: darkgreen !important;
-      }
-      .not-caught {
-        background-color: red !important;
-        border-color: darkred !important;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-100">
-    <header class="pixel-border p-4 mb-4">
-      <nav
-        class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4"
-      >
-        <div class="flex justify-between items-center w-full sm:w-auto">
-          <a class="text-2xl font-bold flex items-center" href="/main">
-            <img
-              src="./assets/images/logo.webp"
-              alt="logo"
-              class="h-10 w-10 mr-2"
-            />
-          </a>
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
-        <div
-          class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto"
-          id="navbar-default"
-        >
-          <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/main">Home</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/battler">Duel</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/catcher">Catch</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
-            </li>
-            <li class="text-left lg:text-center">
-              <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
-    <main class="container mx-auto p-4">
-      <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
-      <div id="initial-message" class="text-center text-xl mb-4">
-        Een wilde <%= randomPokemon.name %> is verschenen!
-      </div>
-      <div
-        id="pokemon-container"
-        class="flex justify-center items-center"
-        style="display: none"
-      >
-        <div class="pokemon-box">
-          <h5 class="text-xl mb-2">
-            #<%= randomPokemon.id %> <%= randomPokemon.name %>
-          </h5>
->>>>>>> production
           <img
             src="../../assets/images/poke-ball.png"
             alt="Pokeball"
@@ -304,17 +75,10 @@
           setTimeout(async function () {
             pokemonImg.classList.remove("shake");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             const catchRate = 0.1;
             const random = Math.random();
-=======
-              const catchRate = 1;
-=======
-              const catchRate = 0.5;
->>>>>>> production
-              const random = Math.random();
->>>>>>> production
+
 
             if (random < catchRate) {
               // Post to server to catch the Pokémon
@@ -327,7 +91,6 @@
               });
               const result = await response.json();
 
-<<<<<<< HEAD
               if (result.success) {
                 catchResult.textContent = "Pokémon gevangen!";
                 catchResult.style.color = "green";
@@ -336,35 +99,6 @@
                 catchResult.textContent = result.message;
                 catchResult.style.color = "red";
                 pokemonImg.style.display = "block"; // Show Pokémon image again
-=======
-                if (result.success) {
-                  catchResult.textContent = "Pokémon gevangen!";
-                  catchResult.style.color = "green";
-                  pokeballBtn.classList.add("caught");
-                  pokeballBtn.classList.remove("not-caught");
-                  // Keep the Pokémon image visible
-                } else {
-                  catchResult.textContent = result.message;
-                  catchResult.style.color = "red";
-                  pokemonImg.style.display = "block"; // Show Pokémon image again
-                }
-                resetBtn.style.display = "block";
-              } else {
-                attempts--;
-                if (attempts > 0) {
-                  catchResult.textContent =
-                    "Pokémon niet gevangen, probeer opnieuw.";
-                  catchResult.style.color = "red";
-                  pokemonImg.style.display = "block"; // Show Pokémon image again
-                } else {
-                  catchResult.textContent = "Pokémon is ontsnapt!";
-                  catchResult.style.color = "red";
-                  resetBtn.style.display = "block";
-                }
-                pokeballBtn.classList.add("not-caught");
-                pokeballBtn.classList.remove("caught");
-                attemptsLeft.textContent = "Pogingen: " + attempts;
->>>>>>> production
               }
               resetBtn.style.display = "block";
             } else {

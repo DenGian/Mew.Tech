@@ -1,0 +1,105 @@
+body {
+    background-color: #f0f0f0;
+    background-image: url("../assets/images/grassland.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Press Start 2P", cursive;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  .pixel-border {
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+  }
+  .pixel-button {
+    background-color:  #ffcc00;
+    color: #fff;
+    border: 2px solid #cc0000;
+    text-shadow: 1px 1px 0px #000;
+  }
+  .pixel-button:hover {
+    background-color: #555;
+  }
+  .pixel-button-pokemon {
+    background-color: #ffcc00; /* Pokémon yellow */
+    color: #fff;
+    border: 2px solid #cc0000; /* Pokémon red */
+    text-shadow: 1px 1px 0px #000;
+    text-align: center;
+    font-size: 10px; /* Smaller button text */
+  }
+  .pixel-button-pokemon:hover {
+    background-color: #ffdd00;
+  }
+  .pokemon-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    animation: appear 1s forwards;
+  }
+  .pokemon-box {
+    background-color: rgba(255, 255, 255, 0.221);
+    border: 4px solid #444;
+    box-shadow: 4px 4px 0px #aaa;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    height: 180px; /
+  }
+  .pokemon-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px; 
+    margin: 0 auto;
+    font-size: 10px; 
+  }
+  .pokemon-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  @media (min-width: 640px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+  @media (min-width: 768px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(5, 1fr); 
+    }
+  }
+  @media (min-width: 1024px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(6, 1fr); 
+    }
+  }
+  @media (min-width: 1280px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(8, 1fr); 
+    }
+  }
+  @media (min-width: 1536px) {
+    .pokemon-grid {
+      grid-template-columns: repeat(10, 1fr); 
+    }
+  }
+  header {
+    background: linear-gradient(to right, #ff0000, #ffcc00);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
