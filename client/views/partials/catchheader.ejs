@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Profielpagina van de gebruiker waar je informatie kunt bijwerken en een hoofd-Pokémon kunt kiezen." />
+  <meta name="keywords" content="Pokémon, profiel, bijwerken, hoofd-Pokémon, AP Hogeschool, project" />
+  <meta name="author" content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan" />
+  <title>Mijn Profiel - Mew.Tech</title>
+  <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/catch.css">
+ 
+</head>
+<body class="bg-gray-100">
+  <header class="pixel-border p-4 mb-4">
+    <nav class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4">
+      <div class="flex justify-between items-center w-full sm:w-auto">
+        <a class="text-2xl font-bold flex items-center" href="/main">
+          <img src="./assets/images/logo.webp" alt="logo" class="h-10 w-10 mr-2" />
+        </a>
+        <% if (selectedPokemon) { %>
+        <div class="flex items-center ml-4">
+          <img src="<%= selectedPokemon.sprites.front_default %>" alt="<%= selectedPokemon.name %>" class="nav-pokemon-img mr-2" />
+          <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
+        </div>
+        <% } %>
+        <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto" id="navbar-default">
+        <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/main">Home</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/battler">Duel</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/catcher">Vangen</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  </body>
+</html>

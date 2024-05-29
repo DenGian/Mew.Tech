@@ -1,21 +1,20 @@
-
-<%- include('partials/header') %>
+<%- include('partials/catchheader') %>
 <body>
-    <main class="container mx-auto p-4">
-      <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
-      <div id="initial-message" class="text-center text-xl mb-4">
-        Een wilde <%= randomPokemon.name %> is verschenen!
-      </div>
-      <div
-        id="pokemon-container"
-        class="flex justify-center items-center"
-        style="display: none"
-      >
-        <div class="pokemon-box">
-          <h5 class="text-xl mb-2">
-            #<%= randomPokemon.id %> <%= randomPokemon.name %>
-          </h5>
-          <img
+  <main class="container mx-auto p-4">
+    <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
+    <div id="initial-message" class="text-center text-xl mb-4">
+      Een wilde <%= randomPokemon.name %> is verschenen!
+    </div>
+    <div
+      id="pokemon-container"
+      class="flex justify-center items-center"
+      style="display: none"
+    >
+      <div class="pokemon-box">
+        <h5 class="text-xl mb-2">
+          #<%= randomPokemon.id %> <%= randomPokemon.name %>
+        </h5>
+        <img
           id="pokemon-img"
           src="<%= randomPokemon.sprites.front_default %>"
           class="pokemon-img mx-auto mb-4 cursor-pointer"
@@ -23,194 +22,198 @@
           onclick="openPokemonModal('<%= randomPokemon.name %>', '<%= randomPokemon.sprites.front_default %>')"
         />
 
-          <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
-            <img
-              src="../../assets/images/poke-ball.png"
-              alt="Pokeball"
-              class="w-8 h-8 inline"
-            />
-          </button>
-          <p id="catch-result" class="mt-4"></p>
-          <p id="attempts-left" class="mt-2"></p>
-          <button
-            id="reset-btn"
-            class="pixel-button-pokemon py-2 px-4 rounded mt-4"
-            style="display: none"
-          >
-            Opnieuw proberen
-          </button>
-          <% if (isCaught) { %>
-          <button
-            id="release-btn"
-            class="pixel-button-pokemon py-2 px-4 rounded mt-4"
-            style="display: block"
-          >
-            Laat vrij
-          </button>
-          <% } %>
-        </div>
-      </div>
-      <div class="tutorial-box">
-        <h3 class="text-2xl mb-2">Hoe te spelen:</h3>
-        <p class="mb-2">
-          1. Klik op de Pokébal om te proberen de Pokémon te vangen.
-        </p>
-        <p class="mb-2">2. Je hebt drie pogingen om de Pokémon te vangen.</p>
-        <p class="mb-2">
-          3. Als de Pokémon ontsnapt na drie pogingen, kun je op "Opnieuw
-          proberen" klikken om het opnieuw te proberen.
-        </p>
+        <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
+          <img
+            src="../../assets/images/poke-ball.png"
+            alt="Pokeball"
+            class="w-8 h-8 inline"
+          />
+        </button>
+        <p id="catch-result" class="mt-4"></p>
+        <p id="attempts-left" class="mt-2"></p>
+        <button
+          id="reset-btn"
+          class="pixel-button-pokemon py-2 px-4 rounded mt-4"
+          style="display: none"
+        >
+          Opnieuw proberen
+        </button>
         <% if (isCaught) { %>
-        <p class="mb-2">
-          4. Als je de Pokémon hebt gevangen, kun je ervoor kiezen om hem vrij
-          te laten.
-        </p>
+        <button
+          id="release-btn"
+          class="pixel-button-pokemon py-2 px-4 rounded mt-4"
+          style="display: block"
+        >
+          Laat vrij
+        </button>
         <% } %>
       </div>
-      <div id="pokemon-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div id="pokemon-modal-content" class="bg-white p-12 rounded-lg shadow-xl">
-          <h3 id="pokemon-modal-name" class="text-3xl font-bold mb-6"></h3>
-          <img id="pokemon-modal-img" src="" alt="Pokemon Image" class="w-full h-auto mb-8">
-          <button id="modal-close-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring focus:ring-blue-200">Close</button>
-        </div>
-      </div>      
-    </main>
+    </div>
+    <div class="tutorial-box">
+      <h3 class="text-2xl mb-2">Hoe te spelen:</h3>
+      <p class="mb-2">
+        1. Klik op de Pokébal om te proberen de Pokémon te vangen.
+      </p>
+      <p class="mb-2">2. Je hebt drie pogingen om de Pokémon te vangen.</p>
+      <p class="mb-2">
+        3. Als de Pokémon ontsnapt na drie pogingen, kun je op "Opnieuw
+        proberen" klikken om het opnieuw te proberen.
+      </p>
+      <% if (isCaught) { %>
+      <p class="mb-2">
+        4. Als je de Pokémon hebt gevangen, kun je ervoor kiezen om hem vrij te
+        laten.
+      </p>
+      <% } %>
+    </div>
+    <div id="pokemon-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div id="pokemon-modal-content" class="bg-white p-12 rounded-lg shadow-xl">
+        <h3 id="pokemon-modal-name" class="text-3xl font-bold mb-6"></h3>
+        <img id="pokemon-modal-img" src="" alt="Pokemon Image" class="w-full h-auto mb-8">
+        <button id="modal-close-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring focus:ring-blue-200">Close</button>
+      </div>
+    </div>    
+  </main>
 
-    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Verberg het initiële bericht na 2 seconden en toon de Pokémon-container
-        setTimeout(function () {
-          document.getElementById("initial-message").style.display = "none";
-          document.getElementById("pokemon-container").style.display = "flex";
-        }, 2000);
+  <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hide initial message after 2 seconds and show the Pokémon container
+      setTimeout(function () {
+        document.getElementById("initial-message").style.display = "none";
+        document.getElementById("pokemon-container").style.display = "flex";
+      }, 2000);
 
-        const modal = document.getElementById("pokemon-modal");
-        const modalName = document.getElementById("pokemon-modal-name");
-        const modalImg = document.getElementById("pokemon-modal-img");
-        const modalCloseBtn = document.getElementById("modal-close-btn");
+      const modal = document.getElementById("pokemon-modal");
+      const modalName = document.getElementById("pokemon-modal-name");
+      const modalImg = document.getElementById("pokemon-modal-img");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
 
-        window.openPokemonModal = function(name, imgSrc) {
-          modalName.textContent = name;
-          modalImg.src = imgSrc;
-          modal.classList.remove("hidden");
-        }
-      
-        modalCloseBtn.addEventListener("click", function () {
-          modal.classList.add("hidden");
+      window.openPokemonModal = function(name, imgSrc) {
+        modalName.textContent = name;
+        modalImg.src = imgSrc;
+        modal.classList.remove("hidden");
+      }
+
+      modalCloseBtn.addEventListener("click", function () {
+        modal.classList.add("hidden");
+      });
+
+      let attempts = 3; // Maximum number of attempts to catch a Pokémon
+      const pokeballBtn = document.getElementById("pokeball-btn");
+      const pokemonImg = document.getElementById("pokemon-img");
+      const attemptsLeft = document.getElementById("attempts-left");
+      const catchResult = document.getElementById("catch-result");
+      const resetBtn = document.getElementById("reset-btn");
+      const releaseBtn = document.getElementById("release-btn");
+
+      async function catchOrReleasePokemon(release) {
+        const response = await fetch("/catcher/catch-pokemon", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pokemonId: "<%= randomPokemon.id %>",
+            release: release ? "true" : "false"
+          }),
         });
+        return response.json();
+      }
 
-        let attempts = 3; // Maximum number of attempts to catch a Pokémon
-        const pokeballBtn = document.getElementById("pokeball-btn");
-        const pokemonImg = document.getElementById("pokemon-img");
-        const attemptsLeft = document.getElementById("attempts-left");
-        const catchResult = document.getElementById("catch-result");
-        const resetBtn = document.getElementById("reset-btn");
-        const releaseBtn = document.getElementById("release-btn");
+      pokeballBtn.addEventListener("click", async function () {
+        if (attempts > 0) {
+          pokeballBtn.disabled = true;
+          pokemonImg.classList.add("shake");
 
-        async function catchOrReleasePokemon(release) {
-          const response = await fetch("/catcher/catch-pokemon", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              pokemonId: "<%= randomPokemon.id %>",
-              release: release
-            }),
-          });
-          return response.json();
-        }
+          setTimeout(async function () {
+            pokemonImg.classList.remove("shake");
 
-        pokeballBtn.addEventListener("click", async function () {
-          if (attempts > 0) {
-            pokeballBtn.disabled = true;
-            pokemonImg.classList.add("shake");
-    
-            setTimeout(async function () {
-              pokemonImg.classList.remove("shake");
-    
-              // Haal de stats van de Pokémon van de speler op
-              const playerPokemon = {
-                attack: <%= selectedPokemon ? selectedPokemon.stats[1].base_stat : 0 %>
-              };
-    
-              // Haal de verdediging van de doel-Pokémon op
-              const targetPokemon = {
-                defense: <%= randomPokemon.stats[2].base_stat %>
-              };
-    
-              // Bereken de vangst kans op basis van de formule
-              const catchRate = (100 - targetPokemon.defense + playerPokemon.attack) / 100;
-              const random = Math.random();
-    
-              if (random < catchRate) {
-                const result = await catchOrReleasePokemon(false);
-                if (result.success) {
-                  catchResult.textContent = "Pokémon gevangen!";
-                  catchResult.style.color = "green";
-                  pokeballBtn.classList.add("caught");
-                  pokeballBtn.classList.remove("not-caught");
-                  resetBtn.style.display = "block";
-                } else {
-                  catchResult.textContent = result.message;
-                  catchResult.style.color = "red";
-                  pokemonImg.style.display = "block"; // Toon de Pokémon afbeelding opnieuw
-                }
-                resetBtn.style.display = "block";
+            // Fetch the player's Pokémon stats
+            const playerPokemon = {
+              attack: <%= selectedPokemon ? selectedPokemon.stats[1].base_stat : 0 %>
+            };
+
+            // Fetch the target Pokémon's defense
+            const targetPokemon = {
+              defense: <%= randomPokemon.stats[2].base_stat %>
+            };
+
+            // Calculate the catch rate based on the formula
+            const catchRate = (100 - targetPokemon.defense + playerPokemon.attack) / 100;
+            const random = Math.random();
+
+            if (random < catchRate) {
+              const result = await catchOrReleasePokemon(false);
+              if (result.success) {
+                catchResult.textContent = "Pokémon gevangen!";
+                catchResult.style.color = "green";
+                pokeballBtn.classList.add("caught");
+                pokeballBtn.classList.remove("not-caught");
+                resetBtn.style.display = "block"; 
               } else {
-                attempts--;
-                if (attempts > 0) {
-                  catchResult.textContent = "Pokémon niet gevangen, probeer opnieuw.";
-                  catchResult.style.color = "red";
-                  pokemonImg.style.display = "block"; // Toon de Pokémon afbeelding opnieuw
-                } else {
-                  catchResult.textContent = "Pokémon is ontsnapt!";
-                  catchResult.style.color = "red";
-                  resetBtn.style.display = "block";
-                }
-                pokeballBtn.classList.add("not-caught");
-                pokeballBtn.classList.remove("caught");
-                attemptsLeft.textContent = "Pogingen: " + attempts;
+                catchResult.textContent = result.message;
+                catchResult.style.color = "red";
+                pokemonImg.style.display = "block"; // Show Pokémon image again
               }
-              pokeballBtn.disabled = false;
-            }, 1000); // Duur van de schudanimatie
+              resetBtn.style.display = "block";
+            } else {
+              attempts--;
+              if (attempts > 0) {
+                catchResult.textContent =
+                  "Pokémon niet gevangen, probeer opnieuw.";
+                catchResult.style.color = "red";
+                pokemonImg.style.display = "block"; // Show Pokémon image again
+              } else {
+                catchResult.textContent = "Pokémon is ontsnapt!";
+                catchResult.style.color = "red";
+                resetBtn.style.display = "block";
+              }
+              pokeballBtn.classList.add("not-caught");
+              pokeballBtn.classList.remove("caught");
+              attemptsLeft.textContent = "Pogingen: " + attempts;
+            }
+            pokeballBtn.disabled = false;
+          }, 1000); // Shake animation duration
+        }
+      });
+
+      if (releaseBtn) {
+        releaseBtn.addEventListener("click", async function () {
+          const result = await catchOrReleasePokemon(true);
+          if (result.success) {
+            catchResult.textContent = "Pokémon vrijgelaten!";
+            catchResult.style.color = "blue";
+            releaseBtn.style.display = "none";
+            pokeballBtn.classList.remove("caught");
+            pokeballBtn.classList.add("not-caught");
+            resetBtn.style.display = "block"; // Ensure reset button is visible
+          } else {
+            catchResult.textContent = result.message;
+            catchResult.style.color = "red";
           }
         });
+      }
 
-        if (releaseBtn) {
-          releaseBtn.addEventListener("click", async function () {
-            const result = await catchOrReleasePokemon(true);
-            if (result.success) {
-              catchResult.textContent = "Pokémon vrijgelaten!";
-              catchResult.style.color = "blue";
-              releaseBtn.style.display = "none";
-              pokeballBtn.classList.remove("caught");
-              pokeballBtn.classList.add("not-caught");
-              resetBtn.style.display = "block"; // Ensure reset button is visible
-            } else {
-              catchResult.textContent = result.message;
-              catchResult.style.color = "red";
-            }
-          });
-        }
+      resetBtn.addEventListener("click", function () {
+        window.location.reload();
+      });
 
-        resetBtn.addEventListener("click", function () {
-          window.location.reload();
-        });
-    
-        // Functionaliteit voor het inklappen van de navigatiebalk
-        const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
-        const navbarDefault = document.getElementById("navbar-default");
-    
-        button.addEventListener("click", function () {
-          navbarDefault.classList.toggle("hidden");
-        });
-    
-        // Extra reset-functionaliteit indien nodig
-        document.getElementById("reset-btn").addEventListener("click", function () {
+      // Navbar collapse functionality
+      const button = document.querySelector(
+        '[data-collapse-toggle="navbar-default"]'
+      );
+      const navbarDefault = document.getElementById("navbar-default");
+
+      button.addEventListener("click", function () {
+        navbarDefault.classList.toggle("hidden");
+      });
+
+      // Additional reset functionality if needed
+      document
+        .getElementById("reset-btn")
+        .addEventListener("click", function () {
           location.href = "/catcher";
         });
-      });
-    </script>
-    
-  </body>
+    });
+  </script>
+</body>
 </html>
