@@ -52,12 +52,14 @@
                 </div>
               </form>
               <% } %> <% if (feedback) { %>
-              <div class="feedback text-center mt-4">
+              <div
+                class="feedback text-center mt-4 <% if (feedback.includes('Correct')) { %>correct<% } else { %>incorrect<% } %>"
+              >
                 <h5><%= feedback %></h5>
               </div>
               <% } %> <% if (statIncreased) { %>
               <div class="stat-increase text-center mt-4">
-                <h5>Attack stat increased by 1!</h5>
+                <h5>Aanval stat verhoogd met 1!</h5>
               </div>
               <% } %>
 
@@ -101,6 +103,8 @@
             <li>
               Als je het goed hebt, zal de Pokémon afbeelding zichtbaar worden.
             </li>
+            <li>
+              Je krijgt een melding dat de aanval statistiek van je Pokémon omhoog gaat.
             <li>
               Klik op de "Volgende Pokémon" knop om naar de volgende Pokémon te
               gaan.

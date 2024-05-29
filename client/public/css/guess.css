@@ -79,7 +79,6 @@ body {
   }
   .feedback {
     font-size: 1.25rem;
-    color: #ff0000;
     animation: flash 0.5s alternate infinite;
   }
   @keyframes flash {
@@ -89,6 +88,12 @@ body {
     to {
       opacity: 0.5;
     }
+  }
+  .feedback.correct {
+    color: #00ce00; /* Green for correct guess */
+  }
+  .feedback.incorrect {
+    color: #ff0000; /* Red for incorrect guess */
   }
   .title {
     font-size: 2.5rem;
