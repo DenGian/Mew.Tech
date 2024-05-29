@@ -241,10 +241,56 @@
         class="flex justify-center items-center"
         style="display: none"
       >
-        <div class="pokemon-box">
-          <h5 class="text-xl mb-2">
-            #<%= randomPokemon.id %> <%= randomPokemon.name %>
-          </h5>
+        <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/main">Home</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/battler">Duel</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/catcher">Catch</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto p-4">
+    <h2 class="text-center text-3xl mb-4">Safari Zone</h2>
+    <div id="initial-message" class="text-center text-xl mb-4">
+      Een wilde <%= randomPokemon.name %> is verschenen!
+    </div>
+    <div
+      id="pokemon-container"
+      class="flex justify-center items-center"
+      style="display: none"
+    >
+      <div class="pokemon-box">
+        <h5 class="text-xl mb-2">
+          #<%= randomPokemon.id %> <%= randomPokemon.name %>
+        </h5>
+        <img
+          id="pokemon-img"
+          src="<%= randomPokemon.sprites.front_default %>"
+          class="pokemon-img mx-auto mb-4 cursor-pointer"
+          alt="<%= randomPokemon.name %>"
+          onclick="openPokemonModal('<%= randomPokemon.name %>', '<%= randomPokemon.sprites.front_default %>')"
+        />
+
+        <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
           <img
             id="pokemon-img"
             src="<%= randomPokemon.sprites.front_default %>"
@@ -295,16 +341,56 @@
         </p>
         <% } %>
       </div>
-    </main>
+    </div>
+    <div class="tutorial-box">
+      <h3 class="text-2xl mb-2">Hoe te spelen:</h3>
+      <p class="mb-2">
+        1. Klik op de Pokébal om te proberen de Pokémon te vangen.
+      </p>
+      <p class="mb-2">2. Je hebt drie pogingen om de Pokémon te vangen.</p>
+      <p class="mb-2">
+        3. Als de Pokémon ontsnapt na drie pogingen, kun je op "Opnieuw
+        proberen" klikken om het opnieuw te proberen.
+      </p>
+      <% if (isCaught) { %>
+      <p class="mb-2">
+        4. Als je de Pokémon hebt gevangen, kun je ervoor kiezen om hem vrij te
+        laten.
+      </p>
+      <% } %>
+    </div>
+    <!-- Popup Modal -->
+    <div id="pokemon-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div id="pokemon-modal-content" class="bg-white p-12 rounded-lg shadow-xl">
+        <h3 id="pokemon-modal-name" class="text-3xl font-bold mb-6"></h3>
+        <img id="pokemon-modal-img" src="" alt="Pokemon Image" class="w-full h-auto mb-8">
+        <button id="modal-close-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring focus:ring-blue-200">Close</button>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Hide initial message after 2 seconds and show the Pokémon container
-        setTimeout(function () {
-          document.getElementById("initial-message").style.display = "none";
-          document.getElementById("pokemon-container").style.display = "flex";
-        }, 2000);
+  <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("pokemon-modal");
+      const modalName = document.getElementById("pokemon-modal-name");
+      const modalImg = document.getElementById("pokemon-modal-img");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
+
+      window.openPokemonModal = function(name, imgSrc) {
+        modalName.textContent = name;
+        modalImg.src = imgSrc;
+        modal.classList.remove("hidden");
+      }
+
+      modalCloseBtn.addEventListener("click", function () {
+        modal.classList.add("hidden");
+      });
+      // Hide initial message after 2 seconds and show the Pokémon container
+      setTimeout(function () {
+        document.getElementById("initial-message").style.display = "none";
+        document.getElementById("pokemon-container").style.display = "flex";
+      }, 2000);
 
         let attempts = 3; // Maximum number of attempts to catch a Pokémon
         const pokeballBtn = document.getElementById("pokeball-btn");
