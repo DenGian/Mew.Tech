@@ -43,20 +43,7 @@
       </div>
     </main>
   
-    <script>
-      const showAllCheckbox = document.getElementById('showAllCheckbox');
-      showAllCheckbox.addEventListener('change', function () {
-        const isChecked = showAllCheckbox.checked;
-        const queryParams = new URLSearchParams(window.location.search);
-        if (isChecked) {
-          queryParams.set('showAll', 'true');
-        } else {
-          queryParams.delete('showAll');
-        }
-        const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-        window.location.href = newUrl;
-      });
-    </script>
+    <script src="/js/pokedex.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
   </body>

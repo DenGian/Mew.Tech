@@ -46,30 +46,6 @@
         <button type="submit" class="pixel-button-pokemon py-2 px-4 rounded mt-4">Hoofd-Pokémon instellen</button>
       </form>
     </div>
+    <script src="/js/viewer.js" defer></script>
   </main>
-
-  <script>
-          const button = document.querySelector(
-        '[data-collapse-toggle="navbar-default"]'
-      );
-      const navbarDefault = document.getElementById("navbar-default");
-
-      button.addEventListener("click", function () {
-        navbarDefault.classList.toggle("hidden");
-      });
-    document.addEventListener("DOMContentLoaded", function () {
-      const pokemonBoxes = document.querySelectorAll(".pokemon-box");
-
-      pokemonBoxes.forEach((box) => {
-        box.addEventListener("click", function () {
-          // Remove highlight from all boxes
-          pokemonBoxes.forEach((b) => b.classList.remove("highlighted"));
-          // Add highlight to the clicked box
-          box.classList.add("highlighted");
-          // Check the corresponding radio button
-          box.querySelector("input[type='radio']").checked = true;
-        });
-      });
-    });
-  </script>
 </body>
