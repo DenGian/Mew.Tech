@@ -306,7 +306,18 @@
             setTimeout(async function () {
               pokemonImg.classList.remove("shake");
 
-              const catchRate = 0.3;
+              // Fetch the player's Pokémon stats
+              const playerPokemon = {
+                attack: <%= selectedPokemon ? selectedPokemon.stats[1].base_stat : 0 %>
+              };
+
+              // Fetch the target Pokémon's defense
+              const targetPokemon = {
+                defense: <%= randomPokemon.stats[2].base_stat %>
+              };
+
+              // Calculate the catch rate based on the formula
+              const catchRate = (100 - targetPokemon.defense + playerPokemon.attack) / 100;
               const random = Math.random();
 
               if (random < catchRate) {

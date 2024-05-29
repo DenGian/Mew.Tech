@@ -326,6 +326,15 @@ async function updatePokemonName(pokemonId: string, newName: string) {
   }
 }
 
+async function getRandomPokemons(limit: number): Promise<PokemonData[]> {
+  try {
+    return await collectionPokemon.aggregate([{ $sample: { size: limit } }]).toArray() as PokemonData[];
+  } catch (error) {
+    console.error("Error fetching random Pokémon:", error);
+    throw new Error("Failed to fetch random Pokémon.");
+  }
+}
+
 async function connect() {
   await client.connect();
   await loadPokemonsFromApi(collectionPokemon);
@@ -356,5 +365,6 @@ export {
   isEmailRegistered,
   isUsernameRegistered,
   collectionUsers,
-  getSelectedPokemon
+  getSelectedPokemon,
+  getRandomPokemons
 };
