@@ -269,9 +269,14 @@
               <h5 class="stat-title">Krachten:</h5>
               <% pokemon1.abilities.forEach((ability, index) => { %>
               <button
-                class="pixel-button"
+                class="pixel-button ability-button"
                 id="ability-<%= index %>"
-                onclick="applyAbilityDamage(1, 2, <%= pokemon1.stats[1].base_stat %>, <%= pokemon2.stats[2].base_stat %>, '<%= pokemon1.name %>', '<%= pokemon2.name %>', '<%= pokemon2.id %>')"
+                data-attack="<%= pokemon1.stats[1].base_stat %>"
+                data-defense="<%= pokemon2.stats[2].base_stat %>"
+                data-attacker-name="<%= pokemon1.name %>"
+                data-defender-name="<%= pokemon2.name %>"
+                data-defender-id="<%= pokemon2.id %>"
+                data-attacker-id="<%= pokemon1.id %>"
               >
                 <%= ability.ability.name %>
               </button>
@@ -336,18 +341,24 @@
       <div class="tutorial-box">
         <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
         <p class="mb-2">
-          Welkom bij de Pokémon Battle! Volg deze stappen om te beginnen:
+          Welkom bij PokéBattler! Volg deze stappen om aan de slag te gaan:
         </p>
         <ol class="list-decimal list-inside mb-4">
+          <li>Kies je Pokémon uit de lijst of zoek een specifieke Pokémon.</li>
+          <li>Klik op een van de aanvallen om de strijd te beginnen.</li>
           <li>
-            Kies je Pokémon uit de lijst of zoek een specifieke Pokémon.
+            Bekijk de statistieken en zie welke Pokémon als winnaar uit de bus komt!
           </li>
-          <li>Klik op de "Begin Gevecht" knop om de strijd te beginnen.</li>
           <li>
-            Bekijk de statistieken en zie welke Pokémon als winnaar uit de bus
-            komt!
+            Als je Pokémon wint, heb je een kans om de vijandige Pokémon te vangen.
+          </li>
+          <li>
+            Als je Pokémon verliest, moet je opnieuw beginnen met een nieuwe Pokémon.
           </li>
         </ol>
+        <p class="mb-2">
+          Veel succes en moge de beste trainer winnen!
+        </p>
       </div>
     </div>
   </main>
@@ -387,17 +398,21 @@
       updateHealthBar(defenderIndex, newDefenderHealth, parseInt(document.getElementById(`hp-value-${defenderIndex}`).textContent.split('/')[1]));
 
       // Log the damage dealt
-      logBattleEvent(`${attackerName} attacks! ${defenderName} takes ${damage} damage!`);
+      logBattleEvent(`${attackerName} valt aan! ${defenderName} neemt ${damage} schade!`);
 
       // Check if the defender's health is 0 or below
       if (newDefenderHealth <= 0) {
         // Declare the other Pokémon as the winner
-        logBattleEvent(`${attackerName} wins!`);
+        logBattleEvent(`${attackerName} heeft gewonnen!`);
         disableAbilityButtons();
         showNewBattleButton();
 
-        // Attempt to catch the defeated Pokémon
-        await catchPokemon(defenderId, defenderName);
+        // Attempt to catch the defeated Pokémon if the player won
+        if (attackerIndex === 1) {
+          await catchPokemon(defenderId, defenderName);
+        } else {
+          logBattleEvent(`De ${attackerName} is weggelopen!`);
+        }
         return true;
       }
       return false;
@@ -405,7 +420,7 @@
 
     // Function to disable all ability buttons
     function disableAbilityButtons() {
-      const abilityButtons = document.querySelectorAll('.pixel-button');
+      const abilityButtons = document.querySelectorAll('.pixel-button.ability-button');
       abilityButtons.forEach(button => {
         button.disabled = true;
       });
@@ -427,7 +442,7 @@
     document.getElementById('new-battle-button').addEventListener('click', startNewBattle);
 
     // Function to apply ability damage
-    function applyAbilityDamage(attackerIndex, defenderIndex, attackStat, defenseStat, attackerName, defenderName, defenderId) {
+    async function applyAbilityDamage(attackerIndex, defenderIndex, attackStat, defenseStat, attackerName, defenderName, attackerId, defenderId) {
       // Check if the attacker can attack
       const attackerCurrentHealth = parseInt(document.getElementById(`hp-value-${attackerIndex}`).textContent.split('/')[0]);
       if (attackerCurrentHealth <= 0) {
@@ -436,7 +451,7 @@
       }
 
       const damage = Math.max(1, (attackStat - (defenseStat / 2))); // Ensure at least 1 damage is dealt
-      const defenderKnockedOut = applyDamage(attackerIndex, defenderIndex, damage, attackerName, defenderName, defenderId);
+      const defenderKnockedOut = await applyDamage(attackerIndex, defenderIndex, damage, attackerName, defenderName, defenderId);
 
       if (defenderKnockedOut) {
         return;
@@ -451,23 +466,25 @@
 
         // Check if the defender is still alive before counter-attack
         const newAttackerHealth = parseInt(document.getElementById(`hp-value-${attackerIndex}`).textContent.split('/')[0]);
-        if (newAttackerHealth > 0 && !defenderKnockedOut) {
-          applyDamage(defenderIndex, attackerIndex, counterDamage, defenderName, attackerName, attackerIndex === 1 ? <%= pokemon1.id %> : <%= pokemon2.id %>, attackerIndex === 1 ? <%= pokemon1.name %> : <%= pokemon2.name %>);
+        if (newAttackerHealth > 0) {
+          await applyDamage(defenderIndex, attackerIndex, counterDamage, defenderName, attackerName, attackerId);
         }
       }
     }
 
     // Event listener for ability buttons
-    const abilityButtons = document.querySelectorAll('.pixel-button');
-    abilityButtons.forEach((button, index) => {
+    const abilityButtons = document.querySelectorAll('.pixel-button.ability-button');
+    abilityButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const attackerIndex = 1; // Pokémon 1 is attacking
-        const defenderIndex = 2; // Pokémon 2 is defending
-        const attackStat = <%= pokemon1.stats[1].base_stat %>;
-        const defenseStat = <%= pokemon2.stats[2].base_stat %>;
+        const attackStat = parseInt(button.getAttribute('data-attack'));
+        const defenseStat = parseInt(button.getAttribute('data-defense'));
+        const attackerName = button.getAttribute('data-attacker-name');
+        const defenderName = button.getAttribute('data-defender-name');
+        const attackerId = button.getAttribute('data-attacker-id');
+        const defenderId = button.getAttribute('data-defender-id');
 
         // Apply damage to the defending Pokémon
-        applyAbilityDamage(attackerIndex, defenderIndex, attackStat, defenseStat, '<%= pokemon1.name %>', '<%= pokemon2.name %>', '<%= pokemon2.id %>');
+        applyAbilityDamage(1, 2, attackStat, defenseStat, attackerName, defenderName, attackerId, defenderId);
       });
     });
 
@@ -487,7 +504,7 @@
         console.log("Catch result:", result);
 
         if (result.success) {
-          logBattleEvent(`You have caught ${pokemonName}!`);
+          logBattleEvent(`je hebt ${pokemonName} gevangen!`);
         } else {
           logBattleEvent(`Failed to catch ${pokemonName}: ${result.message}`);
         }
