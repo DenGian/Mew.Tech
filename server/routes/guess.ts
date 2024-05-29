@@ -3,7 +3,7 @@ import {
   displayRandomPokemon,
   capitalizeFirstLetter,
 } from "../utils/helper-functions";
-import { collectionPokemon, getSelectedPokemon } from "../config/database";
+import { collectionPokemon, getSelectedPokemon, updateSelectedPokemon, updatePokemonStats } from "../config/database";
 import { User } from "../interfaces/userInterface";
 
 const router: Router = express.Router();
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
         ? await getSelectedPokemon(selectedPokemonId)
         : null;
 
-      // Capitalize the selected Pokémon's name
+      // Capitalize the first letter of the selected Pokémon's name
       if (selectedPokemon) {
         selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
       }
@@ -37,6 +37,7 @@ router.get("/", async (req, res) => {
       incorrectGuesses: req.session.incorrectGuesses || 0,
       feedback: null,
       selectedPokemon,
+      statIncreased: false, // Default value for statIncreased
       user: req.session.user,
     });
   } catch (error) {
@@ -52,6 +53,8 @@ router.post("/", async (req, res) => {
 
     const user: User | undefined = req.session.user;
     let selectedPokemon = null;
+    let statIncreased = false; // Flag to indicate if the stat was increased
+
     if (user) {
       const selectedPokemonId = user.selectedPokemon || "";
       selectedPokemon = selectedPokemonId
@@ -68,6 +71,19 @@ router.post("/", async (req, res) => {
       const correct = pokemon.name.toLowerCase() === guess.toLowerCase();
       if (correct) {
         req.session.correctGuesses = (req.session.correctGuesses || 0) + 1;
+
+        // Increase the attack stat of the selected Pokémon
+        if (selectedPokemon) {
+          const attackStat = selectedPokemon.stats.find(stat => stat.name === "attack");
+          if (attackStat) {
+            attackStat.base_stat += 1;
+            statIncreased = true; // Set the flag to true
+
+            // Save the updated Pokémon stats to the database
+            await updatePokemonStats(selectedPokemon.id, selectedPokemon.stats);
+          }
+        }
+
         res.render("pokeGuess", {
           pokemonData: pokemon,
           correctGuesses: req.session.correctGuesses,
@@ -76,6 +92,7 @@ router.post("/", async (req, res) => {
             pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
           }!`,
           selectedPokemon,
+          statIncreased, // Pass the flag to the template
           user: req.session.user,
         });
       } else {
@@ -86,6 +103,7 @@ router.post("/", async (req, res) => {
           incorrectGuesses: req.session.incorrectGuesses,
           feedback: "Incorrect! Try again.",
           selectedPokemon,
+          statIncreased, // Pass the flag to the template
           user: req.session.user,
         });
       }
@@ -110,7 +128,7 @@ router.post("/next", async (req, res) => {
         ? await getSelectedPokemon(selectedPokemonId)
         : null;
 
-      // Capitalize the selected Pokémon's name
+      // Capitalize the first letter of the selected Pokémon's name
       if (selectedPokemon) {
         selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
       }
@@ -127,6 +145,7 @@ router.post("/next", async (req, res) => {
       incorrectGuesses: req.session.incorrectGuesses || 0,
       feedback: null,
       selectedPokemon,
+      statIncreased: false, // Default value for statIncreased
       user: req.session.user,
     });
   } catch (error) {

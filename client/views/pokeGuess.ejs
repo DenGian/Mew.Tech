@@ -130,16 +130,16 @@
         margin-top: 20px;
       }
       .nav-pokemon-img {
-      width: 80px; /* Increased size */
-      height: 80px; /* Increased size */
-      object-fit: contain;
-      margin-right: -5px;
-      margin-top: -50px;
-      margin-bottom: -50px;
-    }
-    .nav-pokemon-name {
-      font-size: 1rem; /* Smaller font size */
-    }
+        width: 80px; /* Increased size */
+        height: 80px; /* Increased size */
+        object-fit: contain;
+        margin-right: -5px;
+        margin-top: -50px;
+        margin-bottom: -50px;
+      }
+      .nav-pokemon-name {
+        font-size: 1rem; /* Smaller font size */
+      }
     </style>
   </head>
   <body>
@@ -156,11 +156,15 @@
             />
           </a>
           <% if (selectedPokemon) { %>
-            <div class="flex items-center ml-4">
-              <img src="<%= selectedPokemon.sprites.front_default %>" alt="<%= selectedPokemon.name %>" class="nav-pokemon-img mr-2" />
-              <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
-            </div>
-            <% } %>
+          <div class="flex items-center ml-4">
+            <img
+              src="<%= selectedPokemon.sprites.front_default %>"
+              alt="<%= selectedPokemon.name %>"
+              class="nav-pokemon-img mr-2"
+            />
+            <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
+          </div>
+          <% } %>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -270,6 +274,10 @@
               <div class="feedback text-center mt-4">
                 <h5><%= feedback %></h5>
               </div>
+              <% } %> <% if (statIncreased) { %>
+              <div class="stat-increase text-center mt-4">
+                <h5>Attack stat increased by 1!</h5>
+              </div>
               <% } %>
 
               <form action="/pokeGuess/next" method="post">
@@ -337,6 +345,15 @@
         document
           .getElementById("pokemonImage")
           .classList.remove("pokemon-silhouette");
+
+        // Display the stat increase message temporarily
+        const statIncreaseMessage = document.querySelector(".stat-increase");
+        if (statIncreaseMessage) {
+          statIncreaseMessage.style.display = "block";
+          setTimeout(() => {
+            statIncreaseMessage.style.display = "none";
+          }, 3000); // Hide after 3 seconds
+        }
       }
     </script>
   </body>
