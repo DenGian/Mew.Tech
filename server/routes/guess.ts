@@ -88,7 +88,7 @@ router.post("/", async (req, res) => {
           pokemonData: pokemon,
           correctGuesses: req.session.correctGuesses,
           incorrectGuesses: req.session.incorrectGuesses || 0,
-          feedback: `Correct! It is ${
+          feedback: `Correct! Het is ${
             pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
           }!`,
           selectedPokemon,
@@ -101,7 +101,7 @@ router.post("/", async (req, res) => {
           pokemonData: pokemon,
           correctGuesses: req.session.correctGuesses || 0,
           incorrectGuesses: req.session.incorrectGuesses,
-          feedback: "Incorrect! Try again.",
+          feedback: "Fout! Probeer het nog eens.",
           selectedPokemon,
           statIncreased, // Pass the flag to the template
           user: req.session.user,
