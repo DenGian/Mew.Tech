@@ -1,5 +1,6 @@
 import express, { Router, Request, Response } from "express";
 import { User } from "../interfaces/userInterface";
+import { capitalizeFirstLetter } from "../utils/helper-functions";
 import { getSelectedPokemon, getRandomPokemons, updateSelectedPokemon } from "../config/database";
 
 const router: Router = express.Router();
@@ -13,10 +14,21 @@ router.get("/", async (req: Request, res: Response) => {
 
     try {
         const selectedPokemonId = user.selectedPokemon || '';
-        const selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+        let selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+
+        // Capitalize the first letter of the selected Pokémon's name
+        if (selectedPokemon) {
+            selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
+        }
 
         // Fetch 3 random Pokémon from the database
         const randomPokemon = await getRandomPokemons(3);
+
+        // Capitalize the first letter of each random Pokémon's name
+        randomPokemon.forEach(pokemon => {
+            pokemon.name = capitalizeFirstLetter(pokemon.name);
+        });
+
         const showStarterModal = !selectedPokemonId;
 
         res.render("pokeMain", { user: req.session.user, selectedPokemon, randomPokemon, showStarterModal });

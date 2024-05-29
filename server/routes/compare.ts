@@ -19,6 +19,11 @@ router.get("/", async (req, res) => {
       selectedPokemon = selectedPokemonId
         ? await getSelectedPokemon(selectedPokemonId)
         : null;
+
+      // Capitalize the first letter of the selected Pokémon's name
+      if (selectedPokemon) {
+        selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
+      }
     }
 
     const searchPokemon1: string | undefined = req.query.searchPokemon1 as
