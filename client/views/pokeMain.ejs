@@ -1,86 +1,334 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Ontdek het ultieme Pokémon-project voor AP Hogeschool, met 6 geweldige features om je Pokémon-ervaring te verbeteren. Leer, speel en verken de wereld van Pokémon op Mew.Tech."
+  />
+  <meta
+    name="keywords"
+    content="Pokémon, AP Hogeschool, project, webpagina, features, spel, educatief, Mew.Tech, Pikachu, Charizard, Squirtle, Bulbasaur, Eevee, Pokeball, Mewtwo"
+  />
+  <meta
+    name="author"
+    content="Cedric Demaeschalk - Ian Mondelaers - Jesus O'Bulan"
+  />
+  <title>Mew.Tech - Welkom</title>
+  <link rel="icon" type="image/x-icon" href="/assets/images/logo.webp" />
+  <link
+    href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f0f0f0;
+      background-image: url("../assets/images/grassland.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: "Press Start 2P", cursive;
+      padding: 1rem;
+      min-height: 100vh;
+    }
+    .pixel-border {
+      border: 4px solid #444;
+      box-shadow: 4px 4px 0px #aaa;
+    }
+    .pixel-button {
+      background-color: #ffcc00; /* Pokémon yellow */
+      color: #fff;
+      border: 2px solid #cc0000; /* Pokémon red */
+      text-shadow: 1px 1px 0px #000;
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+    .pixel-button:hover {
+      background-color: #ffdd00;
+      transform: scale(1.05);
+    }
+    header {
+      background: linear-gradient(to right, #ff0000, #ffcc00);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    .title {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px #000;
+    }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .game-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .game-item {
+      border: 4px solid #444;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      text-align: center;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .game-item:hover {
+      background-color: rgba(255, 204, 0, 0.2); /* Transparent Pokémon yellow */
+      transform: scale(1.05);
+    }
+    .game-item a {
+      display: block;
+      color: #cc0000; /* Pokémon red */
+      text-shadow: 1px 1px 0px #000;
+      font-size: 1.25rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .game-item a:hover {
+      color: #ffdd00;
+    }
+    .game-item img {
+      width: 200px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 4px 4px 0px #000;
+    }
+    .game-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 8px 8px 0px #000;
+    }
+    .tutorial-box {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #444;
+      box-shadow: 2px 2px 0px #aaa;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    .nav-pokemon-img {
+      width: 80px; /* Increased size */
+      height: 80px; /* Increased size */
+      object-fit: contain;
+      margin-right: -5px;
+      margin-top: -50px;
+      margin-bottom: -50px;
+    }
+    .nav-pokemon-name {
+      font-size: 1rem; /* Smaller font size */
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .starter-img {
+      width: 150px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .starter-img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
 <body>
+  <header class="pixel-border p-4 mb-4">
+    <nav class="navbar container mx-auto flex flex-col sm:flex-row items-center px-4">
+      <div class="flex justify-between items-center w-full sm:w-auto">
+        <a class="text-2xl font-bold flex items-center" href="/main">
+          <img src="/assets/images/logo.webp" alt="logo" class="h-10 w-10 mr-2" />
+        </a>
+        <% if (selectedPokemon) { %>
+          <div class="flex items-center ml-4">
+            <img src="<%= selectedPokemon.sprites.front_default %>" alt="<%= selectedPokemon.name %>" class="nav-pokemon-img mr-2" />
+            <span class="nav-pokemon-name"><%= selectedPokemon.name %></span>
+          </div>
+        <% } %>
+      </div>
+      <div class="hidden w-full lg:flex sm:w-auto mt-4 lg:mt-0 lg:ml-auto" id="navbar-default">
+        <ul class="flex flex-col lg:flex-row lg:space-x-4 text-white">
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/main">Home</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/battler">Duel</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/catcher">Catch</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/compare">Vergelijk</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeDex">PokéDex</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/pokeGuess">Wie is het?</a>
+          </li>
+          <li class="text-left lg:text-center">
+            <a class="hover:text-blue-500" href="/viewer">Mijn Pokémon</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
   <main>
     <div class="container mx-auto p-4">
       <div class="game-grid">
         <div class="game-item">
           <a href="/battler">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokeBattler-IMG.webp"
-              alt="PokéDuel Arena"
-            />
+            <img src="./assets/images/template-pokeLandingPage/pokeBattler-IMG.webp" alt="PokéDuel Arena" />
             <span>PokéDuel Arena</span>
           </a>
         </div>
         <div class="game-item">
           <a href="/catcher">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokeCatcher-IMG.webp"
-              alt="Pokémon Safari Zone"
-            />
-            <span>Pokémon Safari Zone</span>
+            <img src="./assets/images/template-pokeLandingPage/pokeCatcher-IMG.webp" alt="Pokémon Vangen" />
+            <span>Pokémon Vangen</span>
           </a>
         </div>
         <div class="game-item">
           <a href="/compare">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokeCompare-IMG.webp"
-              alt="PokéAnalyse"
-            />
-            <span>PokéAnalyse</span>
+            <img src="./assets/images/template-pokeLandingPage/pokeCompare-IMG.webp" alt="Pokémon Vergelijken" />
+            <span>Pokémon Vergelijken</span>
           </a>
         </div>
         <div class="game-item">
-          <a href="/pokedex">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokedex-IMG.webp"
-              alt="Pokédex"
-            />
-            <span>Pokédex</span>
+          <a href="/pokeDex">
+            <img src="./assets/images/template-pokeLandingPage/pokedex-IMG.webp" alt="PokéDex" />
+            <span>PokéDex</span>
           </a>
         </div>
         <div class="game-item">
           <a href="/pokeGuess">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokeGuess-IMG.webp"
-              alt="Wie is Die Pokémon?"
-            />
-            <span>Wie is Die Pokémon?</span>
+            <img src="./assets/images/template-pokeLandingPage/pokeGuess-IMG.webp" alt="Wie is het?" />
+            <span>Wie is het?</span>
           </a>
         </div>
         <div class="game-item">
           <a href="/viewer">
-            <img
-              src="./assets/images/template-pokeLandingPage/pokeViewer-IMG.webp"
-              alt="Mijn Pokémon"
-            />
+            <img src="./assets/images/template-pokeLandingPage/pokeViewer-IMG.webp" alt="Mijn Pokémon" />
             <span>Mijn Pokémon</span>
           </a>
         </div>
       </div>
-      <div class="container mx-auto py-8">
-        <div class="tutorial-box">
-          <h2 class="text-2xl font-semibold mb-4">Tutorial</h2>
-          <p class="mb-2">
-            Welkom bij Mew.Tech! Volg deze stappen om te beginnen:
-          </p>
-          <ol class="list-decimal list-inside mb-4">
-            <li>Klik op een van de spelopties hierboven.</li>
-            <li>Volg de instructies op de geselecteerde spelpagina.</li>
-          </ol>
-        </div>
+      <div class="tutorial-box">
+        <h2 class="text-2xl font-bold mb-4">Welkom bij Mew.Tech</h2>
+        <p class="mb-4">
+          Dit project bevat zes spannende functies die je Pokémon-ervaring
+          verbeteren. Van het vangen van Pokémon tot het duelleren in de
+          arena, je vindt hier alles wat je nodig hebt om een Pokémon-meester
+          te worden.
+        </p>
+        <h3 class="text-xl font-bold mb-2">Hoe te gebruiken:</h3>
+        <ul class="list-disc list-inside">
+          <li>Klik op een van de zes functies om te beginnen.</li>
+          <li>
+            Elke functie biedt unieke manieren om te spelen, te leren en te
+            verkennen.
+          </li>
+          <li>
+            Bekijk de PokéDex om informatie te krijgen over alle bekende
+            Pokémon.
+          </li>
+        </ul>
       </div>
     </div>
   </main>
 
-  <script>
-    const button = document.querySelector(
-      '[data-collapse-toggle="navbar-default"]'
-    );
-    const navbarDefault = document.getElementById("navbar-default");
+  <!-- Modal for selecting starter Pokémon -->
+  <div id="starterModal" class="modal flex">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Kies je starter Pokémon</h2>
+      
+      <form id="starterForm" method="post" action="/main/choose-starter">
+        <div class="flex justify-around mt-4">
+          <input type="hidden" name="starterPokemon" id="starterPokemon" value="">
+          <% randomPokemon.forEach(pokemon => { %>
+            <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>" class="starter-img" data-pokemon="<%= pokemon.id %>">
+          <% }) %>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    button.addEventListener("click", function () {
-      navbarDefault.classList.toggle("hidden");
+  <script>
+    const modal = document.getElementById("starterModal");
+    const closeModal = document.getElementsByClassName("close")[0];
+    const starterForm = document.getElementById("starterForm");
+    const starterInput = document.getElementById("starterPokemon");
+    const starterImages = document.querySelectorAll(".starter-img");
+
+    // Show the modal if the user hasn't selected a starter Pokémon
+    if (<%= showStarterModal %>) {
+      modal.style.display = "flex";
+    }
+
+    // Close the modal when the user clicks on the close button
+    closeModal.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks outside of the modal content
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Select a starter Pokémon
+    starterImages.forEach(img => {
+      img.onclick = function() {
+        starterInput.value = this.getAttribute("data-pokemon");
+        starterForm.submit();
+      }
     });
   </script>
 </body>
+</html>

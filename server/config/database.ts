@@ -213,7 +213,10 @@ async function loadPokemonsFromApi(collectionPokemon: Collection<PokemonData>) {
   }
 }
 
-async function getAllPokemon(): Promise<{ pokemonData: PokemonData[]; totalPokemonCount: number }> {
+async function getAllPokemon(): Promise<{
+  pokemonData: PokemonData[];
+  totalPokemonCount: number;
+}> {
   try {
     const pokemonData = await collectionPokemon.find({}).toArray();
     const totalPokemonCount = await collectionPokemon.countDocuments();
@@ -303,6 +306,22 @@ async function updateSelectedPokemon(
   }
 }
 
+async function updatePokemonStats(pokemonId: string, updatedStats: any): Promise<void> {
+  try {
+    const result = await collectionPokemon.updateOne(
+      { id: pokemonId },
+      { $set: { stats: updatedStats } }
+    );
+    if (result.matchedCount === 0) {
+      throw new Error("No Pokémon found with the given ID");
+    }
+    console.log(`Pokémon stats updated successfully for Pokémon with ID ${pokemonId}`);
+  } catch (error) {
+    console.error("Error updating Pokémon stats:", error);
+    throw new Error("Failed to update Pokémon stats.");
+  }
+}
+
 async function getSelectedPokemon(
   selectedPokemonId: string
 ): Promise<PokemonData | null> {
@@ -326,6 +345,17 @@ async function updatePokemonName(pokemonId: string, newName: string) {
   }
 }
 
+async function getRandomPokemons(limit: number): Promise<PokemonData[]> {
+  try {
+    return (await collectionPokemon
+      .aggregate([{ $sample: { size: limit } }])
+      .toArray()) as PokemonData[];
+  } catch (error) {
+    console.error("Error fetching random Pokémon:", error);
+    throw new Error("Failed to fetch random Pokémon.");
+  }
+}
+
 async function connect() {
   await client.connect();
   await loadPokemonsFromApi(collectionPokemon);
@@ -342,6 +372,7 @@ async function connect() {
 }
 
 export {
+  updatePokemonStats,
   connect,
   getAllPokemon,
   updatePokemonName,
@@ -356,5 +387,6 @@ export {
   isEmailRegistered,
   isUsernameRegistered,
   collectionUsers,
-  getSelectedPokemon
+  getSelectedPokemon,
+  getRandomPokemons,
 };

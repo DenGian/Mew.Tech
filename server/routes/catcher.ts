@@ -16,8 +16,15 @@ router.get("/", async (req: Request, res: Response) => {
     // Fetch selected Pokémon if user is logged in
     let selectedPokemon = null;
     if (user) {
-      const selectedPokemonId = user.selectedPokemon || '';
-      selectedPokemon = selectedPokemonId ? await getSelectedPokemon(selectedPokemonId) : null;
+      const selectedPokemonId = user.selectedPokemon || "";
+      selectedPokemon = selectedPokemonId
+        ? await getSelectedPokemon(selectedPokemonId)
+        : null;
+
+      // Capitalize the first letter of the selected Pokémon's name
+      if (selectedPokemon) {
+        selectedPokemon.name = capitalizeFirstLetter(selectedPokemon.name);
+      }
     }
 
     const randomPokemon = await displayRandomPokemon();
@@ -26,7 +33,12 @@ router.get("/", async (req: Request, res: Response) => {
     }
     const maxAttempts = 3;
 
-    res.render("pokeCatcher", { randomPokemon, maxAttempts, selectedPokemon, user: req.session.user });
+    res.render("pokeCatcher", {
+      randomPokemon,
+      maxAttempts,
+      selectedPokemon,
+      user: req.session.user,
+    });
   } catch (error) {
     console.error("Error fetching random Pokémon:", error);
     res.status(500).send("Failed to load page due to server error.");
@@ -38,7 +50,9 @@ router.post("/catch-pokemon", async (req: Request, res: Response) => {
   const { pokemonId } = req.body;
 
   if (!userId) {
-    return res.status(401).json({ success: false, message: "User not authenticated." });
+    return res
+      .status(401)
+      .json({ success: false, message: "User not authenticated." });
   }
 
   try {

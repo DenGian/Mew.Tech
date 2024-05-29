@@ -76,10 +76,18 @@ router.post("/set-main-pokemon", async (req: Request, res: Response) => {
             res.status(400).send("User ID or selected Pokémon ID not provided");
             return;
         }
-        req.session.user!.selectedPokemon = selectedPokemonId;
+
         await updateSelectedPokemon(userId, selectedPokemonId);
-        console.log("Main Pokémon updated successfully");
-        res.redirect("/viewer");
+
+        req.session.user!.selectedPokemon = selectedPokemonId;
+        req.session.save((err) => {
+            if (err) {
+                console.error("Error saving session:", err);
+                res.status(500).render("error", { message: "An error occurred while saving your session.", error: err });
+                return;
+            }
+            res.redirect("/viewer");
+        });
     } catch (error) {
         console.error("Error setting main Pokémon:", error);
         res.status(500).render("error", { message: "An error occurred while setting the main Pokémon.", error });
