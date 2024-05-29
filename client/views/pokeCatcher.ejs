@@ -248,9 +248,11 @@
         <img
           id="pokemon-img"
           src="<%= randomPokemon.sprites.front_default %>"
-          class="pokemon-img mx-auto mb-4"
+          class="pokemon-img mx-auto mb-4 cursor-pointer"
           alt="<%= randomPokemon.name %>"
+          onclick="openPokemonModal('<%= randomPokemon.name %>', '<%= randomPokemon.sprites.front_default %>')"
         />
+
         <button id="pokeball-btn" class="pixel-button py-2 px-4 rounded-full">
           <img
             src="../../assets/images/poke-ball.png"
@@ -295,6 +297,13 @@
       </p>
       <% } %>
     </div>
+    <div id="pokemon-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div id="pokemon-modal-content" class="bg-white p-12 rounded-lg shadow-xl">
+        <h3 id="pokemon-modal-name" class="text-3xl font-bold mb-6"></h3>
+        <img id="pokemon-modal-img" src="" alt="Pokemon Image" class="w-full h-auto mb-8">
+        <button id="modal-close-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:ring focus:ring-blue-200">Close</button>
+      </div>
+    </div>    
   </main>
 
   <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
@@ -305,6 +314,21 @@
         document.getElementById("initial-message").style.display = "none";
         document.getElementById("pokemon-container").style.display = "flex";
       }, 2000);
+
+      const modal = document.getElementById("pokemon-modal");
+      const modalName = document.getElementById("pokemon-modal-name");
+      const modalImg = document.getElementById("pokemon-modal-img");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
+
+      window.openPokemonModal = function(name, imgSrc) {
+        modalName.textContent = name;
+        modalImg.src = imgSrc;
+        modal.classList.remove("hidden");
+      }
+
+      modalCloseBtn.addEventListener("click", function () {
+        modal.classList.add("hidden");
+      });
 
       let attempts = 3; // Maximum number of attempts to catch a Pokémon
       const pokeballBtn = document.getElementById("pokeball-btn");
